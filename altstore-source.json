@@ -18,6 +18,15 @@
       "screenshotURLs": [],
       "versions": [
         {
+          "version": "2.14.0",
+          "buildVersion": "59",
+          "date": "2026-06-14",
+          "localizedDescription": "A beautiful new look: a premium dark redesign with layered ring gauges, frosted cards and per-domain colour worlds, across Mac, iPhone and Android.",
+          "downloadURL": "https://github.com/NoopApp/noop/releases/download/v2.14.0/NOOP-v2.14.0-ios.ipa",
+          "size": 6360171,
+          "minOSVersion": "17.0"
+        },
+        {
           "version": "2.13.0",
           "buildVersion": "58",
           "date": "2026-06-14",
@@ -253,12 +262,12 @@
           "NSHealthUpdateUsageDescription": "NOOP writes the metrics it computes from your strap back into Apple Health, on-device and only when you allow it."
         }
       },
-      "version": "2.13.0",
-      "buildVersion": "58",
+      "version": "2.14.0",
+      "buildVersion": "59",
       "versionDate": "2026-06-14",
-      "versionDescription": "Big iPhone update: WHOOP-style Today chart, two-way Apple Health, full accessibility pass, pull-to-refresh, Siri shortcuts, iPad layout — plus sleep times and the Overview chart on Mac & Android. 19 community PRs reimplemented.",
-      "downloadURL": "https://github.com/NoopApp/noop/releases/download/v2.13.0/NOOP-v2.13.0-ios.ipa",
-      "size": 6307974,
+      "versionDescription": "A beautiful new look: a premium dark redesign with layered ring gauges, frosted cards and per-domain colour worlds, across Mac, iPhone and Android.",
+      "downloadURL": "https://github.com/NoopApp/noop/releases/download/v2.14.0/NOOP-v2.14.0-ios.ipa",
+      "size": 6360171,
       "minOSVersion": "17.0"
     }
   ],
