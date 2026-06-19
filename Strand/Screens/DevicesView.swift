@@ -201,6 +201,10 @@ private struct DevicesContent: View {
     /// so the dialog's choices come from the still-paired devices.
     private func confirmRemove(_ device: PairedDevice) {
         let wasActive = device.status == .active
+        // #78: actually RELEASE the BLE link, not just archive the registry row — otherwise NOOP keeps
+        // re-grabbing the strap (reconnect timer + targeted-connect pin + iOS state restoration), holding
+        // it connected so it can never enter pairing mode to be re-paired.
+        model.ble.forgetDevice(device.peripheralId)
         registry.archive(device.id)
         removeTarget = nil
         if wasActive {

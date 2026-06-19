@@ -7,7 +7,7 @@ enum AppChangelog {
 
     /// Bump this when you add a release below. The "What's New" sheet shows automatically when the
     /// stored last-seen version is behind this. (Decoupled from the bundle version on purpose.)
-    static let currentVersion = "5.2.4"
+    static let currentVersion = "5.2.5"
 
     struct Release: Identifiable {
         let version: String
@@ -19,6 +19,14 @@ enum AppChangelog {
 
     /// Newest first.
     static let releases: [Release] = [
+        Release(
+            version: "5.2.5",
+            title: "WHOOP 5/MG re-pairing fix",
+            date: "June 2026",
+            items: [
+                "**Fixed: removing a WHOOP from Devices now actually releases it.** Before, NOOP kept reconnecting to a removed strap and held it connected — so a 5/MG could never enter pairing mode, which blocked re-pairing a strap that got stuck. Remove now stops reconnecting, drops the link and frees the strap. (iPhone & Mac.) (#78)",
+                "**Clearer help when a 5/MG won't bond.** If the strap keeps refusing the secure pairing, NOOP now tells you exactly how to free and re-pair it (close the WHOOP app, pairing mode, forget in Bluetooth) rather than a misleading \"transient\" message. (#78)",
+            ]),
         Release(
             version: "5.2.4",
             title: "Today screen tidy-up",

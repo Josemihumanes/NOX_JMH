@@ -17,6 +17,13 @@ approximate; downloads are on the [Releases](https://noop.fans/NoopApp/noop/rele
 
 ---
 
+## 5.2.5 — WHOOP 5/MG re-pairing fix (iPhone & Mac)
+
+Diagnosed from a community strap log (#78): a 5/MG that's bonded to the official WHOOP app refuses NOOP's encrypted bond, and NOOP was holding the strap connected so it could never enter pairing mode to be re-paired — a deadlock.
+
+- **Fixed: "Remove device" now actually releases the strap.** Previously removing a WHOOP only archived the registry row — NOOP kept re-grabbing it (the reconnect timer, the targeted-connect pin, and iOS state restoration all still pointed at it), holding the link so the strap could never show its blue pairing LEDs. Remove now stops auto-reconnect, drops the BLE link, and clears the targeting/restoration references, freeing the strap to re-pair. (iPhone & Mac.)
+- **Clearer guidance on a persistent 5/MG bond refusal.** When the strap keeps refusing the secure pairing (held by the WHOOP app or a stale iOS pairing), NOOP now surfaces the real fix — close the WHOOP app, pairing mode (blue LEDs), Forget This Device in iOS Bluetooth — instead of a misleading "transient reconnect race" message (a 5.2.3 regression). Apple-only build.
+
 ## 5.2.4 — Today-card tidy-up + OnePlus pairing fix
 
 - **Fixed (iPhone & Mac):** the greeting and status word on the Today "Synthesis" card could crowd together on smaller iPhones — "Good evening" and the recovery/calibration pill now sit cleanly in the corner without colliding with the card's headline. (#69)

@@ -623,6 +623,38 @@ public final class BLEManager: NSObject, ObservableObject {
         central.stopScan()
     }
 
+    /// #78: fully RELEASE a strap when the user removes it from the Devices screen. Archiving the registry
+    /// row alone left the strap connected — NOOP kept re-grabbing it (the 3s disconnect→reconnect timer, the
+    /// targeted-connect pin, and iOS state restoration ALL still pointed at it), so it stayed connected and
+    /// the user could never put it into pairing mode to re-pair (the #78 deadlock: a WHOOP that's connected
+    /// can't show its blue pairing LEDs). Stop auto-reconnect, drop the live link, and clear the targeting +
+    /// restoration references that point at this strap so NOOP lets go for good — until the user deliberately
+    /// reconnects (which clears `intentionalDisconnect` again via connect()).
+    public func forgetDevice(_ peripheralId: String?) {
+        let target = peripheralId.flatMap { UUID(uuidString: $0) }
+        let isCurrent = target == nil || peripheral?.identifier == target
+        intentionalDisconnect = true            // defuses the disconnect→3s-reconnect loop's guard
+        cancelScanFallback()
+        readoptingTo = nil                       // abandon any in-flight #52 pin handoff
+        // Clear the targeted-connect pin + the iOS state-restoration peripheral if they point at this strap,
+        // so connect()/restoration can't re-target it.
+        if target == nil || preferredPeripheralUUID == target { setPreferredPeripheral(nil) }
+        if target == nil || restoredPeripheral?.identifier == target { restoredPeripheral = nil }
+        // Drop the live BLE link so the strap is free to enter pairing mode.
+        if isCurrent, let p = peripheral {
+            central.cancelPeripheralConnection(p)
+            peripheral = nil
+            resetCharacteristics()
+            state.connected = false
+            state.bonded = false
+            state.encryptedBond = false
+            state.pairingHint = nil
+            bondRefusalStreak = 0
+        }
+        central.stopScan()
+        log("Device removed — released the strap: stopped auto-reconnect, dropped the link, cleared targeting. Put it in pairing mode (blue LEDs) to re-pair if you want it back. (#78)")
+    }
+
     /// Switch which strap we'll connect to next: drop the current strap and clear the **sticky** bond
     /// state so a newly-picked model bonds fresh. `bonded` deliberately survives a disconnect (it means
     /// "this strap is paired"), but that left a user with BOTH a WHOOP 4 and a 5/MG unable to switch —
