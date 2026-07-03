@@ -208,7 +208,11 @@ struct InsightsView: View {
                        // PERF (scroll): lazy column, byte-identical layout (LazyVStack == eager VStack
                        // alignment/spacing/header). The content is one inner eager VStack, so any nested
                        // staggered reveals are unchanged; this only defers building that stack on scroll-in.
-                       lazy: true) {
+                       lazy: true,
+                       // Liquid finish: the same full-bleed day-of-sky backdrop Today + the other liquid
+                       // tabs carry, so Insights sits in one atmosphere ("the options change, not the page").
+                       // Static + non-interactive; the cards below sit on the opaque canvas and stay legible.
+                       topBackground: liquidScaffoldSky()) {
             if !loaded {
                 ComingSoon(what: "Reading your journal and outcomes…")
             } else {
@@ -302,7 +306,8 @@ struct InsightsView: View {
                 }
             }
         }
-        .buttonStyle(.plain)
+        // Liquid tap response: the same physical settle-inward every tappable liquid card gets.
+        .buttonStyle(LiquidPressStyle())
         .accessibilityElement(children: .combine)
         .accessibilityLabel("What moves you. Ranked patterns in your own data, and your dose-response.")
     }
@@ -640,8 +645,10 @@ struct InsightsView: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                ProgressView(value: snapshot.progress)
-                    .tint(StrandPalette.accent)
+                // Liquid progress: the experiment window as a filling LiquidTube (the same horizontal
+                // vessel Today's Key Metrics + workout bars use) rather than a flat ProgressView. Static
+                // (no live slosh needed for a progress read); carries the same a11y label + value.
+                LiquidTube(frac: snapshot.progress, tint: StrandPalette.accent, height: 8, animated: false)
                     .accessibilityLabel("Experiment progress")
                     .accessibilityValue("\(snapshot.daysElapsed) of \(snapshot.durationDays) days")
                 HStack {
@@ -1030,10 +1037,14 @@ struct InsightsView: View {
         return NoopCard(tint: outcome.domain.color) {
             VStack(alignment: .leading, spacing: NoopMetrics.gap) {
 
-                // Header: behaviour name + significance pill.
-                HStack(alignment: .firstTextBaseline) {
-                    HStack(spacing: 8) {
-                        Circle().fill(tintColor).frame(width: 8, height: 8)
+                // Header: behaviour name + significance pill. The old direction dot becomes a small liquid
+                // vessel filled to the effect magnitude (|Cohen's d|, capped where large is about 0.8+) in
+                // the sign-aware tint, the leading-gauge idiom Today uses, so the strength reads at a glance.
+                HStack(alignment: .center) {
+                    HStack(spacing: 10) {
+                        LiquidVessel(value: min(1, abs(e.cohensD) / 0.8), tint: tintColor, animated: false)
+                            .frame(width: 26, height: 26)
+                            .accessibilityHidden(true)
                         Text(e.behavior)
                             .font(StrandFont.headline)
                             .foregroundStyle(StrandPalette.textPrimary)
@@ -1259,7 +1270,13 @@ struct InsightsView: View {
         // the accessibility label (was computed twice per row).
         let sentence = relationshipSentence(rel)
         return VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
+            HStack(spacing: 10) {
+                // Liquid magnitude accent: a small filling vessel showing |r| in the correlation's
+                // strength colour, the same leading-gauge idiom Today's card rows + vitals use. Static
+                // (a small gauge doesn't need live slosh); decorative, the exact r + a11y read below.
+                LiquidVessel(value: min(1, abs(r)), tint: strength, animated: false)
+                    .frame(width: 28, height: 28)
+                    .accessibilityHidden(true)
                 Text(rel.title)
                     .font(StrandFont.headline)
                     .foregroundStyle(StrandPalette.textPrimary)
