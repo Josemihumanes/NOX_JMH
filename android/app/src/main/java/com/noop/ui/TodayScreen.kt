@@ -488,7 +488,12 @@ fun TodayScreen(
     // this is read once into local state (mirrors iOS @AppStorage in TodayView).
     val showDayCycleBackground = remember { NoopPrefs.showDayCycleBackground(context) }
     var hydrationTotalMl by remember { mutableStateOf(0.0) }
-    LaunchedEffect(days, hydrationEnabled) {
+    // #989: `days` only changes on a data refresh, which a hydration write never causes, so the card sat
+    // stale after logging a drink until an unrelated sync landed. Keying on the store's mutationSeq too
+    // re-reads the one metric row the moment a drink is logged / edited / deleted. Mirrors the iOS
+    // Repository.hydrationSeq trigger.
+    val hydrationSeq by HydrationStore.mutationSeq.collectAsStateWithLifecycle()
+    LaunchedEffect(days, hydrationEnabled, hydrationSeq) {
         hydrationTotalMl = if (hydrationEnabled) {
             runCatching { HydrationStore.total(viewModel.repo) }.getOrDefault(0.0)
         } else 0.0
@@ -4383,6 +4388,47 @@ private suspend fun WhoopRepository.workoutsAllSources(from: Long, to: Long): Li
 // Mirrors the macOS TodayView.heartRateTrendSection. LineChart spaces points by index (no time axis),
 // so the buckets, being uniform 5-min means in time order, read as an even left-to-right day curve.
 
+/** The Today heart-rate card's visible window (the UX from PR #985, reimplemented). [TODAY] = the full
+ *  loaded day since the logical midnight — the unchanged default. The rest are rolling "last N hours"
+ *  ending now. VIEW-ONLY, the #829 zoom rule: a window only narrows which of the already-loaded 5-minute
+ *  buckets render — it never re-queries the DB and never changes the bucket resolution. (PR #985 proposed
+ *  re-reading shorter windows at finer buckets; that adds a DB round-trip per tap and a second read path
+ *  for detail that already has a home — the Deep Timeline re-reads down to raw seconds as you zoom.)
+ *  Because the loaded extent starts at midnight, a window clips to the day: early in the morning the wider
+ *  windows coincide with Today, which reads fine — both mean "everything so far". Only offered on the
+ *  CURRENT day: a past day has no "now", so it always shows the full calendar day, exactly as before. */
+internal enum class HrWindow(val label: String, val hours: Int) {
+    // Declaration order IS the pill order: Today (the whole loaded day) anchors the wide end, then
+    // strictly most → least hours. TODAY stays ordinal 0 so the rememberSaveable default is the full day.
+    TODAY("Today", 0),
+    H24("24h", 24), H12("12h", 12), H6("6h", 6), H3("3h", 3), H1("1h", 1);
+
+    /** Earliest bucket timestamp (unix seconds) this window renders, anchored at `now`. TODAY = no
+     *  narrowing. Anchoring at the wall clock (not the newest banked bucket) keeps the card honest: a
+     *  strap that hasn't offloaded for two hours shows "no heart rate in the last 1h", never a silently
+     *  re-anchored older hour — and the empty state keeps the pills, so it's not a dead end. */
+    fun cutoff(now: Long): Long = if (this == TODAY) Long.MIN_VALUE else now - hours * 3600L
+}
+
+/** The pure narrowing seam (locked by HrWindowTest): does a loaded bucket survive the window's cut?
+ *  The filter only ever drops OLD buckets, so the newest bucket always survives a non-empty cut and the
+ *  card's trailing "latest bpm" read-out is window-invariant. */
+internal fun hrWindowKeeps(bucketTs: Long, window: HrWindow, now: Long): Boolean =
+    bucketTs >= window.cutoff(now)
+
+/** The HR-window selector row, reusing the app's ONE SegmentedPillControl (house chrome, not the PR's
+ *  bespoke control). Shared by the empty and populated card branches so the pills stay put whether or
+ *  not the chosen window has data. */
+@Composable
+private fun HrWindowPills(selection: HrWindow, onSelect: (HrWindow) -> Unit) {
+    SegmentedPillControl(
+        items = HrWindow.entries.toList(),
+        selection = selection,
+        label = { it.label },
+        onSelect = onSelect,
+    )
+}
+
 @Composable
 private fun HeartRateTrendCard(
     viewModel: AppViewModel,
@@ -4401,12 +4447,20 @@ private fun HeartRateTrendCard(
     // thread alongside the buckets; each marker self-hides when its data is absent. (PR #285)
     var sleepToday by remember { mutableStateOf<SleepSession?>(null) }
     var workoutsToday by remember { mutableStateOf<List<WorkoutRow>>(emptyList()) }
+    // #985: the selected HR window. rememberSaveable ordinal so the choice survives rotation / process
+    // death and feels sticky like a preference; 0 = TODAY, the unchanged full-day default. Forced to
+    // TODAY on a past day (no "now" to anchor a rolling window — the pills don't render there either).
+    // VIEW-ONLY (see HrWindow): it narrows the rendered buckets below; the LaunchedEffect read is untouched.
+    var hrWindowOrdinal by rememberSaveable { mutableIntStateOf(0) }
+    val hrWindow = if (selectedDay == today) HrWindow.entries[hrWindowOrdinal] else HrWindow.TODAY
     // #829 Android parity - the Today HR pinch/drag zoom window (unix seconds), null = the full loaded
     // day. Mirrors iOS TodayView.hrZoomDomain: VIEW-ONLY (it narrows which of the already-loaded buckets
     // render, never re-queries the DB), keyed on the selected day so stepping days always opens at full
     // scale, while a same-day live reload keeps the window (fresh buckets only ever extend the loaded
     // extent, so an existing window stays valid). Reset by double-tap on the chart or the Reset link.
-    var hrZoom by remember(selectedDay) { mutableStateOf<LongRange?>(null) }
+    // Also keyed on the #985 window: changing the window re-frames the chart, so a pinch-zoom made
+    // inside the old frame resets with it rather than surviving as a stale sub-range.
+    var hrZoom by remember(selectedDay, hrWindowOrdinal) { mutableStateOf<LongRange?>(null) }
     // #605: a WHOOP-4.0 offload banks raw HR samples straight into the hr-sample store WITHOUT touching
     // any DailyMetric row, so a sync that only adds today's HR curve never changes `days`, and keying the
     // reload on `days` alone left this chart frozen on the pre-sync window until something unrelated
@@ -4451,21 +4505,38 @@ private fun HeartRateTrendCard(
         else -> selectedDay.format(DateTimeFormatter.ofPattern("d MMM", Locale.US))
     }
 
+    // #985 view-only narrowing (the #829 rule): the selected window filters the loaded 5-minute buckets,
+    // anchored at the wall clock when the inputs change. A live reload refreshes `buckets`, so the anchor
+    // tracks the sync cadence — plenty for a card whose buckets are 5 minutes wide.
+    val winBuckets = remember(buckets, hrWindow) {
+        val now = System.currentTimeMillis() / 1000
+        if (hrWindow == HrWindow.TODAY) buckets else buckets.filter { hrWindowKeeps(it.bucket, hrWindow, now) }
+    }
+
     // #863: a sparse/empty selected day used to `return` here and render NOTHING, which read as "the graph
     // froze". Show an explicit calibrating/empty card instead so the user knows the curve is still filling in
     // (a calibrating 4.0 banks HR slowly) rather than that the screen broke. We intentionally do NOT silently
     // swap in a different day's curve here (that day-swap reload behaviour was rejected in #605, see above);
     // the honest empty state is the parity-matched fix. Mirrors the iOS Today HR card's empty branch.
-    if (buckets.size < 2) {
+    // #985: the check reads the WINDOWED subset, and the pills stay visible in the empty state, so a
+    // too-narrow rolling window (say 1h with no recent offload) is never a dead end — the user widens it
+    // or steps back to Today, and the message says which window came up empty.
+    if (winBuckets.size < 2) {
         SectionHeader("Heart Rate", overline = selectedLabel)
         NoopCard {
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Overline("Beats per minute")
+                if (selectedDay == today) {
+                    HrWindowPills(hrWindow) { hrWindowOrdinal = it.ordinal }
+                }
                 Text(
-                    if (selectedDay == today) {
-                        "Calibrating , no heart rate banked yet today. Your curve fills in as the strap offloads."
-                    } else {
-                        "No heart rate for this day. Step back to a day the strap was worn."
+                    when {
+                        selectedDay != today ->
+                            "No heart rate for this day. Step back to a day the strap was worn."
+                        hrWindow != HrWindow.TODAY && buckets.size >= 2 ->
+                            "No heart rate in the last ${hrWindow.label}. Try a wider window or Today."
+                        else ->
+                            "Calibrating , no heart rate banked yet today. Your curve fills in as the strap offloads."
                     },
                     style = NoopType.footnote,
                     color = Palette.textTertiary,
@@ -4475,7 +4546,9 @@ private fun HeartRateTrendCard(
         return
     }
 
-    val bpm = remember(buckets) { buckets.map { it.avgBpm } }
+    // #985: everything below (read-outs, zoom bounds, chart, footer) renders the WINDOWED subset — for
+    // TODAY that is the identical full-buckets list, so the default path is byte-for-byte the old one.
+    val bpm = remember(winBuckets) { winBuckets.map { it.avgBpm } }
     val latest = bpm.last().roundToInt()
     val min = bpm.min().roundToInt()
     val max = bpm.max().roundToInt()
@@ -4484,16 +4557,18 @@ private fun HeartRateTrendCard(
     // #829 - the RENDERED subset: the zoom window narrows which of the loaded buckets draw (the gesture
     // handler only commits windows keeping >= 2 buckets, and the full-buckets fallback covers a same-day
     // reload reshaping the data underneath an open window, so the curve always stays drawable). Bounds =
-    // the loaded day's bucket extent, the same full view the un-zoomed chart renders.
-    val zoomBounds = buckets.first().bucket..buckets.last().bucket
-    val visBuckets = remember(buckets, hrZoom) {
-        val sub = hrZoom?.let { w -> buckets.filter { it.bucket in w } } ?: buckets
-        if (sub.size >= 2) sub else buckets
+    // the SELECTED window's bucket extent (#985) — the same full view the un-zoomed chart renders — so a
+    // pinch-zoom pans within the chosen window, not out into buckets the window has hidden.
+    val zoomBounds = winBuckets.first().bucket..winBuckets.last().bucket
+    val visBuckets = remember(winBuckets, hrZoom) {
+        val sub = hrZoom?.let { w -> winBuckets.filter { it.bucket in w } } ?: winBuckets
+        if (sub.size >= 2) sub else winBuckets
     }
     val visBpm = remember(visBuckets) { visBuckets.map { it.avgBpm } }
     // The left y-rail tracks the RENDERED window (LineChart normalises to what it draws, the Deep
     // Timeline idiom), so a zoomed curve keeps honest max/avg/min beside it; the footer Min/Avg/Max row
-    // below stays the full-day read, mirroring the iOS footer.
+    // below reads the whole SELECTED window (#985) — the full day for Today, or the rolling last-N-hours
+    // span — so it matches the subtitle and stays stable while you pinch around within that window.
     val visMax = visBpm.max().roundToInt()
     val visAvg = visBpm.average().roundToInt()
     val visMin = visBpm.min().roundToInt()
@@ -4505,10 +4580,13 @@ private fun HeartRateTrendCard(
             Row(verticalAlignment = Alignment.Top) {
                 Column(modifier = Modifier.weight(1f)) {
                     Overline("Beats per minute")
-                    val subtitle = if (selectedDay == today) {
-                        "5-minute average | since midnight"
-                    } else {
-                        "5-minute average | selected day"
+                    // #985: the buckets stay the same 5-minute means whatever the window (view-only
+                    // narrowing, no re-read), so the resolution half of the label never changes — only
+                    // the span half tells the truth about what's on screen.
+                    val subtitle = when {
+                        selectedDay != today -> "5-minute average | selected day"
+                        hrWindow == HrWindow.TODAY -> "5-minute average | since midnight"
+                        else -> "5-minute average | last ${hrWindow.label}"
                     }
                     Text(
                         subtitle,
@@ -4517,6 +4595,11 @@ private fun HeartRateTrendCard(
                     )
                 }
                 Text("$latest bpm", style = NoopType.chartValueLarge, color = Palette.metricRose)
+            }
+            // #985: the window selector, current day only — Today (since midnight, the default) or a
+            // rolling last-N-hours cut of the same loaded buckets. A past day has no "now" → no selector.
+            if (selectedDay == today) {
+                HrWindowPills(hrWindow) { hrWindowOrdinal = it.ordinal }
             }
             // Chart with a max/avg/min Y-axis label column on the left and an HH:mm X-axis row below.
             // The line spaces points by index, but the X labels read each bucket's REAL timestamp in
@@ -4537,7 +4620,8 @@ private fun HeartRateTrendCard(
                 // glyphs) overlaid on top, markers are positioned by mapping each event's wall-clock
                 // time onto the line's index spacing, so they sit on the same curve. (PR #285)
                 // #829 - renders the zoom window's subset, with the pinch/pan/double-tap transform
-                // detector attached (keyed on `buckets` so its captured bounds track a reload).
+                // detector attached (keyed on the #985-windowed buckets so its captured bounds track
+                // both a reload and a window change — the pinch operates INSIDE the selected window).
                 OverviewHRChart(
                     buckets = visBuckets,
                     bpm = visBpm,
@@ -4549,9 +4633,9 @@ private fun HeartRateTrendCard(
                     modifier = Modifier
                         .weight(1f)
                         .height(Metrics.chartHeight)
-                        .pointerInput(buckets) {
+                        .pointerInput(winBuckets) {
                             hrChartTransformGestures(
-                                buckets = buckets,
+                                buckets = winBuckets,
                                 bounds = zoomBounds,
                                 window = { hrZoom },
                                 onWindow = { hrZoom = it },

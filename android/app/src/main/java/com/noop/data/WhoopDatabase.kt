@@ -428,6 +428,11 @@ abstract class WhoopDatabase : RoomDatabase() {
 
         private fun build(appContext: Context): WhoopDatabase =
             Room.databaseBuilder(appContext, WhoopDatabase::class.java, DB_NAME)
+                // #1014: replace ONLY the corruption handling of the default open-helper. The
+                // platform default silently DELETES a corrupt database file (non-resendable strap
+                // history gone without a trace); this factory logs + preserves the file instead.
+                // Every migration/lifecycle callback is delegated to Room unchanged.
+                .openHelperFactory(CorruptionPreservingOpenHelperFactory())
                 // Real additive migration, NO destructive fallback (see the class doc): with
                 // exportSchema=false a silent rebuild would lose already-acked, non-resendable strap
                 // history on any schema mismatch. Room throws loudly instead; CI guards the SQL.

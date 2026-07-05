@@ -435,9 +435,11 @@ struct LiquidTodayView: View {
     private var heartRateSection: some View {
         VStack(spacing: 8) {
             sectionHead("HEART RATE", trailing: "Live")
-            // #979: the whole-day HR trend (Deep Timeline, with sleep + activity bands marked) still
-            // exists but was buried behind Metrics → Show all → Deep Timeline. Make the live HR card a
-            // one-tap route into it, with a visible "Full day" affordance so it's discoverable again.
+            // #979: the whole-day HR trend (Deep Timeline) still exists but was buried behind Metrics →
+            // Show all → Deep Timeline. Make the live HR card a one-tap route into it, with a visible
+            // "Full day" affordance so it's discoverable again. (This comment used to claim the Deep
+            // Timeline already drew sleep + activity bands — it didn't at the time; the #979 spin-off
+            // added that parity in FullDayChartView.)
             NavigationLink { FullDayChartView() } label: {
                 card {
                     VStack(spacing: 10) {

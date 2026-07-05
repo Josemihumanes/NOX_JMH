@@ -13,6 +13,12 @@ import WhoopStore
 // zoom binding drives the visible window, and re-reads at the new resolution as the window changes. macOS
 // adds scroll-to-zoom (no pinch); both platforms drag-to-pan. Serves #574 (owned-source filter / honest
 // "Other sources" disclosure) and is the detail surface behind #582.
+//
+// #979 spin-offs: (1) annotation parity with the classic Today whole-day chart — the main night's sleep
+// band + a sport glyph at each workout, fed through the SAME OverviewHRChart layers Today uses (this
+// screen previously drew a bare line, despite being sold as "the whole-day trend with bands"); (2) an
+// iPhone touch-and-hold scrub (`touchScrub: true`) so the crosshair readout the Mac pointer hover gets
+// is reachable on touch too.
 
 struct FullDayChartView: View {
     @EnvironmentObject var repo: Repository
@@ -36,6 +42,12 @@ struct FullDayChartView: View {
     @State private var ownedOnly = true
 
     @State private var series: Repository.TimelineSeries = .empty
+    // #979 spin-off — day annotations, mirroring the classic Today's Overview HR markers: the main
+    // night's band (labelled with its duration) and each workout's sport glyph. Day-scoped facts, so
+    // they're loaded per shown day (NOT per zoom window — the chart clamps them into the visible
+    // window itself), keeping the zoom/pan re-read path untouched.
+    @State private var sleepSpan: OverviewHRChart.SleepSpan? = nil
+    @State private var workoutSpans: [OverviewHRChart.WorkoutSpan] = []
     /// The visible window the chart's gestures mutate. nil → full day (the chart falls back to `dayBounds`).
     @State private var zoomDomain: ClosedRange<Date>? = nil
     @State private var loading = true
@@ -67,7 +79,14 @@ struct FullDayChartView: View {
             zoomHint
         }
         .task(id: taskKey) { await reload() }
+        .task(id: annotationKey) { await reloadAnnotations() }
         .task { await landOnLatestDayIfNeeded() }
+    }
+
+    /// Annotations re-read only when the shown day changes or fresh strap data lands — deliberately NOT
+    /// on zoom (see `sleepSpan` above), so scrubbing/pinching never re-queries sleeps/workouts.
+    private var annotationKey: String {
+        "\(Int(dayStart.timeIntervalSince1970))|\(repo.refreshSeq)"
     }
 
     /// Re-read whenever the metric, the day, the source scope, the settled zoom window, or fresh strap
@@ -183,10 +202,19 @@ struct FullDayChartView: View {
     private var chart: some View {
         OverviewHRChart(
             points: series.points,
+            // #979 spin-off — the same sleep-band + workout-glyph layers the classic Today feeds. Passed
+            // on EVERY metric track (they're time annotations, so "when was I asleep / training" reads
+            // against skin temp or HRV just as it does against HR); the glyph anchors at the shown
+            // metric's peak inside the workout window, and the chart clamps both into the zoom window.
+            sleep: sleepSpan,
+            workouts: workoutSpans,
             gradient: gradientFor(metric),
             valueRange: valueRange(series.points),
             xRange: dayBounds,
             height: 280,
+            // #979 spin-off — iPhone touch scrub: hold to pin the crosshair, drag to read values under
+            // the finger (the Mac pointer hover's readout, made reachable on touch). Opt-in here only.
+            touchScrub: true,
             zoomDomain: $zoomDomain,
             zoomBounds: panBounds,   // #986: pan/scroll clamp is the rolling 3-day window, not one day
             valueFormat: { format($0) },
@@ -243,7 +271,9 @@ struct FullDayChartView: View {
             #if os(macOS)
             Text(zoomDomain == nil ? "Scroll to zoom · drag to pan" : "Zoomed in. Drag to pan")
             #else
-            Text(zoomDomain == nil ? "Pinch to zoom · drag to pan" : "Zoomed in. Drag to pan")
+            // #979 spin-off: name the hold-to-scrub affordance — a hidden gesture nobody tries is a
+            // feature that doesn't exist. (On the Mac the pointer hover is self-discovering.)
+            Text(zoomDomain == nil ? "Pinch to zoom · drag to pan · hold to read" : "Zoomed in. Drag to pan · hold to read")
             #endif
             Spacer()
             if zoomDomain != nil {
@@ -294,6 +324,41 @@ struct FullDayChartView: View {
         guard !Task.isCancelled else { return }
         series = result
         loading = false
+    }
+
+    /// #979 spin-off — load the shown day's sleep + workouts and scope them EXACTLY like the classic
+    /// Today's Overview HR markers: `allSleepSessions` (imported AND on-device computed sources — a
+    /// Bluetooth-only user's sleep lives under the computed source), longest overlapping block = the main
+    /// night, never a nap; `workoutRows` (already dedup/dismiss-filtered) kept where they overlap the day.
+    /// The band + duration use the EFFECTIVE onset so a hand-corrected bedtime shows the same band here as
+    /// on the Sleep tab (#318). Both repo reads are today-relative, so `days:` walks back far enough from
+    /// now to cover the shown day; the +2 pad mirrors TodayView's sleep read (the night straddles midnight).
+    private func reloadAnnotations() async {
+        let daysBack = max(0, Int(Date().timeIntervalSince(dayStart) / 86_400)) + 2
+
+        let sleepCandidates: [OverviewHRChart.SleepSpan] = await repo.allSleepSessions(days: daysBack)
+            .map { s in
+                .init(start: Date(timeIntervalSince1970: TimeInterval(s.effectiveStartTs)),
+                      end: Date(timeIntervalSince1970: TimeInterval(s.endTs)),
+                      label: Self.hoursMinutes(s.endTs - s.effectiveStartTs))
+            }
+        let workoutCandidates: [OverviewHRChart.WorkoutSpan] = await repo.workoutRows(days: daysBack)
+            .map { w in
+                .init(start: Date(timeIntervalSince1970: TimeInterval(w.startTs)),
+                      end: Date(timeIntervalSince1970: TimeInterval(w.endTs)),
+                      symbol: sportSymbol(w.sport))
+            }
+        guard !Task.isCancelled else { return }
+        // The pure, headless-tested selection (StrandDesignTests) — window = the shown DAY, not the zoom.
+        sleepSpan = OverviewHRChart.mainSleep(sleepCandidates, overlapping: dayBounds)
+        workoutSpans = OverviewHRChart.workouts(workoutCandidates, overlapping: dayBounds)
+    }
+
+    /// "H:MM" for a duration in seconds (e.g. a 6h06m night → "6:06") — mirrors TodayView.hoursMinutes
+    /// so the band label reads identically on both whole-day charts.
+    private static func hoursMinutes(_ seconds: Int) -> String {
+        let h = max(0, seconds) / 3600, m = (max(0, seconds) % 3600) / 60
+        return "\(h):\(String(format: "%02d", m))"
     }
 
     // MARK: Presentation helpers

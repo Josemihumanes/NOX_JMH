@@ -422,6 +422,31 @@ object OuraDecoders {
         }
         return if (out.isEmpty()) null else out
     }
+
+    // MARK: - Activity info (0x50; s6.13) - Tier B, third-party formula
+
+    /**
+     * Decode the 0x50 activity_info record: byte0 = a `state` code (activity-category; meaning
+     * unconfirmed), every following byte = one MET sample. Formula (OURA_PROTOCOL.md s6.13, [oura-rs],
+     * clean-room fact citation): `met = byte * 0.1` for byte < 0x80, else `met = 12.8 + (byte - 128) * 0.2`
+     * (a two-slope encoding: 0.1-MET resolution up to 12.7, coarser 0.2 steps above). THIRD-PARTY and NOT
+     * ground-truth-validated against the Oura app, so this stays Tier B end to end: OuraDriver gates it
+     * behind `allowTierB`, and OuraStreamMapping never folds it into a durable stream. Values are
+     * normalised to 2 decimal places so a decoded MET compares exactly against its fixture (0.1 is not
+     * exactly representable in binary floating point; same normalisation as the Swift twin, so both
+     * platforms decode identical doubles). Returns null on an empty body - a record with no state byte
+     * decodes to nothing, never a guess.
+     */
+    fun decodeActivityInfo(rec: OuraRecord): OuraActivityInfo? {
+        val b = rec.payload
+        if (b.isEmpty()) return null
+        val met = ArrayList<Double>(b.size - 1)
+        for (k in 1 until b.size) {
+            val raw = if (b[k] < 0x80) b[k] * 0.1 else 12.8 + (b[k] - 128) * 0.2
+            met.add(Math.round(raw * 100.0) / 100.0)
+        }
+        return OuraActivityInfo(ringTimestamp = rec.ringTimestamp, state = b[0], met = met)
+    }
 }
 
 // MARK: - Bit reader (MSB-first), used by the bit-packed decoders (0x60)

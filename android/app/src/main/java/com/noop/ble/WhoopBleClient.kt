@@ -831,6 +831,21 @@ class WhoopBleClient(
         const val AUTO_CONTINUE_FUTURE_SKEW_SECONDS = 48L * 3600L
 
         /**
+         * #1012: is the strap-reported "newest banked record" FUTURE-dated beyond the skew allowance —
+         * more than [futureSkewSeconds] past the wall clock? The strap's clock is then almost certainly
+         * set in the future (#928), so its range answer AND its freshly-persisted rows are untrustworthy
+         * as backlog evidence. Pure, and shared between [shouldAutoContinue] (it gates 2a AND 2b) and the
+         * call site's honest stop log so the two can never disagree on the reason. null ⇒ false: an
+         * unanswered range is UNKNOWN, not future-dated, and 2b's stale-epoch rescue (#451) still applies
+         * to it. Mirrors the Swift `BackfillContinuation.isFutureDatedNewest`.
+         */
+        fun isFutureDatedNewest(
+            strapNewestTs: Long?,
+            wallNowUnix: Long,
+            futureSkewSeconds: Long = AUTO_CONTINUE_FUTURE_SKEW_SECONDS,
+        ): Boolean = strapNewestTs != null && strapNewestTs > wallNowUnix + futureSkewSeconds
+
+        /**
          * Decides whether a backfill session that ended on the 60s IDLE cap (NOT a true HISTORY_COMPLETE)
          * should immediately re-kick another offload instead of tearing down to wait the 900s periodic
          * floor (#364). The strap offloads OLDEST-first at ~60s/session with no auto-continue, so on a
@@ -849,6 +864,14 @@ class WhoopBleClient(
          *  3. [lastTrimAdvanced] — the just-ended session actually moved the strap's trim cursor. A frozen
          *     cursor (console-only / refusing to trim) would spin forever; stop and let the floor retry.
          *  4. [consecutiveCount] < [maxAutoContinues] — hard per-connection cap.
+         *
+         * #1012: a FUTURE-dated [strapNewestTs] (more than [futureSkewSeconds] past the wall clock, #928)
+         * not only nulls guard 2a — it also STOPS guard 2b. A future-clock strap banks future-dated
+         * records, so the rows it hands over are future-timestamped too and "real rows persisted" is no
+         * evidence of genuine backlog; 2b would chase the future-dated range through the whole cap (six
+         * back-to-back passes, each to its idle timeout — the reported ~15-min sync). The stale/PAST-epoch
+         * case 2b actually exists for (#451) reads BEHIND the frontier, never future-dated, so it is
+         * untouched.
          */
         fun shouldAutoContinue(
             stillConnected: Boolean,
@@ -868,12 +891,21 @@ class WhoopBleClient(
             // #928: a strap clock set in the FUTURE makes "newest" read ahead of ANY real frontier, so 2a
             // would report backlog forever and drive up to the full cap in EMPTY offloads on every
             // connect. A newest more than [futureSkewSeconds] past [wallNowUnix] (the REAL wall clock,
-            // passed in so the predicate stays pure) is implausible: exclude it (treat the range as
-            // unknown) so only demonstrated progress (2b, real rows) can continue the drain.
-            val newest = strapNewestTs?.takeIf { it <= wallNowUnix + futureSkewSeconds }
+            // passed in so the predicate stays pure) is implausible: exclude it from 2a.
+            val futureDated = isFutureDatedNewest(strapNewestTs, wallNowUnix, futureSkewSeconds)
+            val newest = strapNewestTs?.takeIf { !futureDated }
             val frontier = ourFrontierTs
             // 2a: strap reports newer data than we hold — reliable WHEN its clock epoch is sane.
             if (newest != null && frontier != null && (newest - frontier) > behindGapSeconds) return true
+            // #1012: a future-dated newest also gates 2b, not just 2a. A strap whose clock is set ahead
+            // (#928) BANKED future-dated records, so the rows this session persisted are themselves
+            // future-timestamped — "real rows" is NOT evidence of genuine backlog there, and 2b used to
+            // chase the future-dated range through the whole cap (six back-to-back passes, each run to
+            // its idle timeout: the reported ~15-min sync). Stop after this single pass; the periodic
+            // floor keeps draining across connects, restoring the pre-#928 single-pass behaviour. The
+            // stale/PAST-epoch case 2b exists for (#451) reads BEHIND the frontier, never future-dated,
+            // so it falls through untouched below.
+            if (futureDated) return false
             // 2b (#451): GET_DATA_RANGE's "newest" can read a STALE / wrong-epoch value — a strap that was
             // fully discharged (or carries a previous owner's history) banks records across multiple clock
             // epochs and can latch an OLD one (e.g. 2024 when the real newest is 2026). That false "already
@@ -4509,7 +4541,14 @@ class WhoopBleClient(
         Backfiller.sessionSummaryLine(
             backfiller.sessionRowsPersisted, backfiller.sessionMotionRows, backfiller.sessionSkinTempRows,
             backfiller.sessionNights,
-        )?.let { log(it) }
+        )?.let {
+            log(it)
+            // #990: fold this session's drained rows into the persisted ALL-TIME tally at the single
+            // summary emit point, so the Connection readout can show install-lifetime progress beside
+            // the per-session count (which resets on every reconnect). Unconditional, like the summary
+            // itself - not gated on the Connection test mode. Twin of the macOS LiveState sink hook.
+            testCentre.noteDrainedRows(backfiller.sessionRowsPersisted)
+        }
 
         // Connection test mode: the offload OUTCOME the readout's lastOffloadResult id binds. Gated
         // zero-cost (the CONNECTION bool is read before any string is built). Diagnostic only - it reads
@@ -4575,16 +4614,35 @@ class WhoopBleClient(
         val count = consecutiveAutoContinues
         ioScope.launch {
             val frontier = runCatching { repository.latestHrSampleTs(deviceId) }.getOrNull()
+            val wallNow = System.currentTimeMillis() / 1000L   // #928: real wall clock, at decision time
+            val stillConnected = _state.value.connected && _state.value.bonded
             if (!shouldAutoContinue(
-                    stillConnected = _state.value.connected && _state.value.bonded,
+                    stillConnected = stillConnected,
                     strapNewestTs = newest,
                     ourFrontierTs = frontier,
-                    wallNowUnix = System.currentTimeMillis() / 1000L,   // #928: real wall clock, at decision time
+                    wallNowUnix = wallNow,
                     lastTrimAdvanced = trimAdvanced,
                     consecutiveCount = count,
                     rowsPersistedThisSession = rowsPersisted,
                 )
             ) {
+                // #1012: name the stop honestly when the future-clock gate is what ended the chain —
+                // without this line the log just goes quiet after one pass and a strap-log export can't
+                // tell "caught up" from "future-dated range refused". Fires ONLY when 2b would otherwise
+                // have continued (still connected, rows banked, trim advanced, under the cap), so a
+                // frozen-trim / cap / disconnect stop is never misattributed to the clock. Twin of the
+                // Swift maybeAutoContinueBackfill line.
+                if (stillConnected && rowsPersisted > 0 && trimAdvanced &&
+                    count < MAX_AUTO_CONTINUES && isFutureDatedNewest(newest, wallNow)
+                ) {
+                    val aheadH = ((newest ?: wallNow) - wallNow) / 3600L
+                    log(
+                        "Backfill: not auto-continuing (#1012) - the strap-reported newest banked record " +
+                            "reads ${aheadH}h AHEAD of the wall clock, so the range is future-dated and " +
+                            "the strap clock is likely wrong (#928). Stopping after one pass instead of " +
+                            "chasing future-dated ranges; the periodic sync keeps draining across connects.",
+                    )
+                }
                 // No re-kick. THIS is the real "we're done draining" signal (#25): clear the streak so the
                 // NEXT deep backlog (e.g. after the app's been off again) gets a fresh budget of re-kicks.
                 // Reset here — NOT unconditionally on every HISTORY_COMPLETE — so a strap that slices one

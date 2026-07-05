@@ -176,6 +176,12 @@ final class Repository: ObservableObject {
     /// date string within a day and would freeze e.g. the Today HR trend until the date rolls over.
     @Published private(set) var refreshSeq = 0
 
+    /// #989: bumped by every hydration mutation (log / edit / delete). Today's hydration card re-reads on
+    /// this instead of waiting for a full `refreshSeq` data refresh, which a hydration write never causes,
+    /// so the card sat stale until an unrelated sync landed. Race-free: Repository is @MainActor.
+    @Published private(set) var hydrationSeq = 0
+    func noteHydrationChanged() { hydrationSeq += 1 }
+
     /// Workouts & GPS test mode (Test Centre): the tagged sink for the `.workouts` diagnostic lines
     /// (auto-detect inputs/thresholds/why, cross-source dedup decisions). Default nil (inert) so tests +
     /// non-prod inits get the byte-identical untraced path; AppModel wires it to `live.append(log:domain:)`.

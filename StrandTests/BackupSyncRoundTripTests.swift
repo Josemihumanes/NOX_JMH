@@ -175,6 +175,65 @@ final class BackupSyncRoundTripTests: XCTestCase {
                        "The live DB must be unchanged after a rejected restore")
     }
 
+    // MARK: - #1014: damaged-but-plausible backups are refused by the quick_check gate
+
+    func testGarbageBehindSqliteMagicInsideZipIsRejectedAndLiveDbIntact() throws {
+        // 16 valid magic bytes + junk, zipped as a real `.noopbak`: passes the container check AND
+        // the magic check AND the origin gate (no readable sqlite_master → `.unknown`, holds no
+        // data) — before #1014 this sailed all the way through to the swap. Only SQLite's own
+        // `PRAGMA quick_check` sees it for what it is.
+        let fake = tmp.appendingPathComponent("fake.sqlite")
+        var bytes = Data("SQLite format 3".utf8)
+        bytes.append(0x00)
+        bytes.append(Data(repeating: 0x5A, count: 8192))
+        try bytes.write(to: fake)
+        let backup = tmp.appendingPathComponent("damaged.noopbak")
+        try DataBackup.writeBackupForTesting(databaseAt: fake, to: backup)
+        XCTAssertTrue(isZip(backup), "precondition: the damaged payload rides in a real ZIP")
+
+        let liveDB = tmp.appendingPathComponent("live.sqlite")
+        try makeNoopDatabase(at: liveDB, deviceRows: ["original"])
+        let before = try Data(contentsOf: liveDB)
+
+        let result = DataBackup.restore(from: backup, toDatabaseAt: liveDB.path)
+        guard case .failure = result else {
+            return XCTFail("A structurally damaged backup must be rejected, got \(result)")
+        }
+        XCTAssertEqual(try Data(contentsOf: liveDB), before,
+                       "The live DB must be byte-for-byte unchanged after the integrity rejection")
+        XCTAssertEqual(try deviceRows(in: liveDB), ["original"])
+    }
+
+    func testTruncatedNoopBackupIsRejectedAndLiveDbIntact() throws {
+        // A REAL NOOP database grown past one page, then truncated to its first page (the #1014
+        // shape: a backup clipped mid-upload/mid-copy). Page 1 still reads perfectly — magic bytes
+        // intact, `grdb_migrations` visible in sqlite_master — so the header and origin gates both
+        // PASS. Only quick_check notices the file no longer holds the pages its header promises.
+        let sourceDB = tmp.appendingPathComponent("big.sqlite")
+        try makeMultiPageNoopDatabase(at: sourceDB)
+        let fullSize = try XCTUnwrap(
+            (try FileManager.default.attributesOfItem(atPath: sourceDB.path))[.size] as? NSNumber
+        ).int64Value
+        XCTAssertGreaterThan(fullSize, 4096, "precondition: fixture spans multiple pages")
+
+        let handle = try FileHandle(forWritingTo: sourceDB)
+        try handle.truncate(atOffset: 4096)
+        try handle.close()
+
+        // Feed it through the legacy plain-SQLite path (truncation hits both container shapes the
+        // same way; the ZIP shape is covered by the garbage test above).
+        let liveDB = tmp.appendingPathComponent("live.sqlite")
+        try makeNoopDatabase(at: liveDB, deviceRows: ["original"])
+        let before = try Data(contentsOf: liveDB)
+
+        let result = DataBackup.restore(from: sourceDB, toDatabaseAt: liveDB.path)
+        guard case .failure = result else {
+            return XCTFail("A truncated backup must be rejected, got \(result)")
+        }
+        XCTAssertEqual(try Data(contentsOf: liveDB), before,
+                       "The live DB must be unchanged after the integrity rejection")
+    }
+
     // MARK: - Prune deletes the oldest files past keep-N (real files)
 
     func testPruneDeletesOldestRealFilesPastKeepN() throws {
@@ -222,6 +281,23 @@ final class BackupSyncRoundTripTests: XCTestCase {
         try exec(db, "CREATE TABLE device (id TEXT NOT NULL PRIMARY KEY)")
         for id in deviceRows {
             try exec(db, "INSERT INTO device (id) VALUES ('\(id)')")
+        }
+    }
+
+    /// Build a valid GRDB-origin NOOP DB that spans MULTIPLE pages, so a truncation fixture can cut
+    /// real pages off while page 1 (magic + sqlite_master) stays perfectly readable (#1014).
+    private func makeMultiPageNoopDatabase(at url: URL) throws {
+        var db: OpaquePointer?
+        guard sqlite3_open(url.path, &db) == SQLITE_OK else {
+            throw TestError("open failed: \(url.path)")
+        }
+        defer { sqlite3_close(db) }
+        try exec(db, "CREATE TABLE grdb_migrations (identifier TEXT NOT NULL PRIMARY KEY)")
+        try exec(db, "INSERT INTO grdb_migrations (identifier) VALUES ('v1')")
+        try exec(db, "CREATE TABLE device (id TEXT NOT NULL PRIMARY KEY, blob TEXT NOT NULL)")
+        let filler = String(repeating: "x", count: 200)
+        for i in 0..<200 {
+            try exec(db, "INSERT INTO device (id, blob) VALUES ('row-\(i)', '\(filler)')")
         }
     }
 

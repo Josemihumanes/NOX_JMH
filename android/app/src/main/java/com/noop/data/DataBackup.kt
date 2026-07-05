@@ -3,6 +3,10 @@ package com.noop.data
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import android.util.Log
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -28,10 +32,12 @@ import java.util.zip.ZipOutputStream
  *
  * Import: detect whether the picked file is a `.noopbak` ZIP (PK magic) or a legacy
  * plain `.sqlite` / `.noopdb` (SQLite magic) and handle both, so old backups keep
- * working. Validates the extracted/direct SQLite header before touching the live DB.
+ * working. Validates the extracted/direct SQLite header, the backup's origin, AND its
+ * structural integrity (`PRAGMA quick_check`, #1014) before touching the live DB.
  * Closes the live Room singleton, snapshots the current db, overwrites it with the
- * chosen one, and drops the stale `-wal` / `-shm` sidecars. The caller then instructs
- * the user to restart the app so Room re-opens the new file fresh.
+ * chosen one, drops the stale `-wal` / `-shm` sidecars, then re-verifies the landed
+ * file and rolls back to the snapshot automatically if the copy tore (#1014). The
+ * caller then instructs the user to restart the app so Room re-opens the new file fresh.
  */
 object DataBackup {
 
@@ -83,6 +89,19 @@ object DataBackup {
             throw IOException("No database to export yet.")
         }
 
+        // #1014 defence-in-depth (export side): after the checkpoint the single file IS the whole
+        // store — verify it BEFORE archiving. A backup of an already-corrupt database only fails
+        // the import-side integrity gate months later, when the original data may be long gone;
+        // failing loudly NOW is the honest move. Read-only probe, sits safely beside the open Room
+        // connection (WAL allows concurrent readers). Twin of the Apple writeVerifiedBackupZip.
+        sqliteQuickCheckFailure(dbFile)?.let { complaint ->
+            throw IOException(
+                "Couldn't export: the NOOP database failed its integrity check (SQLite reports: " +
+                    "$complaint). A backup of it would not restore. Export the WHOOP-format CSV " +
+                    "instead to save what's still readable."
+            )
+        }
+
         // #1000: the whitelisted profile/display settings ride along as a second entry so a restore
         // brings back weight/height/units, not just the rows. Null (nothing user-set) degrades to the
         // legacy single-entry ZIP. The DB entry stays FIRST — older importers stop at the first
@@ -93,14 +112,23 @@ object DataBackup {
         val output = resolver.openOutputStream(uri)
             ?: throw IOException("Could not open the chosen file for writing.")
         output.use { out ->
-            ZipOutputStream(out).use { zip ->
-                zip.putNextEntry(ZipEntry(ZIP_ENTRY_NAME))
-                dbFile.inputStream().use { input -> input.copyTo(zip) }
-                zip.closeEntry()
-                if (settingsJson != null) {
-                    zip.putNextEntry(ZipEntry(SETTINGS_ENTRY_NAME))
-                    zip.write(settingsJson.toByteArray(Charsets.UTF_8))
+            // #1014: copy the file while HOLDING Room's write transaction. In WAL mode the main
+            // file is only rewritten by a checkpoint, and a checkpoint only runs on a commit — so
+            // with the (single) write connection parked in an empty transaction for the duration
+            // of the copy, no commit can land and the bytes we stream can't be torn mid-page by a
+            // concurrent auto-checkpoint. Writers queue behind us and proceed after; readers are
+            // unaffected. Anything committed after the checkpoint above lives in the new WAL and
+            // is simply (consistently) absent from this snapshot, same as before.
+            db.runInTransaction {
+                ZipOutputStream(out).use { zip ->
+                    zip.putNextEntry(ZipEntry(ZIP_ENTRY_NAME))
+                    dbFile.inputStream().use { input -> input.copyTo(zip) }
                     zip.closeEntry()
+                    if (settingsJson != null) {
+                        zip.putNextEntry(ZipEntry(SETTINGS_ENTRY_NAME))
+                        zip.write(settingsJson.toByteArray(Charsets.UTF_8))
+                        zip.closeEntry()
+                    }
                 }
             }
         }
@@ -194,6 +222,24 @@ object DataBackup {
             BackupOrigin.ANDROID -> Unit // our own backup, proceed.
         }
 
+        // 3c. #1014 defence-in-depth: gates 3 and 3b read only the FIRST pages of the file — the
+        //     16-byte magic and sqlite_master both survive a backup that was truncated mid-upload or
+        //     torn by a flaky drive/cloud client, and such a file then "restores" into a store that
+        //     silently shows no data (the #1014 report; the #1000 settings code was exonerated, but
+        //     the family needed armour). Run SQLite's own `PRAGMA quick_check` over the STAGED file,
+        //     read-only, BEFORE the live DB is touched, and refuse the swap honestly. quick_check
+        //     (not integrity_check) skips index-content verification so it stays fast on a 100 MB+
+        //     library while still catching truncation and malformed pages. Twin of the Apple side's
+        //     DatabaseIntegrity gate.
+        sqliteQuickCheckFailure(tempSqlite)?.let { complaint ->
+            tempSqlite.delete()
+            tempSettings.delete()
+            return ImportResult.Failed(
+                "This backup file is damaged and can't be restored (SQLite reports: $complaint). " +
+                    "Your current data is untouched. Try an earlier backup file."
+            )
+        }
+
         val dbFile = appContext.getDatabasePath(WhoopDatabase.DB_NAME)
         val walFile = File(dbFile.path + "-wal")
         val shmFile = File(dbFile.path + "-shm")
@@ -224,6 +270,40 @@ object DataBackup {
             tempSqlite.delete()
             tempSettings.delete()
             return ImportResult.Failed("Import failed, your data is unchanged: ${e.message}")
+        }
+
+        // 6b. #1014 defence-in-depth, post-swap: re-verify the file that actually LANDED at the live
+        //     path with a second read-only quick_check. The staged file was verified in 3c, but the
+        //     copy itself can tear — disk-full mid-copy, a dying flash chip, the process killed at
+        //     the wrong instant — and the next launch would meet a corrupt store (which, before the
+        //     CorruptionPreservingOpenHelperFactory below, the platform would then silently DELETE).
+        //     On failure, roll back to the `.import-bak` snapshot automatically and say so.
+        sqliteQuickCheckFailure(dbFile)?.let { complaint ->
+            tempSqlite.delete()
+            tempSettings.delete()
+            walFile.delete()
+            shmFile.delete()
+            val message: String
+            if (rollbackFile.exists()) {
+                if (runCatching { rollbackFile.copyTo(dbFile, overwrite = true) }.isSuccess) {
+                    rollbackFile.delete()
+                    message = "The backup failed its integrity check after the copy (SQLite reports: " +
+                        "$complaint). Your previous data was rolled back automatically and is unchanged."
+                } else {
+                    // The roll-back copy itself failed: KEEP the snapshot on disk — it is now the
+                    // only good copy of the user's data — and tell the user exactly where it is.
+                    message = "The backup failed its integrity check after the copy (SQLite reports: " +
+                        "$complaint), and rolling back also failed. Your previous data is preserved at " +
+                        "${rollbackFile.name} next to the app's database."
+                }
+            } else {
+                // Fresh install: nothing existed before the import, so removing the damaged file
+                // returns to the exact pre-import (empty) state.
+                dbFile.delete()
+                message = "The backup failed its integrity check after the copy (SQLite reports: " +
+                    "$complaint). There was no previous data to roll back."
+            }
+            return ImportResult.Failed(message)
         }
 
         // 7. #1000: re-apply the backup's whitelisted profile/display settings (weight, height, age,
@@ -396,10 +476,12 @@ object DataBackup {
         return tableNames.any { it !in housekeeping && !it.startsWith("sqlite_") }
     }
 
-    /** Every table name in [file], opened READ-ONLY so the probed file is never mutated. Empty on failure. */
+    /** Every table name in [file], opened READ-ONLY so the probed file is never mutated. Empty on
+     *  failure. Carries [PRESERVE_ON_CORRUPTION] (#1014): without an explicit handler the framework
+     *  default would DELETE the staged file when the open reports SQLITE_NOTADB/CORRUPT. */
     private fun sqliteTableNames(file: File): Set<String> {
         val db = runCatching {
-            SQLiteDatabase.openDatabase(file.path, null, SQLiteDatabase.OPEN_READONLY)
+            SQLiteDatabase.openDatabase(file.path, null, SQLiteDatabase.OPEN_READONLY, PRESERVE_ON_CORRUPTION)
         }.getOrNull() ?: return emptySet()
         return try {
             val names = LinkedHashSet<String>()
@@ -419,5 +501,137 @@ object DataBackup {
         tempSqlite.delete()
         tempSettings.delete()
         return ImportResult.Failed(message)
+    }
+
+    // ── Integrity gate (#1014 defence-in-depth; twin of the Apple DatabaseIntegrity) ─────
+
+    /**
+     * Pure classification of the rows `PRAGMA quick_check` returned: null = healthy (the single
+     * canonical "ok" row), otherwise the first complaint row VERBATIM — never a fabricated summary.
+     * An EMPTY result set is a failure too: quick_check always answers, so silence means the query
+     * was swallowed and the file must not be trusted. Mirrors the Apple side's
+     * `DatabaseIntegrity.verdict(fromRows:)` byte-for-byte — the same golden vectors are pinned in
+     * [DataBackupIntegrityTest] here and `DatabaseIntegrityTests` there, so both platforms agree on
+     * what "healthy" means. Pure + public so the plain-JVM test can drive it without Robolectric.
+     */
+    fun quickCheckVerdict(rows: List<String>): String? {
+        if (rows.size == 1 && rows[0].equals("ok", ignoreCase = true)) return null
+        return rows.firstOrNull { !it.equals("ok", ignoreCase = true) }
+            ?: "quick_check returned no verdict"
+    }
+
+    /**
+     * A [android.database.DatabaseErrorHandler] that closes the handle and PRESERVES the file. The
+     * framework default ([android.database.DefaultDatabaseErrorHandler]) DELETES the file it was
+     * probing on SQLITE_CORRUPT/SQLITE_NOTADB — every `openDatabase` overload without an explicit
+     * handler inherits that. For the integrity probes below that would be catastrophic: the export
+     * probe opens the LIVE database, so a corrupt store would be silently destroyed by the very
+     * check meant to protect it (#1014). Also used by the origin probe for the same reason.
+     */
+    private val PRESERVE_ON_CORRUPTION = android.database.DatabaseErrorHandler { dbObj ->
+        runCatching { dbObj.close() }
+    }
+
+    /**
+     * Run `PRAGMA quick_check(1)` on [file]. Returns null when the file is healthy, otherwise a
+     * short human-readable complaint for the caller's honest failure message. `quick_check(1)`
+     * stops at the first error, so a damaged 100 MB library still answers quickly.
+     *
+     * Opens READ-ONLY first (never mutates the probed file; sits safely beside an open Room
+     * connection — WAL allows concurrent readers). If the read-only open itself fails, falls back
+     * to a read-write open: pre-3.22 SQLite (API 26/27, minSdk 26) cannot read-only-open a
+     * WAL-header file without an initialized `-shm`, which is exactly what a checkpointed staged
+     * backup looks like — refusing those would break valid restores on Android 8.x. Every probed
+     * file is ours to touch (the staged temp copy, the just-swapped live file, or the live store
+     * the export is about to archive), and a read-write open only performs standard SQLite
+     * recovery, never a content change. Both opens carry [PRESERVE_ON_CORRUPTION] so no probe can
+     * ever delete what it probes.
+     */
+    private fun sqliteQuickCheckFailure(file: File): String? {
+        val db = runCatching {
+            SQLiteDatabase.openDatabase(file.path, null, SQLiteDatabase.OPEN_READONLY, PRESERVE_ON_CORRUPTION)
+        }.recoverCatching {
+            SQLiteDatabase.openDatabase(file.path, null, SQLiteDatabase.OPEN_READWRITE, PRESERVE_ON_CORRUPTION)
+        }.getOrElse { return "could not open the database: ${it.message}" }
+        return try {
+            val rows = ArrayList<String>()
+            db.rawQuery("PRAGMA quick_check(1)", null).use { c ->
+                while (c.moveToNext()) c.getString(0)?.let(rows::add)
+            }
+            quickCheckVerdict(rows)
+        } catch (e: Exception) {
+            // The query failed outright (SQLITE_NOTADB on garbage behind a valid magic header,
+            // a malformed page 1, …). That IS the verdict: the file is not a usable database.
+            "quick_check failed: ${e.message}"
+        } finally {
+            runCatching { db.close() }
+        }
+    }
+}
+
+/**
+ * #1014 defence-in-depth: a Room open-helper factory whose ONLY behavioural change is corruption
+ * handling. The platform DEFAULT — androidx.sqlite routes SQLITE_CORRUPT to
+ * [SupportSQLiteOpenHelper.Callback.onCorruption], whose base implementation mirrors Android's
+ * `DefaultDatabaseErrorHandler` — silently DELETES the corrupt database file. For NOOP that means
+ * permanently destroying already-acked strap history the strap will never re-send, without the user
+ * ever seeing a byte of it. Confirmed absent in this app before #1014: nothing overrode
+ * onCorruption, so the delete-on-corruption default applied.
+ *
+ * The factory wraps the stock [FrameworkSQLiteOpenHelperFactory] and delegates every lifecycle
+ * callback (configure/create/migrate/open) to Room's real callback UNCHANGED, so migrations behave
+ * exactly as before. Only `onCorruption` is replaced: it logs loudly, closes the handle, sets ONE
+ * `.corrupt` sibling copy aside (best-effort, skipped when one already exists so repeated failed
+ * opens can't multiply 100 MB files), and — crucially — deletes NOTHING. The trade-off is
+ * deliberate and matches [WhoopDatabase]'s no-destructive-fallback doctrine: the app may then fail
+ * to open the store (the user sees an error instead of a silently empty app), but the file survives
+ * for backup/recovery instead of vanishing.
+ *
+ * `allowDataLossOnRecovery` is pinned FALSE for the same reason: androidx's recovery path deletes
+ * the file when an open fails, which is exactly the destruction this factory exists to prevent.
+ */
+class CorruptionPreservingOpenHelperFactory(
+    private val delegate: SupportSQLiteOpenHelper.Factory = FrameworkSQLiteOpenHelperFactory(),
+) : SupportSQLiteOpenHelper.Factory {
+
+    override fun create(configuration: SupportSQLiteOpenHelper.Configuration): SupportSQLiteOpenHelper {
+        val preserving = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
+            .name(configuration.name)
+            .callback(PreservingCallback(configuration.callback))
+            .noBackupDirectory(configuration.useNoBackupDirectory)
+            .allowDataLossOnRecovery(false)
+            .build()
+        return delegate.create(preserving)
+    }
+
+    /** Delegates everything to Room's callback except the destructive corruption default. */
+    private class PreservingCallback(
+        private val roomCallback: SupportSQLiteOpenHelper.Callback,
+    ) : SupportSQLiteOpenHelper.Callback(roomCallback.version) {
+        override fun onConfigure(db: SupportSQLiteDatabase) = roomCallback.onConfigure(db)
+        override fun onCreate(db: SupportSQLiteDatabase) = roomCallback.onCreate(db)
+        override fun onUpgrade(db: SupportSQLiteDatabase, oldVersion: Int, newVersion: Int) =
+            roomCallback.onUpgrade(db, oldVersion, newVersion)
+        override fun onDowngrade(db: SupportSQLiteDatabase, oldVersion: Int, newVersion: Int) =
+            roomCallback.onDowngrade(db, oldVersion, newVersion)
+        override fun onOpen(db: SupportSQLiteDatabase) = roomCallback.onOpen(db)
+
+        override fun onCorruption(db: SupportSQLiteDatabase) {
+            // Do NOT call super — the base implementation deletes the file. Log + close + preserve.
+            val path = runCatching { db.path }.getOrNull()
+            Log.e(
+                "WhoopDatabase",
+                "SQLite reported corruption in $path — preserving the file (NOT deleting it). " +
+                    "The store may fail to open until the file is repaired or restored from a backup.",
+            )
+            runCatching { db.close() }
+            if (path != null && path != ":memory:") {
+                val original = File(path)
+                val preserved = File("$path.corrupt")
+                if (original.exists() && !preserved.exists()) {
+                    runCatching { original.copyTo(preserved) }
+                }
+            }
+        }
     }
 }

@@ -434,7 +434,14 @@ class OuraDriver(
                         ),
                     ),
                 )
-            OuraEventTag.ACTIVITY_INFO, OuraEventTag.ACTIVITY_SUMMARY_1, OuraEventTag.ACTIVITY_SUMMARY_2 ->
+            OuraEventTag.ACTIVITY_INFO ->
+                // Split out of the raw-bytes TierB wrapper: this ONE activity tag has a plausible decode
+                // formula (OuraDecoders.decodeActivityInfo, third-party [oura-rs], PR #960 investigation).
+                // Still Tier B - only reached behind allowTierB (gated above), and OuraStreamMapping never
+                // folds ActivityInfo into a durable stream. 0x51/0x52 summaries stay raw below.
+                OuraDecoders.decodeActivityInfo(record)?.let { listOf(OuraEvent.ActivityInfo(it)) }
+                    ?: emptyList()
+            OuraEventTag.ACTIVITY_SUMMARY_1, OuraEventTag.ACTIVITY_SUMMARY_2 ->
                 listOf(
                     OuraEvent.TierB(
                         OuraTierBSummary(

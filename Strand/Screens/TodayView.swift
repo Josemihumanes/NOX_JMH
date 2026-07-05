@@ -1328,6 +1328,11 @@ struct TodayView: View {
         // Reload when the data refreshes OR the selected day changes, the HR trend and Rest score are
         // day-scoped, so navigating must re-fetch them for the newly selected window.
         .task(id: TodayLoadKey(seq: repo.refreshSeq, offset: selectedDayOffset)) { await loadAll() }
+        // #989: hydration writes don't bump refreshSeq, so the card needs its own triggers, a logged /
+        // edited / deleted drink (hydrationSeq) and the Settings feature toggle both re-read just the two
+        // hydration fields. Cheap (one metricSeries row), never re-runs the heavy loads.
+        .task(id: repo.hydrationSeq) { await reloadHydration() }
+        .onChangeCompat(of: hydrationEnabled) { _ in Task { await reloadHydration() } }
         // #755: NO per-edge safety net here, on purpose. A deep offload segments into many slices that each
         // flip `backfilling` false→true, so re-running the heavy history-wide reads on that edge would re-fire
         // them dozens of times mid-offload and re-create the very write-contention this fix removes. The
@@ -3615,6 +3620,9 @@ struct TodayView: View {
         // reload identical data. If the cache is somehow absent (defensive), fall through and reload.
         if repo.todayHistoryWideLoadedSeq == currentSeq, let cached = repo.todayHistoryWideCache {
             restoreHistoryWide(cached)
+            // #989: hydration is excluded from the snapshot (a drink logged since would be stale), so a
+            // restore re-reads it live, one cheap row.
+            await reloadHydration()
             loadedHistoryWideOnce = true
             announceNewDaysIfNeeded()
             return
@@ -3724,13 +3732,7 @@ struct TodayView: View {
         vitalityToday = (await vitalitySeriesA).last?.value
         // Hydration card (opt-in): today's stored total + the sex/Effort goal. Only loaded when the
         // feature is on, so a disabled feature does zero work and the card stays hidden.
-        if hydrationEnabled {
-            hydrationTotalML = await repo.hydrationTotal(day: Repository.localDayKey(Date()))
-            hydrationGoalML = repo.hydrationGoalML(profileSex: profile.sex)
-        } else {
-            hydrationTotalML = nil
-            hydrationGoalML = nil
-        }
+        await reloadHydration()
         if let store = await repo.storeHandle() {
             let farFuture = Int(Date.distantFuture.timeIntervalSince1970)
             xiaomiSleeps = ((try? await store.sleepSessions(deviceId: "xiaomi-band", from: 0, to: farFuture, limit: 4000))?.count) ?? 0
@@ -3753,9 +3755,7 @@ struct TodayView: View {
             xiaomiSleeps: xiaomiSleeps,
             stressToday: stressToday,
             fitnessAgeToday: fitnessAgeToday,
-            vitalityToday: vitalityToday,
-            hydrationTotalML: hydrationTotalML,
-            hydrationGoalML: hydrationGoalML
+            vitalityToday: vitalityToday
         )
     }
 
@@ -3774,8 +3774,21 @@ struct TodayView: View {
         stressToday = c.stressToday
         fitnessAgeToday = c.fitnessAgeToday
         vitalityToday = c.vitalityToday
-        hydrationTotalML = c.hydrationTotalML
-        hydrationGoalML = c.hydrationGoalML
+        // Hydration is deliberately NOT part of the snapshot (#989): logging a drink never bumps
+        // refreshSeq, so a restored total could be stale. It is re-read live instead (see loadAll).
+    }
+
+    /// #989: today's hydration total + goal, re-read wherever staleness could show: the history-wide load,
+    /// the same-seq cache restore, a hydration mutation (`repo.hydrationSeq`), and the feature toggle.
+    /// One metricSeries row + a UserDefaults read, cheap enough to run on every pass.
+    private func reloadHydration() async {
+        if hydrationEnabled {
+            hydrationTotalML = await repo.hydrationTotal(day: Repository.localDayKey(Date()))
+            hydrationGoalML = repo.hydrationGoalML(profileSex: profile.sex)
+        } else {
+            hydrationTotalML = nil
+            hydrationGoalML = nil
+        }
     }
 
     /// #932: restore the day-scoped outputs from a same-(seq, day) cache on a re-mount, so the selected day
@@ -4296,8 +4309,8 @@ struct TodayHistoryWideCache {
     let stressToday: Double?
     let fitnessAgeToday: Double?
     let vitalityToday: Double?
-    let hydrationTotalML: Double?
-    let hydrationGoalML: Int?
+    // Hydration total/goal intentionally absent (#989): mutations don't bump refreshSeq, so a cached
+    // value could restore stale. TodayView re-reads hydration live on restore instead.
 }
 
 /// #849/#932: an in-memory snapshot of everything `loadDayScoped()` computes for ONE viewed day: the Rest
