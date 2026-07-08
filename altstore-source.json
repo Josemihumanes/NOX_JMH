@@ -18,7 +18,7 @@
       "screenshotURLs": [],
       "versions": [
         {
-          "version": "1.1.1",
+          "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
           "localizedDescription": "Icono de NOX actualizado.",
@@ -37,7 +37,7 @@
           "NSHealthUpdateUsageDescription": "NOX writes the metrics it computes from your strap back into Apple Health, on-device and only when you allow it."
         }
       },
-      "version": "1.1.1",
+      "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
       "versionDescription": "Icono de NOX actualizado.",
