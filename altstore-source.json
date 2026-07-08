@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "NOOP reemplazado por NOX en textos visibles (onboarding, terminos, wordmark).",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.1/NOX-v1.2.1-ios.ipa",
-          "size": 17032798,
+          "localizedDescription": "Wordmark real de NOX corregido + idiomas restringidos a en/es.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.2/NOX-v1.2.2-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "NOOP reemplazado por NOX en textos visibles (onboarding, terminos, wordmark).",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.1/NOX-v1.2.1-ios.ipa",
-      "size": 17032798,
+      "versionDescription": "Wordmark real de NOX corregido + idiomas restringidos a en/es.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.2/NOX-v1.2.2-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],

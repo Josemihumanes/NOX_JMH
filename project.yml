@@ -192,6 +192,12 @@ targets:
         AppGroupIdentifier: "$(APP_GROUP_ID)"
         LSApplicationCategoryType: public.app-category.healthcare-fitness
         UILaunchScreen: {}
+        # Restringe los idiomas que iOS puede seleccionar en tiempo de ejecución a solo inglés
+        # y español. Las demás traducciones siguen presentes en Localizable.xcstrings (por si
+        # se quiere revertir), pero iOS nunca las ofrecerá como idioma activo de la app.
+        CFBundleLocalizations:
+          - en
+          - es
         # Alternate app icons (v3 "Titanium & Gold"). The primary icon stays the asset-catalog
         # AppIcon (machined titanium); the alternate "AppIcon-Navy" (blued titanium) is declared
         # here so UIApplication.setAlternateIconName("AppIcon-Navy") can switch to it at runtime.
