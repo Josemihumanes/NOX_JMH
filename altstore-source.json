@@ -18,11 +18,11 @@
       "screenshotURLs": [],
       "versions": [
         {
-          "version": "1.1.0",
-          "buildVersion": "2",
+          "version": "1.1.1",
+          "buildVersion": "3",
           "date": "2026-07-08",
-          "localizedDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+          "localizedDescription": "Icono de NOX actualizado.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
           "size": 0,
           "minOSVersion": "17.0"
         }
@@ -37,11 +37,11 @@
           "NSHealthUpdateUsageDescription": "NOX writes the metrics it computes from your strap back into Apple Health, on-device and only when you allow it."
         }
       },
-      "version": "1.1.0",
-      "buildVersion": "2",
+      "version": "1.1.1",
+      "buildVersion": "3",
       "versionDate": "2026-07-08",
-      "versionDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+      "versionDescription": "Icono de NOX actualizado.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
       "size": 0,
       "minOSVersion": "17.0"
     }
