@@ -19,7 +19,7 @@
       "versions": [
         {
           "version": "1.1.1",
-          "buildVersion": "3",
+          "buildVersion": "172",
           "date": "2026-07-08",
           "localizedDescription": "Icono de NOX actualizado.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
@@ -38,7 +38,7 @@
         }
       },
       "version": "1.1.1",
-      "buildVersion": "3",
+      "buildVersion": "172",
       "versionDate": "2026-07-08",
       "versionDescription": "Icono de NOX actualizado.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
