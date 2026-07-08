@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Icono de NOX actualizado.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
-          "size": 1811487,
+          "localizedDescription": "Build sin Apple Watch embebido (diagnóstico de crash en SideStore).",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.0/NOX-v1.2.0-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Icono de NOX actualizado.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.1/NOX-v1.1.1-ios.ipa",
-      "size": 1811487,
+      "versionDescription": "Build sin Apple Watch embebido (diagnóstico de crash en SideStore).",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.0/NOX-v1.2.0-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
