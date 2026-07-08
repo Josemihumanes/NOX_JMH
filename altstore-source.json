@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Build sin Apple Watch embebido (diagnóstico de crash en SideStore).",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.0/NOX-v1.2.0-ios.ipa",
-          "size": 0,
+          "size": 17032601,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Build sin Apple Watch embebido (diagnóstico de crash en SideStore).",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.0/NOX-v1.2.0-ios.ipa",
-      "size": 0,
+      "size": 17032601,
       "minOSVersion": "17.0"
     }
   ],
