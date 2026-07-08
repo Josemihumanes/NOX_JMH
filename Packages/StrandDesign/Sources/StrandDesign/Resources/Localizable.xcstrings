@@ -9,6 +9,12 @@
             "value": "%lld days ago"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hace %lld días"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -65,6 +71,12 @@
             "value": "%lld minutes"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld minutos"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -79,6 +91,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld points, mean %@, range %@ to %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld puntos, media %@, rango de %@ a %@"
           }
         },
         "pt-PT": {
@@ -97,6 +115,12 @@
             "value": "%lld readings"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld lecturas"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -113,6 +137,12 @@
             "value": "%lld workouts"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld entrenamientos"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -127,6 +157,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lldd ago"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hace %lldd"
           }
         },
         "pt-PT": {
@@ -185,6 +221,12 @@
             "value": "%lldm ago"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hace %lldm"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -241,6 +283,12 @@
             "value": "1 minute"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 minuto"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -257,6 +305,12 @@
             "value": "1 workout"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 entrenamiento"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -271,6 +325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ALL-OUT"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MÁXIMO"
           }
         },
         "pt-PT": {
@@ -347,6 +407,12 @@
             "value": "Classic"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clásico"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -363,6 +429,12 @@
             "value": "DEPLETED"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AGOTADO"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -377,6 +449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dark"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oscuro"
           }
         },
         "pt-PT": {
@@ -533,6 +611,12 @@
             "value": "LIGHT"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LIGERO"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -647,6 +731,12 @@
             "value": "MODERATE"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MODERADO"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -721,6 +811,12 @@
             "value": "No heart-rate data"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin datos de frecuencia cardíaca"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -777,6 +873,12 @@
             "value": "PRIMED"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREPARADO"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -791,6 +893,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recovery calendar, %lld days, average %lld, low %lld, high %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario de recuperación, %lld días, media %lld, mín %lld, máx %lld"
           }
         },
         "pt-PT": {
@@ -809,6 +917,12 @@
             "value": "Recovery calendar, no data"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario de recuperación, sin datos"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -823,6 +937,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "STRENUOUS"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXTENUANTE"
           }
         },
         "pt-PT": {
@@ -841,6 +961,12 @@
             "value": "Sleep stages, %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fases del sueño, %@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -857,6 +983,12 @@
             "value": "Sleep stages, no data"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fases del sueño, sin datos"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -871,6 +1003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "System"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
           }
         },
         "pt-PT": {
@@ -947,6 +1085,12 @@
             "value": "Trend, %lld points, latest %@, low %@, high %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tendencia, %lld puntos, último %@, mín %@, máx %@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -1003,6 +1147,12 @@
             "value": "asleep %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dormido %@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -1017,6 +1167,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "average %@ bpm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "media %@ ppm"
           }
         },
         "pt-PT": {
@@ -1073,6 +1229,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "range %@ to %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rango de %@ a %@"
           }
         },
         "pt-PT": {

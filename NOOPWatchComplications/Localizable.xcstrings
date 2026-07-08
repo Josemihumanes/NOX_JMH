@@ -9,6 +9,12 @@
             "value": "%@ %lld"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %lld"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -25,6 +31,12 @@
             "value": "%@ calibrating"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ calibrando"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -39,6 +51,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ no disponible"
           }
         },
         "pt-PT": {
@@ -115,6 +133,12 @@
             "value": "Charge %lld out of 100"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga %lld de 100"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -129,6 +153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charge %lld · %lld bpm%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga %lld · %lld ppm%@"
           }
         },
         "pt-PT": {
@@ -147,6 +177,12 @@
             "value": "Charge %lld%@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga %lld%@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -161,6 +197,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charge calibrating"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga calibrando"
           }
         },
         "pt-PT": {
@@ -179,6 +221,12 @@
             "value": "Charge calibrating, needs more data"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga calibrando, necesita más datos"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -193,6 +241,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charge out of date, last synced %@. Open NOOP on iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga desactualizada, última sincronización %@. Abre NOOP en el iPhone."
           }
         },
         "pt-PT": {
@@ -211,6 +265,12 @@
             "value": "Charge stale · %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga desactualizada · %@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -225,6 +285,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charge unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga no disponible"
           }
         },
         "pt-PT": {
@@ -243,6 +309,12 @@
             "value": "Charge · %@"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga · %@"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -259,6 +331,12 @@
             "value": "Charge · cal"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga · cal"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -273,6 +351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charge –"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga –"
           }
         },
         "pt-PT": {
@@ -389,6 +473,12 @@
             "value": "NOOP · open on iPhone"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOOP · abrir en el iPhone"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -400,6 +490,12 @@
     "NOOP. %@, %@, %@.": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOOP. %@, %@, %@."
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "NOOP. %@, %@, %@."
@@ -421,6 +517,12 @@
             "value": "NOOP. No data yet, open NOOP on your iPhone to sync."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOOP. Aún no hay datos, abre NOOP en tu iPhone para sincronizar."
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -435,6 +537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "NOOP. Scores out of date, last synced %@. Open NOOP on iPhone to refresh."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOOP. Puntuaciones desactualizadas, última sincronización %@. Abre NOOP en el iPhone para actualizar."
           }
         },
         "pt-PT": {
@@ -453,6 +561,12 @@
             "value": "No data, open NOOP on iPhone"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin datos, abre NOOP en el iPhone"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -467,6 +581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open NOOP"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir NOOP"
           }
         },
         "pt-PT": {
@@ -583,6 +703,12 @@
             "value": "a while ago"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hace un rato"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -594,6 +720,12 @@
     "cal": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cal"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "cal"
@@ -615,6 +747,12 @@
             "value": "old"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desactualizado"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -631,6 +769,12 @@
             "value": "open iPhone"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "abrir iPhone"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
@@ -645,6 +789,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "stale"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desactualizado"
           }
         },
         "pt-PT": {

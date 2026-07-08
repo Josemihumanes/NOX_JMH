@@ -2145,6 +2145,12 @@
             "value": "cal"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cal"
+          }
+        },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
