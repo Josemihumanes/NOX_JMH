@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Wordmark real de NOX corregido + idiomas restringidos a en/es.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.2/NOX-v1.2.2-ios.ipa",
-          "size": 17032802,
+          "localizedDescription": "Traducción al español de la pantalla Hoy (saludo, métricas, frecuencia cardíaca).",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.3/NOX-v1.2.3-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Wordmark real de NOX corregido + idiomas restringidos a en/es.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.2/NOX-v1.2.2-ios.ipa",
-      "size": 17032802,
+      "versionDescription": "Traducción al español de la pantalla Hoy (saludo, métricas, frecuencia cardíaca).",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.3/NOX-v1.2.3-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],

@@ -669,7 +669,7 @@ struct LiquidTodayView: View {
         }
     }
 
-    private func vitalRow(_ label: String, _ value: String, _ tint: Color, _ frac: Double?) -> some View {
+    private func vitalRow(_ label: LocalizedStringKey, _ value: String, _ tint: Color, _ frac: Double?) -> some View {
         HStack(spacing: 12) {
             LiquidVessel(value: frac, tint: tint, animated: false).frame(width: 26, height: 26)
             Text(label).font(StrandFont.subhead).foregroundStyle(StrandPalette.textSecondary)
@@ -703,9 +703,9 @@ struct LiquidTodayView: View {
         }
     }
 
-    private func ktile(_ label: String, _ value: String, _ unit: String, _ tint: Color, _ frac: Double?) -> some View {
+    private func ktile(_ label: LocalizedStringKey, _ value: String, _ unit: String, _ tint: Color, _ frac: Double?) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(label.uppercased()).font(StrandFont.overlineScaled(9)).tracking(1.2)
+            Text(label).font(StrandFont.overlineScaled(9)).tracking(1.2).textCase(.uppercase)
                 .foregroundStyle(StrandPalette.textTertiary)
             (Text(value).font(StrandFont.number(17))
                 + Text(unit.isEmpty ? "" : " \(unit)").font(StrandFont.caption))
@@ -790,7 +790,7 @@ struct LiquidTodayView: View {
 
     // MARK: - Reusable chrome
 
-    private func sectionHead(_ title: String, trailing: String) -> some View {
+    private func sectionHead(_ title: LocalizedStringKey, trailing: LocalizedStringKey) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(title).font(StrandFont.overline).tracking(1.6).foregroundStyle(StrandPalette.textTertiary)
             Spacer()
@@ -885,26 +885,26 @@ struct LiquidTodayView: View {
 
     private var readinessWord: String? {
         switch readiness.level {
-        case .primed: return "Push"
-        case .balanced: return "Maintain"
-        case .strained, .rundown: return "Rest"
+        case .primed: return String(localized: "Push")
+        case .balanced: return String(localized: "Maintain")
+        case .strained, .rundown: return String(localized: "Rest")
         case .insufficient: return nil
         }
     }
 
     private var synthLine: String {
         switch readiness.level {
-        case .primed: return "You're primed. A hard session should land well today."
-        case .balanced: return "You're in a good spot for training."
-        case .strained: return "Signals are down a touch. Keep it easy today."
-        case .rundown: return "Several recovery signals are down. Prioritise rest today."
-        case .insufficient: return "Still learning your baseline. A few more nights and this fills in."
+        case .primed: return String(localized: "You're primed. A hard session should land well today.")
+        case .balanced: return String(localized: "You're in a good spot for training.")
+        case .strained: return String(localized: "Signals are down a touch. Keep it easy today.")
+        case .rundown: return String(localized: "Several recovery signals are down. Prioritise rest today.")
+        case .insufficient: return String(localized: "Still learning your baseline. A few more nights and this fills in.")
         }
     }
 
     private var greeting: String {
         let h = Calendar.current.component(.hour, from: Date())
-        return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"
+        return h < 12 ? String(localized: "Good morning") : h < 17 ? String(localized: "Good afternoon") : String(localized: "Good evening")
     }
 
     private var stepCount: Double? { displayDay?.steps.map(Double.init) ?? stepsEst }

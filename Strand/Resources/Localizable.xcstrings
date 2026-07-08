@@ -1,6 +1,206 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "BEATS PER MINUTE": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LATIDOS POR MINUTO"
+          }
+        }
+      }
+    },
+    "BETA": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BETA"
+          }
+        }
+      }
+    },
+    "Full day": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Día completo"
+          }
+        }
+      }
+    },
+    "YOUR CARDS": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TUS TARJETAS"
+          }
+        }
+      }
+    },
+    "SYNTHESIS": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SÍNTESIS"
+          }
+        }
+      }
+    },
+    "RECOVERY VITALS": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SIGNOS VITALES DE RECUPERACIÓN"
+          }
+        }
+      }
+    },
+    "No workouts yet": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay entrenamientos"
+          }
+        }
+      }
+    },
+    "View sources": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver fuentes"
+          }
+        }
+      }
+    },
+    "KEY METRICS": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MÉTRICAS CLAVE"
+          }
+        }
+      }
+    },
+    "LAST WORKOUTS": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ÚLTIMOS ENTRENAMIENTOS"
+          }
+        }
+      }
+    },
+    "DATA SOURCES": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FUENTES DE DATOS"
+          }
+        }
+      }
+    },
+    "Strain": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esfuerzo"
+          }
+        }
+      }
+    },
+    "Rest HR": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FC reposo"
+          }
+        }
+      }
+    },
+    "WHOOP": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WHOOP"
+          }
+        }
+      }
+    },
+    "You're primed. A hard session should land well today.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estás en tu punto óptimo. Hoy es buen día para una sesión exigente."
+          }
+        }
+      }
+    },
+    "You're in a good spot for training.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estás en un buen momento para entrenar."
+          }
+        }
+      }
+    },
+    "Signals are down a touch. Keep it easy today.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus señales están un poco bajas. Tómalo con calma hoy."
+          }
+        }
+      }
+    },
+    "Several recovery signals are down. Prioritise rest today.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varias señales de recuperación están bajas. Prioriza el descanso hoy."
+          }
+        }
+      }
+    },
+    "Still learning your baseline. A few more nights and this fills in.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todavía aprendiendo tu línea base. Con unas noches más esto se completa."
+          }
+        }
+      }
+    },
+    "Live · beat by beat": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En vivo · latido a latido"
+          }
+        }
+      }
+    },
     "": {
       "localizations": {
         "de": {
