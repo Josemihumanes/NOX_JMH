@@ -1089,7 +1089,7 @@ private struct HeroScoreCell: View {
             }
             Button(action: onGuide) {
                 HStack(spacing: 3) {
-                    Text(label.uppercased()).font(StrandFont.overline).tracking(1.6)
+                    Text(String(localized: String.LocalizationValue(label)).uppercased()).font(StrandFont.overline).tracking(1.6)
                     Image(systemName: "chevron.right").font(.system(size: 9, weight: .semibold)).opacity(0.6)
                 }
                 // The hero card fill is pinned dark in BOTH themes, so the CHARGE/EFFORT/REST label must use
@@ -1100,7 +1100,7 @@ private struct HeroScoreCell: View {
             .buttonStyle(.plain)
             .accessibilityLabel(Text("\(label), \(score.map { String(Int($0.rounded())) } ?? "no data yet"). See how it is scored."))
             if let pill {
-                Text(pill)
+                Text(String(localized: String.LocalizationValue(pill)))
                     .font(StrandFont.overlineScaled(8.5)).tracking(1.2)
                     // WHOOP pill on the pinned-dark hero card → on-dark token, not the theme-flipping one (#1013).
                     .foregroundStyle(StrandPalette.onDarkSecondary)
