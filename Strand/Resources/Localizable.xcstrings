@@ -7128,31 +7128,31 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$lld Messwert%2$@ stimmen bisher überein, noch nicht genug für einen Trend (NOOP wartet auf %3$lld)."
+            "value": "%1$lld Messwert%2$@ stimmen bisher überein, noch nicht genug für einen Trend (NOX wartet auf %3$lld)."
           }
         },
         "en": {
           "stringUnit": {
             "state": "new",
-            "value": "%1$lld reading%2$@ line up so far, not enough to read a trend yet (NOOP waits for %3$lld)."
+            "value": "%1$lld reading%2$@ line up so far, not enough to read a trend yet (NOX waits for %3$lld)."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld lectura%@ coinciden hasta ahora, no es suficiente para leer una tendencia todavía (NOOP espera %lld)."
+            "value": "%lld lectura%@ coinciden hasta ahora, no es suficiente para leer una tendencia todavía (NOX espera %lld)."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$lld lettura%2$@ allineate finora, non abbastanza per leggere un andamento (NOOP aspetta %3$lld)."
+            "value": "%1$lld lettura%2$@ allineate finora, non abbastanza per leggere un andamento (NOX aspetta %3$lld)."
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "%lld leitura%@ coinciden até agora, no es suficiente para leer uma tendência todavía (NOOP espera %lld)."
+            "value": "%lld leitura%@ coinciden até agora, no es suficiente para leer uma tendência todavía (NOX espera %lld)."
           }
         },
         "zh-Hans": {
@@ -7313,31 +7313,31 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$lld Messwerte stimmen bisher überein, noch nicht genug für einen Trend (NOOP wartet auf %2$lld)."
+            "value": "%1$lld Messwerte stimmen bisher überein, noch nicht genug für einen Trend (NOX wartet auf %2$lld)."
           }
         },
         "en": {
           "stringUnit": {
             "state": "new",
-            "value": "%1$lld readings line up so far, not enough to read a trend yet (NOOP waits for %2$lld)."
+            "value": "%1$lld readings line up so far, not enough to read a trend yet (NOX waits for %2$lld)."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld lecturas coinciden hasta ahora, no es suficiente para leer una tendencia todavía (NOOP espera %lld)."
+            "value": "%lld lecturas coinciden hasta ahora, no es suficiente para leer una tendencia todavía (NOX espera %lld)."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld letture allineate finora, non abbastanza per leggere una tendenza (NOOP ne aspetta %lld)."
+            "value": "%lld letture allineate finora, non abbastanza per leggere una tendenza (NOX ne aspetta %lld)."
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "%lld leituras coinciden até agora, no es suficiente para leer uma tendência todavía (NOOP espera %lld)."
+            "value": "%lld leituras coinciden até agora, no es suficiente para leer uma tendência todavía (NOX espera %lld)."
           }
         },
         "zh-Hans": {
@@ -10322,13 +10322,13 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "1 Messwert stimmt bisher überein, noch nicht genug für einen Trend (NOOP wartet auf %lld)."
+            "value": "1 Messwert stimmt bisher überein, noch nicht genug für einen Trend (NOX wartet auf %lld)."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "1 lectura coincide hasta ahora, no es suficiente para leer una tendencia todavía (NOOP espera %lld)."
+            "value": "1 lectura coincide hasta ahora, no es suficiente para leer una tendencia todavía (NOX espera %lld)."
           }
         },
         "it": {
@@ -10340,7 +10340,7 @@
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "1 leitura coincide até agora, no es suficiente para leer uma tendência todavía (NOOP espera %lld)."
+            "value": "1 leitura coincide até agora, no es suficiente para leer uma tendência todavía (NOX espera %lld)."
           }
         },
         "zh-Hans": {
@@ -16582,7 +16582,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Después de una sincronización, NOOP revisa tu frecuencia cardíaca reciente buscando un tramo sostenido y elevado que parezca ejercicio y ofrece guardarlo. Solo sugiere. No se guarda nada hasta que tocas Guardar, y puedes descartar cualquier sugerencia. Es deliberadamente conservador, así que algún entrenamiento puede pasarse por alto. Solo en %@."
+            "value": "Después de una sincronización, NOX revisa tu frecuencia cardíaca reciente buscando un tramo sostenido y elevado que parezca ejercicio y ofrece guardarlo. Solo sugiere. No se guarda nada hasta que tocas Guardar, y puedes descartar cualquier sugerencia. Es deliberadamente conservador, así que algún entrenamiento puede pasarse por alto. Solo en %@."
           }
         },
         "it": {
@@ -16680,7 +16680,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Después de que tu iPhone se reinicie, desbloquéalo una vez. Hasta que lo hagas, iOS mantiene bloqueados los archivos de NOOP (Protección de datos), así que no se puede escribir ni sincronizar historial nuevo."
+            "value": "Después de que tu iPhone se reinicie, desbloquéalo una vez. Hasta que lo hagas, iOS mantiene bloqueados los archivos de NOX (Protección de datos), así que no se puede escribir ni sincronizar historial nuevo."
           }
         },
         "it": {
@@ -18428,7 +18428,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apple Health vive en el iPhone, no en la Mac, así que la conexión de tu Apple Watch se hace ahí. Abre NOOP en tu iPhone, ve a Ajustes y ejecuta esta misma configuración del Apple Watch. Tus puntuaciones aparecerán luego en todos tus dispositivos."
+            "value": "Apple Health vive en el iPhone, no en la Mac, así que la conexión de tu Apple Watch se hace ahí. Abre NOX en tu iPhone, ve a Ajustes y ejecuta esta misma configuración del Apple Watch. Tus puntuaciones aparecerán luego en todos tus dispositivos."
           }
         },
         "it": {
@@ -21028,7 +21028,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bluetooth im Hintergrund hat OS-Grenzen: iOS kann NOOP pausieren, wenn es nicht im Vordergrund ist. Lass es also offen, während ein frischer Strap synchronisiert."
+            "value": "Bluetooth im Hintergrund hat OS-Grenzen: iOS kann NOX pausieren, wenn es nicht im Vordergrund ist. Lass es also offen, während ein frischer Strap synchronisiert."
           }
         },
         "es": {
@@ -22242,13 +22242,13 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bevor du NOOP benutzt"
+            "value": "Bevor du NOX benutzt"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antes de usar NOOP"
+            "value": "Antes de usar NOX"
           }
         },
         "it": {
@@ -28629,7 +28629,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carga compara tu VFC con tu línea base personal (~55%%), la frecuencia cardíaca en reposo (~20%%), la calidad del descanso (~15%%), la respiración (~5%%) y la desviación de la temperatura de la piel (~5%%). Esfuerzo es una carga cardiovascular de 0 a %@ según el tiempo en zonas de frecuencia cardíaca. Descanso se clasifica por fases a partir del movimiento y la frecuencia cardíaca. Todo se calcula aquí con los datos crudos de la pulsera. Funciona para cualquier día en que NOOP recopiló datos crudos."
+            "value": "Carga compara tu VFC con tu línea base personal (~55%%), la frecuencia cardíaca en reposo (~20%%), la calidad del descanso (~15%%), la respiración (~5%%) y la desviación de la temperatura de la piel (~5%%). Esfuerzo es una carga cardiovascular de 0 a %@ según el tiempo en zonas de frecuencia cardíaca. Descanso se clasifica por fases a partir del movimiento y la frecuencia cardíaca. Todo se calcula aquí con los datos crudos de la pulsera. Funciona para cualquier día en que NOX recopiló datos crudos."
           }
         },
         "it": {
@@ -32436,13 +32436,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Conecta tu pulsera WHOOP en NOOP y vuelve a intentarlo."
+            "value": "Conecta tu pulsera WHOOP en NOX y vuelve a intentarlo."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Collega la tua fascia WHOOP in NOOP, poi riprova."
+            "value": "Collega la tua fascia WHOOP in NOX, poi riprova."
           }
         },
         "pt-PT": {
@@ -33229,13 +33229,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Conectada. Se lee al abrir y cuando vuelves a NOOP."
+            "value": "Conectada. Se lee al abrir y cuando vuelves a NOX."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Collegata. Lettura all'avvio e quando torni in NOOP."
+            "value": "Collegata. Lettura all'avvio e quando torni in NOX."
           }
         },
         "pt-PT": {
@@ -42863,7 +42863,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada latido, cada noche, cada día, entrelazados en una imagen serena de ti. Bienvenido a NOOP."
+            "value": "Cada latido, cada noche, cada día, entrelazados en una imagen serena de ti. Bienvenido a NOX."
           }
         },
         "fr": {
@@ -42956,7 +42956,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada métrica es una aproximación no validada. No uses NOOP para diagnosticar, tratar o tomar decisiones de salud. Consulta siempre a un profesional cualificado."
+            "value": "Cada métrica es una aproximación no validada. No uses NOX para diagnosticar, tratar o tomar decisiones de salud. Consulta siempre a un profesional cualificado."
           }
         }
       }
@@ -43012,7 +43012,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada puntuación lleva una pequeña etiqueta de honestidad. Calibrando significa que NOOP aún está aprendiendo tu línea base o no tiene suficientes datos todavía. Construyendo significa que hay suficiente para mostrar, pero es poco. Sólido significa que todos los datos están presentes. Cuando NOOP no puede calcular una puntuación honestamente, no muestra nada en lugar de un número falso."
+            "value": "Cada puntuación lleva una pequeña etiqueta de honestidad. Calibrando significa que NOX aún está aprendiendo tu línea base o no tiene suficientes datos todavía. Construyendo significa que hay suficiente para mostrar, pero es poco. Sólido significa que todos los datos están presentes. Cuando NOX no puede calcular una puntuación honestamente, no muestra nada en lugar de un número falso."
           }
         },
         "it": {
@@ -46904,25 +46904,25 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Beende NOOP vollständig und öffne es erneut, um es zu laden."
+            "value": "Beende NOX vollständig und öffne es erneut, um es zu laden."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cierra por completo NOOP y vuelve a abrirlo para cargarlo."
+            "value": "Cierra por completo NOX y vuelve a abrirlo para cargarlo."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chiudi completamente e riapri NOOP per caricarlo."
+            "value": "Chiudi completamente e riapri NOX per caricarlo."
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Cierra por completo NOOP e vuelve a abrirlo para cargarlo."
+            "value": "Cierra por completo NOX e vuelve a abrirlo para cargarlo."
           }
         },
         "zh-Hans": {
@@ -52040,19 +52040,19 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cómo funciona NOOP"
+            "value": "Cómo funciona NOX"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Come funziona NOOP"
+            "value": "Come funziona NOX"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Como funciona NOOP"
+            "value": "Como funciona NOX"
           }
         },
         "zh-Hans": {
@@ -55107,7 +55107,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Import überschreibt alles, was sich derzeit auf diesem Mac befindet. Deine alten Daten werden sicherheitshalber in einer separaten Datei aufbewahrt. NOOP muss neu gestartet werden, damit ein Import wirksam wird."
+            "value": "Der Import überschreibt alles, was sich derzeit auf diesem Mac befindet. Deine alten Daten werden sicherheitshalber in einer separaten Datei aufbewahrt. NOX muss neu gestartet werden, damit ein Import wirksam wird."
           }
         },
         "en": {
@@ -59375,7 +59375,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deja que NOOP toque tu muñeca para las cosas que actives abajo, así puedes dejar el teléfono y aun así sentir lo que importa."
+            "value": "Deja que NOX toque tu muñeca para las cosas que actives abajo, así puedes dejar el teléfono y aun así sentir lo que importa."
           }
         },
         "it": {
@@ -66379,55 +66379,55 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP"
+            "value": "NOX"
           }
         }
       }
@@ -66541,19 +66541,19 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carga de NOOP"
+            "value": "Carga de NOX"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carica NOOP"
+            "value": "Carica NOX"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Carga NOOP"
+            "value": "Carga NOX"
           }
         },
         "zh-Hans": {
@@ -66701,13 +66701,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calculado por NOOP"
+            "value": "Calculado por NOX"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calcolato da NOOP"
+            "value": "Calcolato da NOX"
           }
         },
         "pt-PT": {
@@ -66862,7 +66862,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "NOOP es un proyecto no oficial: no está afiliado con WHOOP, Inc., ni respaldado ni patrocinado por ella. «WHOOP» es su marca registrada, usada aquí solo para nombrar el hardware con el que funciona NOOP."
+            "value": "NOX es un proyecto no oficial: no está afiliado con WHOOP, Inc., ni respaldado ni patrocinado por ella. «WHOOP» es su marca registrada, usada aquí solo para nombrar el hardware con el que funciona NOX."
           }
         }
       }
@@ -68078,7 +68078,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carica, Sforzo e Riposo calcolati da NOOP sul tuo dispositivo a partire da metodi pubblicati."
+            "value": "Carica, Sforzo e Riposo calcolati da NOX sul tuo dispositivo a partire da metodi pubblicati."
           }
         },
         "pt-PT": {
@@ -68124,7 +68124,7 @@
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "A bracelete principal de NOOP, totalmente compatible"
+            "value": "A bracelete principal de NOX, totalmente compatible"
           }
         },
         "zh-Hans": {
@@ -68224,7 +68224,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calculé par NOOP"
+            "value": "Calculé par NOX"
           }
         },
         "it": {
@@ -69088,7 +69088,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Banda WHOOP más reciente, experimental en NOOP"
+            "value": "Banda WHOOP más reciente, experimental en NOX"
           }
         },
         "it": {
@@ -70338,7 +70338,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aún no hay días en los que tanto NOOP como tu teléfono hayan contado pasos. Cuando tu teléfono registre unos días junto con la pulsera, aparecerán aquí para que veas qué tan cerca está la estimación."
+            "value": "Aún no hay días en los que tanto NOX como tu teléfono hayan contado pasos. Cuando tu teléfono registre unos días junto con la pulsera, aparecerán aquí para que veas qué tan cerca está la estimación."
           }
         },
         "it": {
@@ -75290,7 +75290,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Auf dem iPhone ist das ein sideloadeter Build. Signiere ihn etwa alle 7 Tage neu mit einer kostenlosen Apple-ID (länger mit einem bezahlten Konto). Entsperre dein Telefon nach einem Neustart einmal, damit NOOP seine Daten lesen und synchronisieren kann."
+            "value": "Auf dem iPhone ist das ein sideloadeter Build. Signiere ihn etwa alle 7 Tage neu mit einer kostenlosen Apple-ID (länger mit einem bezahlten Konto). Entsperre dein Telefon nach einem Neustart einmal, damit NOX seine Daten lesen und synchronisieren kann."
           }
         },
         "es": {
@@ -75410,7 +75410,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "An den Tagen, an denen dein Telefon ebenfalls Schritte gezählt hat, lernt NOOP, wie deine Bewegung auf Schritte abbildet, und wendet das auf die Nur-Strap-Tage an. Je mehr übereinstimmende Tage es hat, desto mehr vertraut es der Schätzung."
+            "value": "An den Tagen, an denen dein Telefon ebenfalls Schritte gezählt hat, lernt NOX, wie deine Bewegung auf Schritte abbildet, und wendet das auf die Nur-Strap-Tage an. Je mehr übereinstimmende Tage es hat, desto mehr vertraut es der Schätzung."
           }
         },
         "es": {
@@ -76161,13 +76161,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre NOOP primero para que pueda conectar con tu pulsera."
+            "value": "Abre NOX primero para que pueda conectar con tu pulsera."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri prima NOOP così può raggiungere la tua fascia."
+            "value": "Apri prima NOX così può raggiungere la tua fascia."
           }
         },
         "pt-PT": {
@@ -76241,19 +76241,19 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre NOOP en tu iPhone para sincronizar"
+            "value": "Abre NOX en tu iPhone para sincronizar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri NOOP sul tuo iPhone per sincronizzare"
+            "value": "Apri NOX sul tuo iPhone per sincronizzare"
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Abre o NOOP no iPhone para sincronizar"
+            "value": "Abre o NOX no iPhone para sincronizar"
           }
         },
         "zh-Hans": {
@@ -78202,7 +78202,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abbina e gestisci le fasce da cui NOOP legge."
+            "value": "Abbina e gestisci le fasce da cui NOX legge."
           }
         },
         "pt-PT": {
@@ -86336,7 +86336,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ entfernen? NOOP verbindet sich dann nicht mehr damit. Die aufgezeichneten Daten bleiben, und du kannst es jederzeit wieder hinzufügen."
+            "value": "%@ entfernen? NOX verbindet sich dann nicht mehr damit. Die aufgezeichneten Daten bleiben, und du kannst es jederzeit wieder hinzufügen."
           }
         },
         "es": {
@@ -91604,7 +91604,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ in NOOPs Ordner in der Dateien-App gesichert."
+            "value": "%@ in NOXs Ordner in der Dateien-App gesichert."
           }
         },
         "es": {
@@ -91616,7 +91616,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ salvato nella cartella di NOOP nell'app File."
+            "value": "%@ salvato nella cartella di NOX nell'app File."
           }
         },
         "pt-PT": {
@@ -101853,7 +101853,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apoya a NOOP"
+            "value": "Apoya a NOX"
           }
         },
         "it": {
@@ -101900,7 +101900,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apoya a NOOP: dona o ponte en contacto"
+            "value": "Apoya a NOX: dona o ponte en contacto"
           }
         },
         "fr": {
@@ -105027,7 +105027,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aún no hay respaldos de NOOP en tu carpeta. Usa Respaldar ahora primero."
+            "value": "Aún no hay respaldos de NOX en tu carpeta. Usa Respaldar ahora primero."
           }
         },
         "it": {
@@ -105147,7 +105147,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aún no hay datos de NOOP para exportar."
+            "value": "Aún no hay datos de NOX para exportar."
           }
         },
         "it": {
@@ -105187,7 +105187,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aún no hay datos de NOOP para exportar. Importa o registra algunos primero."
+            "value": "Aún no hay datos de NOX para exportar. Importa o registra algunos primero."
           }
         },
         "it": {
@@ -105421,7 +105421,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das sind deine eigenen Zahlen, dir zurückgespiegelt. NOOP entscheidet nicht, ob ein Wert normal, hoch oder niedrig ist."
+            "value": "Das sind deine eigenen Zahlen, dir zurückgespiegelt. NOX entscheidet nicht, ob ein Wert normal, hoch oder niedrig ist."
           }
         },
         "es": {
@@ -111833,7 +111833,7 @@
         "pt-PT": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "A compatibilidad com WHOOP 5.0 / MG es mais nova e sigue siendo experimental en NOOP."
+            "value": "A compatibilidad com WHOOP 5.0 / MG es mais nova e sigue siendo experimental en NOX."
           }
         },
         "zh-Hans": {
@@ -114552,13 +114552,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Qué hace NOOP"
+            "value": "Qué hace NOX"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cosa fa NOOP"
+            "value": "Cosa fa NOX"
           }
         },
         "pt-PT": {
@@ -115476,7 +115476,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cuando se detecta una caída reciente de VFC sin ejercicio mientras estás en reposo, NOOP te ofrece un minuto de respiración guiada: una sola vibración de confirmación y una tarjeta que puedes descartar. Nunca una alarma, nunca un diagnóstico."
+            "value": "Cuando se detecta una caída reciente de VFC sin ejercicio mientras estás en reposo, NOX te ofrece un minuto de respiración guiada: una sola vibración de confirmación y una tarjeta que puedes descartar. Nunca una alarma, nunca un diagnóstico."
           }
         },
         "it": {
@@ -115648,7 +115648,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cuando aparezca el aviso del sistema, elige Permitir para que NOOP pueda encontrar tu pulsera."
+            "value": "Cuando aparezca el aviso del sistema, elige Permitir para que NOX pueda encontrar tu pulsera."
           }
         },
         "fr": {
@@ -115700,7 +115700,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cuando está activado, NOOP reescribe un archivo de texto plano (En mi iPhone › NOOP › noop_sync.txt) cada vez que sales de la app: una línea por cada 15 minutos de frecuencia cardíaca, VFC y pasos, leídos directamente desde tu pulsera. Combínalo con el atajo de Siri que lee el archivo y registra todo en Apple Health (sin necesidad del permiso de HealthKit), así funciona en instalaciones sideloaded. La guía de configuración y el atajo ya hecho están en la wiki del proyecto en GitHub."
+            "value": "Cuando está activado, NOX reescribe un archivo de texto plano (En mi iPhone › NOX › noop_sync.txt) cada vez que sales de la app: una línea por cada 15 minutos de frecuencia cardíaca, VFC y pasos, leídos directamente desde tu pulsera. Combínalo con el atajo de Siri que lee el archivo y registra todo en Apple Health (sin necesidad del permiso de HealthKit), así funciona en instalaciones sideloaded. La guía de configuración y el atajo ya hecho están en la wiki del proyecto en GitHub."
           }
         },
         "it": {
@@ -115740,7 +115740,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cuando importas una exportación de Apple Health o WHOOP, iOS le entrega a NOOP una copia privada del archivo. NOOP la lee, guarda tus datos en la base de datos de salud y luego elimina la copia. Las versiones antiguas no eliminaban todas las copias. Esta pantalla recupera las que quedaron atrás."
+            "value": "Cuando importas una exportación de Apple Health o WHOOP, iOS le entrega a NOX una copia privada del archivo. NOX la lee, guarda tus datos en la base de datos de salud y luego elimina la copia. Las versiones antiguas no eliminaban todas las copias. Esta pantalla recupera las que quedaron atrás."
           }
         },
         "it": {
@@ -119469,13 +119469,13 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deine Zahlen, dein Strap und wie NOOP funktioniert. Alles auf %@."
+            "value": "Deine Zahlen, dein Strap und wie NOX funktioniert. Alles auf %@."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tus números, tu pulsera y cómo funciona NOOP. Todo en %@."
+            "value": "Tus números, tu pulsera y cómo funciona NOX. Todo en %@."
           }
         },
         "it": {
@@ -119510,7 +119510,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deine Werte, dein Strap und wie NOOP funktioniert. Alles auf diesem Mac."
+            "value": "Deine Werte, dein Strap und wie NOX funktioniert. Alles auf diesem Mac."
           }
         },
         "en": {
@@ -119808,7 +119808,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein Ring spricht nur mit NOOP, komplett offline, kein Oura-Konto."
+            "value": "Dein Ring spricht nur mit NOX, komplett offline, kein Oura-Konto."
           }
         },
         "es": {
@@ -120205,7 +120205,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deine Uhr, NOOPs Gehirn"
+            "value": "Deine Uhr, NOXs Gehirn"
           }
         },
         "es": {
