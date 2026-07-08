@@ -40,6 +40,21 @@ jobs:
             echo "version=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: List available Xcode versions (debug)
+        run: ls -1 /Applications | grep -i Xcode
+
+      - name: Select latest available Xcode
+        run: |
+          set -e
+          LATEST_XCODE=$(ls -d /Applications/Xcode_*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$LATEST_XCODE" ]; then
+            echo "No se encontró ningún Xcode_*.app; usando el default del runner."
+          else
+            echo "Seleccionando: $LATEST_XCODE"
+            sudo xcode-select -s "$LATEST_XCODE/Contents/Developer"
+          fi
+          xcodebuild -version
+
       - name: Install XcodeGen
         run: brew install xcodegen
 
