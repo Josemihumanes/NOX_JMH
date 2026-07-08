@@ -1,29 +1,29 @@
 {
-  "name": "NOOP",
+  "name": "NOX",
   "subtitle": "A standalone WHOOP app — your strap, your device, fully offline.",
-  "description": "An AltStore / SideStore source for NOOP, the independent open-source WHOOP companion. Add this source to get one-tap updates for the sideloaded iOS build.\n\nNOOP is not affiliated with WHOOP. It reads a strap you own, directly over Bluetooth, on your own device — no WHOOP app, no subscription, no cloud.",
-  "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/Strand/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png",
+  "description": "An AltStore / SideStore source for NOX (a personal fork of NOOP, the independent open-source WHOOP companion). Add this source to get one-tap updates for the sideloaded iOS build.\n\nNOX is not affiliated with WHOOP. It reads a strap you own, directly over Bluetooth, on your own device — no WHOOP app, no subscription, no cloud.",
+  "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
   "website": "https://github.com/Josemihumanes/JMH_WH00P_N00P",
-  "tintColor": "44E2B0",
+  "tintColor": "6C4FE0",
   "apps": [
     {
-      "name": "NOOP",
-      "bundleIdentifier": "com.noopapp.noop",
-      "developerName": "NoopApp",
+      "name": "NOX",
+      "bundleIdentifier": "com.jmh.nox",
+      "developerName": "Josemihumanes (personal fork of NOOP by NoopApp)",
       "subtitle": "Read your own WHOOP strap, fully offline.",
-      "localizedDescription": "NOOP talks to a WHOOP 4.0 / 5.0 / MG strap you own directly over Bluetooth — no WHOOP app, no subscription, no cloud. Live heart rate, history sync, and NOOP's own Charge / Effort / Rest scores, all computed on-device and stored only on your iPhone.\n\nIndependent and experimental; not affiliated with WHOOP. Source: https://github.com/Josemihumanes/JMH_WH00P_N00P (personal fork, based on NOOP by NoopApp).",
-      "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/Strand/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png",
-      "tintColor": "44E2B0",
+      "localizedDescription": "NOX talks to a WHOOP 4.0 / 5.0 / MG strap you own directly over Bluetooth — no WHOOP app, no subscription, no cloud. Live heart rate, history sync, and Charge / Effort / Rest scores, all computed on-device and stored only on your iPhone.\n\nIndependent and experimental; not affiliated with WHOOP. Personal fork based on NOOP by NoopApp: https://github.com/Josemihumanes/JMH_WH00P_N00P",
+      "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
+      "tintColor": "6C4FE0",
       "category": "healthcare-fitness",
       "screenshotURLs": [],
       "versions": [
         {
-          "version": "1.0.0",
-          "buildVersion": "1",
+          "version": "1.1.0",
+          "buildVersion": "2",
           "date": "2026-07-08",
-          "localizedDescription": "Primera build personal.",
-          "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.0.0/NOOP-v1.0.0-ios.ipa",
-          "size": 1812066,
+          "localizedDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
+          "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -32,17 +32,17 @@
           "com.apple.developer.healthkit"
         ],
         "privacy": {
-          "NSBluetoothAlwaysUsageDescription": "NOOP connects directly to your WHOOP strap over Bluetooth to read heart rate, R-R intervals, battery, and sensor data locally on your iPhone. Nothing leaves your device.",
-          "NSHealthShareUsageDescription": "NOOP reads your own Apple Health data on-device to compute recovery, strain, and sleep. Nothing leaves your device.",
-          "NSHealthUpdateUsageDescription": "NOOP writes the metrics it computes from your strap back into Apple Health, on-device and only when you allow it."
+          "NSBluetoothAlwaysUsageDescription": "NOX connects directly to your WHOOP strap over Bluetooth to read heart rate, R-R intervals, battery, and sensor data locally on your iPhone. Nothing leaves your device.",
+          "NSHealthShareUsageDescription": "NOX reads your own Apple Health data on-device to compute recovery, strain, and sleep. Nothing leaves your device.",
+          "NSHealthUpdateUsageDescription": "NOX writes the metrics it computes from your strap back into Apple Health, on-device and only when you allow it."
         }
       },
-      "version": "1.0.0",
-      "buildVersion": "1",
+      "version": "1.1.0",
+      "buildVersion": "2",
       "versionDate": "2026-07-08",
-      "versionDescription": "Primera build personal.",
-      "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.0.0/NOOP-v1.0.0-ios.ipa",
-      "size": 1812066,
+      "versionDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
+      "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],

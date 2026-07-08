@@ -1,0 +1,889 @@
+[33m0fc31387[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Proyecto personal basado en NOOP
+[33mf099af09[m chore: AltStore source → 8.2.2 (build 172)
+[33mfd33d115[m v8.2.2: reliability + board-wave fixes + i18n + sleep visuals
+[33m891448f1[m Board 2026-07-06 fix wave: BLE reliability, UI fixes, i18n, sleep visuals
+[33mef8b42fc[m Board 2026-07-06: Android thread-safety + fresh-install Devices seed
+[33m2d008303[m Terms gate: itemised affirmative attestations (clickwrap) + consent record
+[33m4bcb7d65[m Android: corrupt-DB handler quarantines aside + rebuilds, no startup crash-loop
+[33m5ba19a13[m chore: AltStore source → 8.2.1 (build 171)
+[33mfb94f93c[m v8.2.1: key WHOOP imports to the wake day + stop heal purging imported history
+[33m7898090d[m AltStore source: point at v8.2.0 (build 170)
+[33m8046d298[m v8.2.0: the community release (12-lane fix wave)
+[33mcc8974e9[m AltStore source: point at v8.1.0 (build 169)
+[33m3a55428c[m v8.1.0: Live Sessions (beta) + fix wave (#991 #992 #1000)
+[33mce1f1363[m v8.0.1 release notes: fuller detail + issues-closed list + coming-next credits
+[33m08ff67ed[m AltStore source: point at v8.0.1 (build 168)
+[33m2566dacf[m Release v8.0.1: version bump + release notes
+[33m93e5f8df[m Deep Timeline: drag back up to 3 days (#986, serves #979)
+[33mafe15f17[m Scoring: skip the per-day owner probe on a single-WHOOP install (#970)
+[33me5e7013e[m Health Connect import: write sleep sessions so HC-only users see sleep (#983)
+[33m6612fd6f[m Oura: fix impossible SpO2 % and reject corrupt ring timestamps (#968)
+[33me1c8b7e2[m Today: one-tap full-day HR trend (#979) + charging on the battery (#972)
+[33m88c33ee8[m Android connect: bound the connect/subscribe/self-drop loop (#982)
+[33m8e2ac8fb[m iOS widget: refresh the snapshot when a background backfill completes (#980)
+[33m93cef5bb[m Haptic Clock: widen the gaps so the taps stop blending on the wrist (#981)
+[33m85d7840d[m Decode: skip building the whole-frame rawHex on the live fast path (#969)
+[33m08b272e1[m Today/Watch: don't show a stale Rest score as if it were today's (#977 display)
+[33m0d51ba48[m Today: carry last night's HRV/Resting HR/Respiratory independently of the recovery score
+[33m26dbd4ed[m README: Liquid Metal refresh (v8 hero banner + new liquid screenshots)
+[33mf9b911f0[m AltStore source: point at v8.0.0 (build 167)
+[33m89f439bd[m Release v8.0.0 (Liquid Metal): version bump + release notes
+[33m7f86cbd0[m V8 review pass: fix Today value bugs + gauge floor + calories detail + scrub name mentions
+[33m980644b3[m liquid-android-today: each metric/vital card opens its OWN detail, not the shared Health hub
+[33m20eea003[m liquid-android-today: match iOS density + mini-vessel card icons + 3-col key metrics + dismissible sleep card
+[33m9aa7eeaf[m liquid-android-today: rebuild the Today to match the iOS structure (header + wordmark + hero + cards)
+[33m16a450be[m Donation card: drop the out-of-date downloads/donors count line (both platforms)
+[33mb1db9f50[m macOS liquid sky: fix the white headers (Color.liquidComponents used UIColor, which is absent on mac)
+[33m40de6c5b[m em-dash sweep: Android user-facing strings (#171)
+[33m01b6fb5d[m em-dash sweep: iOS/mac user-facing strings (#171)
+[33mf4d05453[m oura-android: GetEvents history backfill + ring-time UTC anchor (#953) + battery on live path (#955) — Swift parity
+[33mf546cbb9[m StrandAnalytics test: call WorkoutsTrace.detectedBoutLine (the #975 test typo'd AutoWorkoutDetector)
+[33m6e7e9dd5[m WhoopProtocol test: accept integer-form gravity_mag in the decoder oracle
+[33mf80463e9[m Android liquid screens: apply the liquid design language across the app (14 screens)
+[33m068b3ad9[m macOS liquid Today: make LiquidTodayView cross-platform + host it in the mac split-view shell
+[33m445749df[m liquid-android-today: restyle Today to the liquid design language (pilot)
+[33maf1af4d5[m liquid-analysis: restyle Compare, Lab Book & Rhythm to the liquid language
+[33m36c8b168[m liquid-settings: day-of-sky backdrop + LiquidPressStyle on tappable rows
+[33m93c254cd[m liquid-coupled: restyle coupled day-glance to the liquid language
+[33mcd7ac9dc[m liquid-explore: finish MetricExplorer in the liquid language
+[33mf15033c5[m liquid-mind: restyle Hydration, Breathe & Mind to the liquid language
+[33m1785912e[m Android liquid foundation: port the liquid primitives to Compose (physics/motion/renderers/sky/composables)
+[33m080021e7[m liquid-coach: sky backdrop, liquid forecast/day gauges, liquid-tube weight bars + press-style prompt chips
+[33m2b448c23[m liquid-stress: sky backdrop + LiquidVessel hero gauge + LiquidTube stress-split
+[33mb8b19108[m liquid-workouts: sky backdrop + LiquidVessel effort gauges + liquid-press session rows
+[33m985a191b[m liquid-insights: sky backdrop + liquid gauges/tube + press style on Insights
+[33m0fe353bd[m liquid-devices: restyle device manager to the liquid language
+[33ma06bd882[m liquid-live: restyle LiveView to the liquid language (vessel HR gauge, live thread, tubes, frosted cards, sky backdrop) with LiveState isolated to leaf views
+[33m120bcc1f[m liquid-health: full liquid finish on Health Monitor (sky backdrop, vessel/tube gauges, press style, count-up heroes)
+[33m60c5fb76[m liquid-sleep: restyle Sleep tab to the canonical liquid language
+[33mcc822ee1[m liquid-trends: finish Trends in the liquid language (vessel accents on the Week-in-review scores + tap-through cards)
+[33m980131ee[m V8 foundation: make liquid primitives cross-platform (guard haptics for macOS 13, share LiquidPressStyle/CountUpNumber); mac target now only excludes the iOS-shaped Today screen
+[33m86c4096e[m V8 build-verify: keep iOS-shaped liquid Today out of the macOS target; guard CMMotionManager to iOS/Catalyst
+[33m52b6e88d[m lane9-oura: GetEvents history fetch + ring-time UTC anchor + battery on live path
+[33mb66852a1[m lane8-trendchart: add top headroom via data-space yDomain, not the macOS14/iOS17 plot-dimension API
+[33m1ae3931c[m lane7-macos: menu-bar sync-line height slot (#962) + Charge-driver/connection localization (#966) + relocate detail .id off split-view root (#833)
+[33m79d644b5[m lane6-android-parity: Health Connect body-comp import (#951) + German localization layer (#694)
+[33md5ec5d14[m lane5-android-ble: serialise analyzeRecent, confine reconcileRealtime, hoist offload-frame eval, WHOOP 4.0 bond-watchdog backoff (#956 #957 #949 #971)
+[33m555e239b[m lane4-resprate: pin slow-breather resp rate to fundamental, guard against RSA doubling (#958)
+[33m222cefa2[m lane3-workouts: dedup detected shadows + effort backfill + auto-detect trace (#975 #961 #973)
+[33m533d37d7[m lane2-sleep: honest per-mode Test Centre day/night capture accumulator (#965)
+[33m1652ef50[m lane1-skintemp: family-aware WHOOP 4.0 v24 skin-temp raw->C conversion (#938)
+[33m5b2fe14c[m V8 foundation: liquid Today + shared finish + off-main history decode, behind the liquid/classic toggle
+[33m1b225a80[m macOS Info.plist: regenerate CFBundleVersion 198 (v7.9.0)
+[33m8199b758[m AltStore source: point at v7.9.0 (build 167)
+[33m49c76835[m v7.9.0: bump versions (iOS 167, macOS 198, Android 255) + What's New + CHANGELOG
+[33m67af8494[m v7.9.0: final adversarial-verify remediation (Coupled readiness anchor, merged-workout strain rescore, sleep-undo motion+band-state and honest banner copy, journal placeholder glyphs)
+[33m31cc9def[m Sleep: deleting a detected sleep suppresses re-detection, with undo (#65)
+[33mad4cc1f4[m Sleep: band sleep-state stream end-to-end (#175)
+[33m95db1edb[m v7.9.0 remediation remainder: Swift range-chip coercion non-destructive + LabBook copy
+[33m3029f96a[m Test: WhoopStore journal migration test compiles (await out of the XCTAssert autoclosure)
+[33m7f02d559[m Journal (Android): fix Kotlin compile (unit ctor prop + no continue-in-lambda)
+[33mda52e32a[m v7.9.0: apply adversarial-review remediation (14 findings on the 7.8.1 fix wave)
+[33m32819ee1[m v7.9.0 features: Coupled view, workout redesign, journal numeric entries
+[33m8de015a9[m Test: VitalRangeGating expectations account for ALL never being gated
+[33mfc4cf495[m Lab Book: markers CSV import lands (date, marker, value, unit)
+[33m82a7f684[m Watch: real localization and a semantic freshness flag
+[33m2b33cdfb[m Sleep: impossible edits can no longer blank the screen (#940)
+[33mc44fc7aa[m BLE: Android scan keeps the live strap, bond give-up hardened, alarms tell the truth (#74 #78)
+[33meeedd0ef[m Week in Review: honest sparse comparisons and the Effort scale everywhere (#463)
+[33me9397201[m Health hero + explorer: real 1Hz live-HR sampling and history-gated range chips (#941 #943)
+[33mffa71247[m AltStore source: point at v7.8.0 (build 166)
+[33m8b86e1a9[m Android: declare xForStrict after xFor (local functions resolve in order)
+[33mc6af847e[m Bump: macOS CFBundleVersion 197 (xcodegen sync)
+[33m632fe900[m Android copy parity: clear em-dashes and comma-space artifacts from user-facing strings
+[33m2694d758[m Changelog honesty: the language milestone is iPhone and Mac; Android is on the roadmap
+[33mdac1d776[m Fix the final-verify findings: watch-gate lockout, locale-stable sport keys, heal bound
+[33mcabb2150[m Localization: complete Italian, Spanish and both Chinese variants (6,273 strings)
+[33m3bf72d6b[m Today: fix two macOS compile breaks from the gesture and cache lanes
+[33m57bec824[m Bump 7.8.0: the everything update (iOS build 166, macOS 197, Android 254)
+[33mb0c1d1a8[m Localization sweep (screens N-Z + onboarding): catalogue non-auto contexts + clear dashes (#909)
+[33m1891cc09[m Localization sweep (screens A-M): catalogue non-auto contexts + clear dashes (#909)
+[33m72a90aa6[m Localization: clear em-dashes from translation VALUES too
+[33me2eb1a04[m Localization sweep (app core + watch + design): catalogue the non-auto contexts (#909)
+[33m27f10be8[m Continuous HRV: opt-in overnight-only window + future-clock backfill guard (#927 #928)
+[33mb034c84a[m Watch: budget-aware snapshot push gate + mid-session trigger
+[33mde32e9f4[m Today: center the hero ring labels + make chart zoom actually reachable (#937 #829)
+[33m2ec12508[m Localization: adopt the Chinese catalog, Simplified + Traditional (PR #936)
+[33mb56ad525[m Sleep: overlap-aware session dedup + store heal for shifted-timebase re-banks (#899)
+[33ma62504c3[m Protocol: decode-only fast path, field metadata now opt-in (D#742)
+[33m2e1963d7[m Compare: downsample the overlay chart and index the hover path (D#770)
+[33m6434ecee[m Workouts: Bowling preset, all platforms (D#850)
+[33m5842628f[m Health copy: entitlement-missing text covers paid reseller certs too (#930)
+[33md2743fec[m macOS sidebar: search field to filter destinations (#915)
+[33mb487b11e[m Design: chips never wrap, one line always (#934)
+[33m7678aff6[m iOS widget: republish the snapshot when the dashboard actually changes (#911 #759)
+[33ma4ea8d44[m Buzz: route every one-shot user buzz through the confirmed sequence, acknowledged (#921)
+[33me66feb71[m Today: repo-level day-scoped cache so re-mounts skip the heavy day reads (#849 #932)
+[33mb8c6caff[m Freeze (WIP, gated): move CSV export + non-HR timeline transforms off the main thread
+[33m71da37a1[m Freeze (WIP, gated): move backup and device-delete off the main thread (audit)
+[33m20a3aff7[m Repository: single-flight ensureStore to stop a thundering-herd of DB opens (measured)
+[33m5dd93e49[m Freeze (WIP, gated): AppleHealthView repo cache to cut the cold-mount reload
+[33m42a05cc4[m AltStore source: point at v7.7.1 (build 165)
+[33m1d29a3f8[m Release v7.7.1: bump versions + What's New (all platforms)
+[33md79f0e58[m Effort/HR: read the active-strap union so a re-added strap is not invisible (#904, #908)
+[33m491c24ed[m Today: give Key Metrics tiles a uniform height (#907)
+[33m8e278f83[m Oura: auto-reconnect a dropped ring with WHOOP-style backoff (#912)
+[33m9070414c[m Widget: anchor every surface on the logical day, not the last scored day (#911)
+[33m2da29879[m Backup: list date-only .noopbak files in the restore picker (#852)
+[33m31890443[m Devices (Android): make the Add-a-device wizard list scroll under large font scaling (#897)
+[33m1f5fb43e[m BLE (Android): atomic command seq + volatile cross-thread connection flags
+[33med46bb7e[m Battery: personalise days-left without a near-full charge anchor (#919)
+[33me5b347fe[m AltStore source: point at v7.7.0 (build 164)
+[33mf00caee7[m Release v7.7.0: regenerate Info.plist build number (195) to match project.yml
+[33md42d511c[m Release v7.7.0: bump versions + What's New (all platforms)
+[33mdf650ee8[m AI Coach: editable system prompt + stress in the context (clean-room from #901, no duplicate sheet)
+[33m464b7949[m Steps: persist + show the strap's activity class (still/walk/run) from @63 (clean-room from #901)
+[33m6348f67b[m Analytics: re-arm a forced rescore dropped mid-pass (#899-A)
+[33mf808debd[m Repo hygiene: drop 7 old committed macOS release zips (~75MB) from the tree (#902, thanks pipiche38)
+[33m0c7db181[m Oura: fix the live-HR enable stall (#900, was fully broken) + honest STREAMING pill (#903)
+[33mb1bd6835[m Charts: pinch-to-zoom + drag-to-pan on the iOS Today heart-rate chart (#829)
+[33m3445a8b7[m Localization: fold ~1265 Italian strings into the String Catalog (from #895, thanks dpguglielmi)
+[33m9f0c3754[m Today: show a live "workout in progress" card that taps through to Live (#839, reimplements #879)
+[33mde49f97a[m WHOOP 4.0: surface banked-but-sparse data instead of empty screens (#863) + honest Rest tile (#898)
+[33mde25e37e[m BLE: make all LiveState writes atomic to fix a lost-update race (reimplements #896, thanks ryanbr)
+[33m043969f8[m Add a device: move Oura ring to the first Experimental option so it stops getting missed (#897)
+[33mfc934959[m #18: disclose when an edited Avg HR diverges from the recorded graph/zones/Effort (both platforms)
+[33m57ed64cf[m #10: re-key the GPS route when a workout's sport/start is edited (Apple)
+[33mb1324338[m Day-nav date labels read the logical day, not raw Date() (#14/#15/#16)
+[33m3863e161[m Backfiller: no-cursor gate sees this END's own rows (#1) + Android logs silent write-stalls (#13)
+[33m4f8b2bb5[m Smart alarm: iOS scheduled wake backup (#4/#6) + Android single-slot arbiter (#5)
+[33m03ccfd08[m Sleep edits reconcile on imported nights (#0) + imported resp-rate reaches the daily rollup (#17)
+[33ma7b91d95[m Android HC import: per-source de-overlap for steps + calories (#589 parity) + Swift steps-trace parity
+[33m8c4c783e[m Battery estimate: seed from DB on connect (iOS/mac parity) + don't let a partial top-up inflate days-left
+[33mf06f13a6[m #833: fix the macOS freeze for real (on-open + Insights), both root causes
+[33med544ec2[m AI Coach: snapshot provider across refreshModels fetch (#873) + surface Keychain write failures (#872)
+[33macf8f77c[m #833/#167: move Deep Timeline raw post-processing off the UI thread (both platforms)
+[33m4dc54fb8[m #864: iOS Smart-alarm tells the truth on WHOOP 5/MG (parity with Android)
+[33me7099d9b[m #862: harden Oura export parser against the real export schema (Swift + Android)
+[33m73bcb805[m v7.6.1: refresh AltStore source (build 163)
+[33m02a1db7f[m v7.6.1: Today lands on today on launch, even mid-calibration (#860 item 1)
+[33m55b78df7[m v7.6.0: refresh AltStore source (build 162)
+[33mb24cb35c[m v7.6.0: lockstep bump (iOS 162 / Mac CFBundle 193 / Android vc 250) + What's New
+[33m09dea640[m v7.6.0 additions: new board bugs + an anonymity source guard
+[33m07f5f9a5[m Board sweep: reimplement 8 community PRs + bug fixes + localization, scrub a name leak
+[33mc0a65fd3[m v7.5.0: refresh AltStore source (build 161)
+[33m45a24447[m v7.5.0: lockstep bump (iOS 161 / Mac CFBundle 192 / Android vc 249) + What's New (local Oura ring support)
+[33m4897f26e[m Add local Oura ring support (Gen 3/4/5), on-device, beta
+[33m781a2b75[m v7.4.1: refresh AltStore source (build 160)
+[33m85637920[m v7.4.1: add the What's New entry (steps, sleep export, battery-saving reconnect, hydration, iPad)
+[33m1f2d8a19[m v7.4.1: bug-fix release (steps freeze, sleep-export drop, connect-drop loop, hydration, iPad)
+[33m00d85933[m v7.4.0: refresh AltStore source (build 159)
+[33m4fe76228[m v7.4.0: lockstep bump (iOS 159 / Mac CFBundle 190 / Android vc 247) + What's New
+[33mbf3c2406[m Simpler Today, explain Charge, wire the on-device algorithm pickups, Test Centre one tap away
+[33m8665931a[m Simplify the app + explain the Charge score, plus conservative on-device algorithm pickups
+[33mdd1f6435[m Fix iOS Test Centre report button: open the prefilled issue in-app, cap the URL, surface the copy fallback (#812)
+[33m30bb7ef6[m Adopt OpenStrap learnings (wave 1): Charge what-shaped-it breakdown, confidence + tier, honest calibrating countdown, relative skin temp, pairing warning, cited methods, golden decoder oracle
+[33m2695353b[m v7.3.2: refresh AltStore source (build 158)
+[33me19818f1[m v7.3.2: lockstep bump (iOS 158 / Mac CFBundle 189 / Android vc 246) + What's New (Backup & Restore, the wrong-day fix, smarter Test Centre, quick wins)
+[33mbf946489[m Big update: Test Centre reporting hardening + quick-win fixes
+[33m2bd45394[m Spine fix v2: union-read model (fixes 2 regressions caught in review)
+[33mb4b8adad[m Bug-fix wave: source-attribution spine + Test Centre capture upgrades
+[33m57581148[m Backup & Sync: scheduled local folder backup (default OFF) + restore-from-folder
+[33m01f7847f[m v7.3.1: refresh AltStore source (build 157)
+[33ma55a7627[m v7.3.1: lockstep bump (iOS 157 / Mac CFBundle 188 / Android vc 245) + What's New entry (board-clear bug-fix sweep + Test Centre nudge)
+[33m5f6ac36a[m v7.3.1 #755 review hardening: fix DatabasePoolConcurrencyTests (missing await + WhoopProtocol import, never compiled), add production-path test proving prepareDatabase pragmas apply on pooled reader connections, doc the WAL-size note on databaseFileSizeBytes
+[33me44810c8[m v7.3.1 wave-2 seam fixes: registryWriter rename in ExperimentalDriversTests (#755), StressBand/StressRange internal visibility (#753 Android)
+[33mb6dfa9ee[m v7.3.1 fix wave 2: Today charge-ring layout (#762), pinned Stress card sync (#753), calibration copy reconcile (#784), Android Today z-order+spacing (#765), WhoopStore DatabaseQueue->DatabasePool concurrent reads (#755), sport presets (#768), French translations (#778)
+[33m5d98f59a[m v7.3.1 wave-1 seam fixes: public minSkinTempSamples (skin-temp funnel default arg), carriedLastNight title literal key (#779 test parity)
+[33m7e9c5eab[m v7.3.1 fix wave 1: backfill caught-up log (#783), corrupt-RTC detect (#773), bond-loop pause+epitaph (#750/#747), stop-haptics on stop+disconnect (#769), sleep awake-gap (#777/#705), skin-temp funnel (#752), steps calibration status (#760/#792), carry-over Last-scored label (#779), onboarding units picker (#781), alarm consolidation (#766)
+[33mdc2f843e[m v7.3.0: AltStore source + Homebrew cask
+[33me8af781f[m v7.3.0: bump versions + What's New entry for the Test Centre (iOS 156 / Mac 187 / Android vc 244)
+[33m42268e3b[m Test Centre Import: read the dataImport gate once on import completion (L11)
+[33m46f90b5e[m Test Centre traces: steps scaledSteps=none when production is nil + route Recovery weights through r2 (L7/L9)
+[33m85960b2d[m Test Centre Workouts: stop the dead GPS accept-rate on Android (L4)
+[33mc58b8cd4[m Test Centre Workouts: redact free-text sport in the trace + fix dedup kept/dropped label (L5/L8)
+[33ma7058683[m Test Centre export: count the screenshot PNG against the 20 MB bundle cap (L2)
+[33me0bc1363[m Test Centre Connection: failedConnect parity, integer error tokens, gated frame-type write (M3/L3/L6)
+[33me511ded2[m Test Centre Import: align Kotlin redactCell with Swift isNumber (L10)
+[33m406ef9e8[m Test Centre Import: stop advertising captures nothing emits (L1)
+[33m6ef5e9f2[m Test Centre Import: make Android diagnostic honest and Swift-parity (H1/H2/M1/M2)
+[33m87500b44[m Test Centre: fix Display p95 to surface the tail frame + use an IEEE-safe memory rounding fixture
+[33ma7600eb9[m Test Centre: Display & Performance mode on Android (twins + wiring)
+[33ma1963e92[m Test Centre: Display & Performance mode on iOS/macOS (monitor, screenshot, readout)
+[33m925f8ac6[m Test Centre: Import & Data Ingest mode on Android (twin + wiring)
+[33m8e233437[m Test Centre: Import & Data Ingest mode on iOS/macOS (emitters, readout, panel)
+[33m5af18b1e[m Test Centre: drop three em-dashes from Steps/Workouts comments (house style)
+[33mb99df02d[m Test Centre: Workouts & GPS mode on Android (twins + wiring)
+[33ma8542ebb[m Test Centre: Workouts & GPS mode on iOS/macOS (emitters, readout, panel)
+[33m5af813f0[m Test Centre: Steps mode on Android (twins + wiring)
+[33m5dc3607d[m Test Centre: Steps mode on iOS/macOS (emitters, readout, panel)
+[33m88f527dd[m Test Centre: import StrandAnalytics in Backfiller for the Connection trace formatters
+[33m471e96b2[m Test Centre: Connection & Sync mode on Android (twins + wiring)
+[33md8de3553[m Test Centre: Connection & Sync mode on iOS/macOS (emitters, readout, panel)
+[33m090745c0[m Test Centre: update layout tests for the 9-entry Phase-2 registry (were pinned to sleep+battery)
+[33m80ef2c4d[m Test Centre G: Recovery + HRV traces on Android (twins + wiring)
+[33mfdce3270[m Test Centre G: wire Recovery + HRV traces into iOS
+[33m4427f4bb[m Test Centre G: Charge term-breakdown + HRV cleaning traces (StrandAnalytics)
+[33me984f39a[m Test Centre M5: Kotlin twin of the 7 Phase-2 profiles + parity test
+[33m1828b0df[m Test Centre M5: register the 7 Phase-2 test-mode profiles (Swift)
+[33mf5a86bcb[m Test Centre: drop two em-dashes from review-fix comments (house style)
+[33m9cba0ad8[m Test Centre M4a: re-host the Continuous-HRV toggle in the Android Test Centre
+[33mb9abd5af[m Test Centre M3: review gate previews every text file in the bundle
+[33mcffaebeb[m Test Centre M2: match the Settings 5/MG gate in the Test Centre
+[33m92600649[m Test Centre M1: emit the battery analysis trace, not just the per-reading line
+[33m1862190b[m Test Centre H2: wire Android Sleep test-mode trace into the analyzeDay pass
+[33md19983eb[m Test Centre H1: byte-align Kotlin meta.json object separator with Swift pretty-print
+[33mab79e7d0[m Battery test mode (Android): guided multi-day status twin, byte-aligned with Swift
+[33md80eb7c7[m Battery test mode (Android): gated (t, soc) emit on setBattery via pure formatter
+[33m5f50ead6[m Battery test mode (Android): estimateTrace twin, byte-aligned trace with Swift
+[33m4ddb408e[m Battery test mode: guided multi-day capture reuses ScheduledDebugExport
+[33m8eb59431[m Battery test mode: questionnaire/readout contract test + batteryReadout resolver + readout panel
+[33m16f5f9bf[m Battery test mode: emitBatteryTrace wires discharge-run + slope + gate trace into live path
+[33mf42618eb[m Battery test mode: gated per-sample (t, soc) emit on bankBatterySample
+[33m432185bf[m Battery test mode: pure estimateTrace SoC-series + discharge-run + slope + gate trace
+[33m04e0acaf[m Test Centre: import WhoopProtocol in LiveState for the Sleep readout HRSample/GravitySample types
+[33md9891e91[m Sleep test mode (Android): guided capture accountant + Swift/Kotlin gate-name and label parity
+[33mdfcc6862[m Sleep test mode (Android): Rest sub-score line + analyzeDay forwarding + readout source
+[33m2de3e992[m Sleep test mode (Android): gate-trace twin emitted from detectSleep (null sink = byte-identical)
+[33m656682ec[m Sleep test mode: guided multi-night capture reusing ScheduledDebugExport (pure night accountant)
+[33md8d6e0f1[m Sleep test mode: bind HR density, gravity coverage and last-gate readout in Test Centre
+[33ma5933ab7[m Sleep test mode: pure live-readout source (HR density, gravity coverage, last gate fired)
+[33m848b797b[m Sleep test mode: pin questionnaire kinds and live-readout ids against drift
+[33m465e582b[m Sleep test mode: thread tagged trace sink through analyzeDay and IntelligenceEngine per day
+[33m04fc2e0b[m Sleep test mode: Rest sub-score diagnostic line (reuses Rest.composite, cannot diverge)
+[33m6bd564a0[m Sleep test mode: emit per-candidate-run gate trace + sparse-bridge result from detectSleep (nil sink = byte-identical)
+[33m601f7ab3[m Sleep test mode: pure gate-trace line formatters (SleepStager+Trace)
+[33mfe242fad[m Test Centre: Android screen, sections, Report action and Settings nav link
+[33mcead44df[m Test Centre: Settings and Live links into Test Centre (#507/#509)
+[33m8c0ad5ef[m Test Centre: iOS/macOS screen + Report orchestrator (sections 1 to 4)
+[33m391808fc[m Test Centre: assembler entrypoint (the Group B/D integration seam)
+[33m0ff54e22[m Test Centre: Kotlin registry-projection + status-string twin + parity test
+[33mb5c6c9ff[m Test Centre: priority-ordered registry projection + per-mode status string
+[33m239a3162[m Test Centre: fix B/C integration seams (redactPii nonisolated, meta snake_case + sorted Kotlin emit, URL comma encoding, XCTAssertLessThan)
+[33mcd27f0b2[m Gate the Report flow behind the mandatory review-before-share check
+[33m197f9260[m Add mandatory review-before-share gate on iOS and Android
+[33m9b8e4b15[m Add Kotlin TestReportFlow twin with parity-tested report plan
+[33m6962e918[m Add TestReportFlow controller with pure report-decision core
+[33m5f75bf64[m Add test_profile dropdown, zip-attach guidance and importer sources to bug form
+[33m8f8b214e[m Add Kotlin TestReportLink twin with JVM-testable URL builder
+[33me781218b[m Add TestReportLink deep-link builder for Test Centre reports
+[33m54e5d556[m Test Centre: Kotlin twin of the 20 MB cap with raw-capture tail-truncation
+[33m3c2bcc67[m Test Centre: 20 MB bundle cap with raw-capture tail-truncation (section 5.4)
+[33mf4206a9b[m Test Centre: Kotlin twin of the whole-bundle redaction pass (section 5.3 fix)
+[33m8c5fb86e[m Test Centre: re-scrub every bundle file through redactPii (section 5.3 fix)
+[33m20e686fe[m Test Centre: add exportBundle zip + refactor shareRawAndLog to a 2-entry case
+[33ma994fca6[m Test Centre: add exportBundle zip + refactor exportPair to a 2-entry case
+[33m55a6ea37[m Test Centre: Kotlin twin of the bundle filename builder
+[33me636bc1b[m Test Centre: add profile-tagged bundle filename builder
+[33m5b7a7948[m Test Centre: Kotlin twin of meta.json schema v1
+[33m9cb332de[m Test Centre: add meta.json schema v1 Codable model + encoder
+[33m4b75aa91[m Test Centre: Android environment-header block plus wire it into LogExport
+[33mca528062[m Test Centre: macOS environment-header block in IOSDiagnostics
+[33m63a913f9[m Test Centre: TestCentre Kotlin twin on a single noop_testcentre prefs file
+[33mf5522a2d[m Test Centre: TestCentre activation state plus single prefs namespace (Swift)
+[33mb0d98dda[m Test Centre: add TestMode and TestModeRegistry Kotlin twin plus parity test
+[33mf8f3ef2e[m Test Centre: add TestMode and the 2-entry TestModeRegistry (Swift)
+[33m7a7e5fa8[m Test Centre: widen IntelligenceEngine diagnosticSink to (String, TestDomain?)
+[33m045161cd[m Test Centre: optional domain tag on WhoopBleClient.log() and externalLog()
+[33mb065fbc3[m Test Centre: optional domain tag on LiveState.append(log:)
+[33m296b1ed2[m Test Centre: add TestDomain Kotlin twin plus id-parity test
+[33me89784c3[m Test Centre: add TestDomain enum (Swift)
+[33m5687ea58[m Release v7.2.3: AltStore source + Homebrew cask
+[33m896743f3[m v7.2.3: dashboard lag fix (#755) + Smart Alarm rename (#730) + What's New backfill
+[33m2c750cb4[m Fix iOS dashboard lag on heavy + syncing data (#755)
+[33mf15b2596[m Backfill the in-app What's New changelog 7.0.2 to 7.2.2 (both platforms)
+[33md63ccc9c[m Disambiguate the Smart Alarm naming (#730)
+[33m9c031e1d[m Release v7.2.2: AltStore source + Homebrew cask
+[33mc3c6de36[m Remove stray err.txt; gitignore it
+[33m5259e980[m v7.2.2: fix glitched Blue Titanium icon (#708) + macOS card back-nav (#753)
+[33m2e836a4e[m Release v7.2.1: AltStore source + Homebrew cask
+[33m28fc2637[m v7.2.1: strip embedded watch app from the sideload IPA (AltStore install fix)
+[33mdbc6a9d2[m Release v7.2.0: AltStore source + Homebrew cask + Info.plist
+[33md28ad640[m Embed the watch app in the iOS app so it reaches users (v7.2.0)
+[33mea3d38d4[m Apple Watch as a device (v7.2.0): live source, watch app, complications
+[33m4135f05a[m release: ship the iOS .ipa under one canonical name (NOOP-v<V>-ios.ipa)
+[33mb6f5887f[m release v7.1.0: refresh AltStore source (build 151) + sync macOS Info.plist to 182
+[33mf1a615f9[m v7.1 "Board Sweep": 14 fixes plus battery estimate, browse-weeks, breath cues
+[33m119bd8f3[m v7.0.3: sync macOS Info.plist build number to 181
+[33m0b057526[m release v7.0.3: refresh AltStore source (build 150)
+[33mcef4ba95[m v7.0.3: fix iOS post-import and general UI lag
+[33m917b95b5[m release v7.0.2: refresh AltStore source + sync macOS build number to 180
+[33mfdd45291[m v7.0.2: app-wide performance overhaul + #707 Sleep V2 OOM crash fix
+[33m7b26bd7e[m Today scroll-perf: kill the per-heartbeat full-screen re-render (LOCAL, unreleased)
+[33ma3547a55[m #698: day-cycle background toggle (LOCAL, unreleased)
+[33md967ce58[m #614 follow-up (LOCAL, unreleased): date-shift on resume, Rest graph matches score, sleep nav empty-state
+[33mc1aaab73[m altstore: source -> 7.0.1 (build 148)
+[33m7d30f15d[m 7.0.1: fixes for sleep V2 toggle, steps calibration, 5/MG manual workouts, HRV headline, scroll drift, version display
+[33mde756043[m altstore: source -> 7.0.0 (build 147)
+[33m4da3cfb4[m 7.0.0 "Everything": full redesign + hydration + auto workout detection + smarter sleep
+[33m1080e158[m Design Reset (10/n): WHOOP across all screens + custom-cards dashboard + green logo
+[33mbafb1763[m Design Reset (9/n): kill ALL gold — full WHOOP palette (pixel-sampled)
+[33mb80a6e5f[m Design Reset (8/n): WHOOP score-colour trio (gold dropped)
+[33mf3ba1f7b[m Design Reset (7/n): lean into WHOOP — gold Charge, grey cards, thick rings
+[33m17bf0a63[m Design Reset (6/n): Apple header, uniform icons, recording-as-light, flat cards
+[33m7d4a3afc[m Design Reset (5/n): re-point tokens to the Apple x WHOOP language
+[33mdf83dd35[m Design Reset (4/n): recompose Today to the flat mockup order + build Your-cards
+[33mc36552cd[m Design Reset (3/n): hero rings now match the flat mockup
+[33m14a9ce31[m Design Reset (2/n): tighten density + compact the hero rings
+[33mca0b416f[m Design Reset (1/n): lighten the hero rings on Today
+[33m909d0bf9[m #446: richer Home Screen + Lock Screen widgets
+[33mba27eebf[m #605: dashboard auto-lands on the most recent day with data when today is empty
+[33mba39ad75[m #605/#608: surface Average + Max Heart Rate in the Android Explore picker
+[33mf889c4cb[m altstore: source → 6.2.2 (build 146)
+[33m92ddb0d2[m 6.2.2: lockstep bump + changelog (Deep Timeline day-nav, faster manual workouts, storage clean-up, ru, Coach tables)
+[33mf20a49ca[m #598: Android manual workout — absolute start date+time picker (iOS parity)
+[33mb9baec5d[m #598: rescore a manually-added workout immediately, not on the next tick
+[33md53e2565[m #594: add Russian (ru) localization for iOS/Mac (443/443 keys)
+[33mf605381d[m #597: Deep Timeline day navigation + open on the latest day with data
+[33m88e5fcde[m #593: render GFM pipe tables in the Android Coach Markdown view
+[33mdd8f022f[m #590: reclaim stranded multi-GB import temp extractions (noop-health-*)
+[33mc4064ff8[m altstore: source → 6.2.1 (build 145)
+[33m4bc2873e[m 6.2.1: stop double-counting imported Apple Health steps (#589)
+[33m055fa528[m altstore: source → 6.2.0 (build 144)
+[33m2b1ddaff[m 6.2.0 'See Everything': Deep Timeline + sleep movement graph + board-clear
+[33mf6e44006[m altstore: source → 6.1.1 (build 143)
+[33mc3f9a317[m 6.1.1: Sleep tab shows a briefly-interrupted night as one sleep, not naps (#555)
+[33md71fe20f[m community: wire the Discord into the issue funnel + README
+[33m2091a06f[m issues: lead the bug form with a question-gate
+[33m6fe86b3f[m altstore: source → 6.1.0 (build 142)
+[33m0b593d49[m 6.1.0: smarter sleep, on-device naps, more devices, big board-clear
+[33m40907ce5[m docs: XRP donation address requires destination tag 3338312747
+[33m483e64be[m dist: catch AltStore source + Homebrew cask up to 6.0.3, auto-update both from release.sh (#560/#562)
+[33md094ff10[m 6.0.3: data-hygiene fix for bad-clock straps (#547)
+[33med8b018c[m 6.0.2: sleep main-night rework (learned-timing scored selector) + in-app guidance layer
+[33m21c7c1a1[m 6.0.1 (Android): ship the #536 Buzz WHOOP 4 toggle for real
+[33m97693d4e[m #536: actually wire the Buzz WHOOP 4 toggle into the Smart Alarm screen (Android)
+[33m4b69da6f[m 6.0.0: multi-device support + offline imports + experimental drivers
+[33ma96c2bfb[m channels: AltStore source + badges → v5.3.0
+[33m21be69c3[m 5.3.0: bundled board-clear across all platforms
+[33m0d8bca3e[m safeguards: avoid re-tripping GitHub's abuse filter (docs/SAFEGUARDS.md + release cadence guard)
+[33m918a9e13[m channels: AltStore + badges → v5.2.6 (GitHub)
+[33m987f470d[m v5.2.6: in-app update check + About link back to GitHub (canonical again)
+[33m1f47aa5b[m GitHub now canonical: repoint channels + docs to GitHub, noop.fans is the mirror
+[33m36a92b91[m stats: refresh lastcommit.json
+[33m4598d3cf[m stats: refresh resolved.json
+[33m63e5b58f[m stats: refresh open.json
+[33m4c6fccfd[m stats: refresh forks.json
+[33m9f3cb149[m stats: refresh stars.json
+[33m4e3d2208[m stats: refresh released.json
+[33m693f2dc4[m stats: refresh release.json
+[33mf9f45e1e[m AltStore: point source at v5.2.5
+[33m43473984[m v5.2.5 (Apple): Remove device now releases the strap + persistent-refusal guidance (#78)
+[33ma01dc26c[m BLE (5/MG): show pairing-mode guidance on PERSISTENT bond refusal (#78)
+[33m33d19988[m stats: refresh lastcommit.json
+[33mc60c48c4[m stats: refresh resolved.json
+[33m87c5bdc0[m stats: refresh open.json
+[33m2640d3ef[m stats: refresh forks.json
+[33mdf2c2bcb[m stats: refresh stars.json
+[33m532e9de9[m stats: refresh released.json
+[33mbb9be5ac[m stats: refresh release.json
+[33m5f507e1a[m AltStore: point source at v5.2.4
+[33mcaaaec72[m v5.2.4: Today-card greeting layout (#69, Apple) + OnePlus WHOOP-4 pairing fix (#50, Android)
+[33m3a1cbe36[m stats: refresh lastcommit.json
+[33md2f23493[m stats: refresh resolved.json
+[33m0c68ed94[m stats: refresh open.json
+[33m064fe779[m stats: refresh forks.json
+[33m5338164d[m stats: refresh stars.json
+[33mb818fa9a[m stats: refresh released.json
+[33m77b86725[m stats: refresh release.json
+[33mab1a2bd2[m AltStore: point source at v5.2.3
+[33mc66a47eb[m v5.2.3 (Apple): fix WHOOP 5/MG connection loop from Add-a-WHOOP scan (#74)
+[33m52118406[m docs: add brew trust to the README/CHANGELOG homebrew one-liner (Homebrew 6.0+ untrusted-tap gate, #44)
+[33md7e7d267[m stats: refresh lastcommit.json
+[33m909f0b12[m stats: refresh resolved.json
+[33md75d583b[m stats: refresh open.json
+[33m4b609ec5[m stats: refresh forks.json
+[33m4ce697f3[m stats: refresh stars.json
+[33mf957b347[m stats: refresh released.json
+[33mbcaa1f5b[m stats: refresh release.json
+[33mb1d82b65[m AltStore: point source at v5.2.2
+[33md3b708d4[m v5.2.2: security hardening — import-crash guards, dep pinning, cleartext guard
+[33mcd10d93e[m stats: refresh lastcommit.json
+[33m913b6872[m stats: refresh resolved.json
+[33mab1c1636[m stats: refresh open.json
+[33mb36fd580[m stats: refresh forks.json
+[33m55d06148[m stats: refresh stars.json
+[33m958e9c23[m stats: refresh released.json
+[33mc14b6bd4[m stats: refresh release.json
+[33me78eba17[m altstore: bump source to 5.2.1 (catch up + go live)
+[33m7ae27f2e[m v5.2.1: iOS sleep/nap delete (#68) + Android swipe-to-mark-read (#65)
+[33mb94a6a9c[m stats: refresh lastcommit.json
+[33mb2fee4ab[m stats: refresh resolved.json
+[33m3fe1094a[m stats: refresh open.json
+[33m3acfd3ad[m stats: refresh forks.json
+[33m4417c627[m stats: refresh stars.json
+[33m61fc94c0[m stats: refresh released.json
+[33m8390b609[m stats: refresh release.json
+[33mf63fb956[m v5.2.0: connection & sleep board fixes (all platforms)
+[33m6984b9cb[m stats: stop generating public download-count badges
+[33m573043e4[m site: remove public download-count file (don't broadcast scale)
+[33m0ce2a445[m site: remove public download-count file (don't broadcast scale)
+[33mf7b70d80[m site: reframe donation push from scale to running-cost; drop precise download counter (lower adversarial profile)
+[33m01e434d7[m site: add stats-badge refresh script (keeps homepage counter live)
+[33m3700a374[m site: forge-source the Activity stats badges (kill remaining dead-GitHub badges)
+[33m51d77013[m stats: lastcommit
+[33m7745296e[m stats: forks
+[33m24e3c34a[m stats: resolved
+[33m8d7d5edb[m stats: open
+[33m00562cac[m site: live download counter + donation nudge on homepage; fix dead-GitHub badges (forge-sourced)
+[33m81a97045[m stats: released.json
+[33m6da4f67d[m stats: thisrelease.json
+[33m49be23ce[m stats: stars.json
+[33mdfa2e8c0[m stats: release.json
+[33m89480a97[m stats: downloads.json
+[33mbe519de3[m AltStore source: iOS 5.1.2 (build 130)
+[33m2b6ed301[m Bump to v5.1.2 — design polish & cross-platform parity (lockstep all platforms)
+[33mdd16ce9d[m Android bell: stop clipping the unread-count badge
+[33md04f710a[m Android inbox: Mark-all-read as a filled accent pill (iOS parity, both themes)
+[33m4c7a1f14[m Android Updates inbox: beige sheet + full-height so it reads like iOS
+[33meea16203[m Android More page: mirror the iOS group structure exactly (Insights/Body/Data/App)
+[33m5aaae271[m Android: vitals card white surface + More page grouped cards (iOS parity)
+[33m798567e1[m More page parity + Mac toolbar split (iOS/Android/macOS)
+[33m2f308d7d[m Android v5.1.1 — design parity release (versionCode 218 / 5.1.1)
+[33m3d1835b8[m Android: full iOS design parity pass (kill nav chrome, rebuild Today header, clean rings)
+[33m344309e3[m Sync macOS Info.plist CFBundleVersion to 160 (v5.1.0)
+[33mc55c4629[m AltStore source: iOS 5.1.0 (build 129)
+[33m2211cb98[m Bump to v5.1.0 — design refresh (lockstep all platforms)
+[33mef1f80f5[m Profile picture (C, all platforms): optional on-device avatar
+[33m209a2646[m Updates inbox (B, Android parity): bell + dismissible cards + inbox sheet
+[33m215b09bf[m Updates inbox (B, iOS): notification bell + dismissible Today cards
+[33m6e5c5ecc[m Android layout parity: + to the Today header top-right, clean 4-tab bottom bar
+[33m4ac41dbf[m iOS layout: move quick-action + to the top-right, clean 4-tab bottom bar
+[33ma50b6699[m Design parity pass: equal pill margins, onboarding appearance step, Android bar/glow/pills
+[33mdee3933e[m Design: dial back glow for a crisper look (centralized)
+[33m045a3021[m iOS: unified glass tab bar — one bar, contained gold add button, no glow
+[33mc1266f00[m altstore: add v5.0.1 to the AltStore/SideStore source
+[33m445d1957[m v5.0.1 — stability & polish: lockstep bump + What's New / CHANGELOG
+[33me1329d49[m v5 UI/UX sweep: fix the macOS sheet-collapse class + clipping/parity issues
+[33mf964f8bd[m Fix Lab Book editor/detail/disclaimer sheets collapsing on macOS
+[33m072d4b97[m altstore: add v5.0.0 to the AltStore/SideStore source
+[33me05700d7[m v5.0.0 — the raw-signal release
+[33mb7f4edf9[m altstore: iOS 4.9.1 (build 126)
+[33mc6405e2c[m v4.9.1: realistic all-day calories, HC workout markers, WHOOP-import day fix, honest smart-alarm copy
+[33m86eb2071[m Fix iOS sideload: AltStore source + icon URLs were dead GitHub links (caused 'given data not valid JSON')
+[33m88e14619[m altstore: iOS 4.9.0 (build 125)
+[33m16df2b4d[m v4.9.0: steadier live HR (#39/PR#45), durable sleep-delete (#33/PR#46), step-calibration phone-source fix (#37), brew docs (#44)
+[33m70a24192[m altstore: iOS 4.8.0 (build 124)
+[33mf10b96ca[m v4.8.0: on-demand HRV, Haptic Clock, sleep marks, scheduled debug export, steps explainer
+[33mad082898[m altstore: NOOP 4.7.0 (build 123)
+[33mde976839[m v4.7.0: Xiaomi Mi Band import + WHOOP 4.0 sleep fix + 6 board fixes
+[33me8849a30[m v4.6.4 (Android): Today score rings render as true circles
+[33m5794e636[m v4.6.3 (Android): finish the #23 Today redesign on Android
+[33m0ee40ffe[m v4.6.2: bump macOS build number to 153 + AltStore source to 4.6.2 (build 122)
+[33m1db981f2[m v4.6.2: Android GlowRing Today hero parity (#23) + fix releases-link 404s (#26)
+[33m2918f87b[m redesign(today): WHOOP-style GlowRing hero + compact top bar (iOS) (#23)
+[33mbcedc5d4[m redesign(today): WHOOP-style hero — animated GlowRing scores + compact top bar
+[33me37b5422[m fix(android): use .noopbak extension for Backup & Move export (#19)
+[33m9e38b530[m README: add Mirroring & forking note (clone freely, non-commercial, canonical home = noop.fans)
+[33m00748006[m fix: use .noopbak extension for Backup & Move export in Data Sources
+[33m7d1c009b[m altstore-source: iOS 4.6.1
+[33m39eaa9a3[m forgejo-release.sh: don't abort on the expected 404 tag-lookup (drop set -e)
+[33m78d63473[m v4.6.1: point the app at its new home (noop.fans) — About link + updater + changelog
+[33mb15bc9ff[m Re-home: point release tooling, links and in-app footer at the self-hosted forge (noop.fans)
+[33ma1de2222[m altstore: add v4.6.0
+[33m51768026[m v4.6.0 — editable naps (#508) + Trends Workouts/Stress rows (#457) + debug export (#510)
+[33m0ef6dddc[m altstore: add v4.5.5
+[33m977b0c00[m v4.5.5 — Today Effort floor (#489/#506) + iOS strap-log Settings shortcut (#509)
+[33m531a378c[m altstore: add v4.5.4
+[33mf5270fa5[m v4.5.4 — macOS Settings strap-log shortcut (#507 / #17 discoverability)
+[33m3c15f984[m altstore: add v4.5.3
+[33mdebf2003[m v4.5.3 — #507 WHOOP 4.0 sleep regression fix + accurate 5/MG steps
+[33m24eac87d[m altstore: add v4.5.2
+[33md97d91e9[m v4.5.2 — honest labelling for WHOOP 5/MG deep-data diagnostics (#494)
+[33m051cbdb1[m altstore: add v4.5.1
+[33mfe9b0875[m v4.5.1 — sleep off-wrist guard: fractional coverage, keep real nights
+[33mb3a80685[m altstore: add v4.5.0
+[33m51643fc8[m v4.5.0 — WHOOP 5/MG v20/v21 historical decode + sleep & workout fixes
+[33mfcdad058[m altstore: add v4.4.0 (Classic chart colours)
+[33mfaae588a[m v4.4.0 — Classic chart colours toggle (throwback red→green readiness palette)
+[33m04111dd1[m altstore: point the sideload source at v4.3.2
+[33m726038f7[m v4.3.2 — light theme tuning (the maintainer feedback): less gold, blue chrome, card contrast, macOS sidebar fix
+[33m6faa64bd[m altstore: point the sideload source at v4.3.1
+[33m940aa174[m v4.3.1 — light theme audit fixes (chart/gauge cores, button outline, tooltip shadow)
+[33mfcf1daab[m altstore: point the sideload source at v4.3.0
+[33maebd8d17[m v4.3.0 — Light theme (System/Light/Dark) across macOS/iOS/Android
+[33m096f6b29[m Merge light-theme: full System/Light/Dark theme across macOS/iOS/Android
+[33m593540ae[m light theme (wave 4): Android port — System/Light/Dark across every surface
+[33m016b3607[m light theme (wave 2): special surfaces — gauges, cards, scenic hero adopt the light idiom
+[33md7dbb29d[m altstore: point the sideload source at v4.2.13
+[33ma859b485[m light theme (foundation): dynamic Color(light:dark:) + warm-paper palette + System/Light/Dark toggle
+[33mb1aba060[m v4.2.13 — Effort explains a calm-day zero + scores on the 5.0/MG (#482/#480), clock-reset history guard (#471)
+[33mb033446b[m fix(clock): never future-date offloaded history when the strap RTC reset to ~epoch (#471)
+[33m4cc74e9b[m docs(ble-re): re-ground @73 skin-temp on observation; drop firmware-sourced part identifier
+[33m68bc5d0c[m v4.2.12 (Android) — make the Bluetooth-on path crash-proof (#453, critical)
+[33m522305ee[m issue funnel: surface FAQ + WHOOP 5/MG status in the New-Issue menu + bug form; README FAQ link
+[33mdae5cc01[m v4.2.11 (Android) — fix generic-HR strap activation crash in strap-log PII redaction (#421)
+[33md2154cf3[m altstore: 4.2.10 ios release
+[33m8ef52587[m v4.2.10 (all platforms) — Week in Review: sparse week says 'too early to call', not 'steady' (#463)
+[33m1246fd3a[m altstore: 4.2.9 ios release
+[33me3952804[m v4.2.9 (all platforms) — Respiratory rate & skin temp in the Trends report (#457)
+[33mc07e88d9[m altstore: 4.2.8 ios release
+[33mbb16f933[m v4.2.8 (iPhone & Mac) — double-tap to log a sleep mark (#461, Phase 1)
+[33m1568e1bc[m altstore: 4.2.7 ios release
+[33m8ad0a6bc[m v4.2.7 (iPhone & Mac) — Start a workout from the Workouts screen (#459)
+[33m98f40c94[m feat(haptic-clock): pure time→buzz-schedule encoder + tests (#460, foundation)
+[33mc2bccb1b[m altstore: 4.2.6 ios release
+[33m609b2e65[m v4.2.6 (iPhone & Mac) — Trends "now" dot now sits on the line (#458)
+[33m7af9e624[m altstore: 4.2.5 ios release
+[33ma41b8601[m v4.2.5 — Trends report explains its scores (#457)
+[33m249bdc21[m altstore: 4.2.4 ios release
+[33m76919bc8[m v4.2.4 (iOS) — Trends report PDF export now opens the share sheet (#455)
+[33m86246bcf[m altstore: 4.2.3 ios release
+[33m17390486[m v4.2.3 — backfill drains a deep/multi-epoch backlog without manual strap taps (#451)
+[33mab1e4fc3[m readme: refresh feature list for v4.1-v4.2 (Activity Cost, shareable trends report, workout detail view, inactivity reminder)
+[33m481a3158[m ble: log the full banked history SPAN (oldest→newest) for sync-depth diagnosis (#364)
+[33ma4628f00[m v4.2.2 Android — sleep stages self-heal after a sync (#449 parity)
+[33mf970cbfc[m altstore: 4.2.2 ios release
+[33mc592853c[m v4.2.2 — sleep stages self-heal after a sync (#449)
+[33m1ab499fe[m altstore: 4.2.1 ios release
+[33mfa806dcb[m v4.2.1 — optional inactivity reminder (#419)
+[33m5e500148[m altstore: 4.2.0 ios release
+[33ma3a4e3be[m v4.2.0 — workout detail, activity-cost insights, shareable trends report, faster sync
+[33m6baff251[m v4.2.0 foundation: activity-cost + range-report + sedentary engines, #443 weight-in-Compare
+[33m7e4df87a[m v4.1.1 hotfix — activating a heart-rate strap no longer crashes (#421)
+[33m2e5b85fe[m docs(PROTOCOL): record FORCE_TRIM / REBOOT_STRAP payload forms as do-not-send
+[33mc047e0a7[m release: retire the published Android demo APK
+[33m07c43c5e[m log privacy: mask CoreBluetooth peripheral UUID in shared strap log (#445/#447)
+[33m56d52257[m altstore: 4.1.0 ios release
+[33me4e05fa2[m v4.1.0 — Estimated steps for WHOOP 4.0 + generic-HR connect + log privacy
+[33m20893a32[m Add StepsEstimateEngine — calibrated motion->steps estimate (foundation)
+[33m54656223[m v4.0.4 — sync visibility diagnostics + Android stress-timeline interaction
+[33me497da36[m v4.0.3 — generic-HR diagnostics, Today/Intelligence date fix, UI polish
+[33mdfe106d5[m v4.0.2 — multi-WHOOP: switching active strap moves the connection
+[33m37b1a769[m docs: add a WHOOP 5/MG analysis-limits matrix to the README
+[33m9807f786[m v4.0.1 — live Today Effort, sleep-edit + day-keying fixes, alarm honesty
+[33m480b1ad1[m Adopt 5 community fixes (board-clear, reimplemented under project identity)
+[33m3a6fe9e9[m v4.0.0 — Age & Longevity engine (version bump + changelogs + device roadmap)
+[33me05907d4[m Vitality / Body Age: Android Health-tab hero (parity) + demo seed
+[33ma91d9071[m Vitality / Body Age: Health-tab hero (Swift) + demo seed + render hook
+[33m01b338f9[m Vitality / Body Age: orchestration + age-norm helpers + catalog (Phase 7)
+[33m9107e9e1[m Vitality / Body Age engine (multi-source Phase 7)
+[33m8cbbceac[m Fitness Age: --demo-screen fitnessage render hook (DEBUG)
+[33m6fec9b7a[m Fitness Age (multi-source Phase 2) — weekly on-device fitness comparison
+[33mcbb4efc8[m v3.9.1 — reconnect, exports & Health setup fixes
+[33m2f5b6ccf[m fix(ios): widget extension version now matches the app (#416)
+[33mf3846121[m fix(onboarding): don't make first-run feel WHOOP-only — honest "no WHOOP? continue" note
+[33m4028df26[m chore(release): v3.9.0 — multi-WHOOP device management + honest per-device capabilities
+[33mbf31fe22[m feat(android): honest per-model capability + function display on the Devices card (parity)
+[33m97cb5554[m feat(devices): honest per-model capability + function display on the Devices card (iOS/Mac)
+[33mf225de96[m feat(android): multi-WHOOP device management parity (peripheralId, targeting, switching, guided wizard)
+[33m8cde6284[m feat(live): link Live screen to the Devices manager (multi-WHOOP)
+[33m2ace6577[m feat(devices): guided Add-a-device wizard + switch re-attribution (multi-WHOOP)
+[33m84141ab9[m feat(devices): WHOOP switching + strap-identity adoption (multi-WHOOP)
+[33m4a26373b[m feat(devices): BLEManager can target a specific WHOOP (multi-WHOOP, additive)
+[33m10b03caa[m feat(devices): per-WHOOP peripheral identity (multi-WHOOP foundation)
+[33m8b707a35[m Release v3.8.0 — Connect a heart-rate strap (early access)
+[33mfd1fccad[m feat(devices): Android parity — generic BLE HR source + Devices screen (Phase 1B)
+[33mca5e7408[m feat(devices): analytics read the day-owner's data only (Phase 1B, I2)
+[33mb811874d[m feat(devices): Devices screen + add/switch/unpair wizards (Phase 1B UI)
+[33m717040ee[m feat(devices): generic BLE HR source + active-source coordinator (Phase 1B data layer)
+[33mca931def[m Release v3.7.1 — Today gauges no longer squish on large iPhones (#403)
+[33m3949f4d8[m feat(devices): multi-device foundation — registry, single-active, day-owner resolver (Phase 1A)
+[33m7171142f[m Release v3.7.0 — step calibration to 30×, lazy Insights, honest sideload Health, per-version archive retention
+[33m9ff3523e[m AltStore source: NOOP 3.6.0 (build 86)
+[33m4e1232bc[m v3.6.0 — new gold-on-navy app icon (everywhere) + Android sleep durability
+[33m4d4d07fb[m AltStore source: NOOP 3.5.0 (build 84)
+[33m191152a7[m v3.5.0 — durable sleep bed/wake editing + compressed .noopbak backups
+[33m333a1e06[m AltStore source: NOOP 3.4.0 (build 83)
+[33mb03745cf[m v3.4.0 — Today hero fix, WHOOP-4 strap rename, journal pre-fill
+[33mb0eca56d[m AltStore source: NOOP 3.3.1 (build 82)
+[33m5ebce545[m v3.3.1 — more quick-relabel sports (#318)
+[33meabf40f7[m AltStore source: NOOP 3.3.0 (build 81)
+[33m8f7a29fb[m v3.3.0 — strap battery alerts (#368, cross-platform)
+[33mf8e0388e[m AltStore source: NOOP 3.2.0 (build 80)
+[33md8de442c[m v3.2.0 — iOS-17 / macOS-14 API migration (no behaviour change)
+[33mf6f3904a[m AltStore source: NOOP 3.1.0 (build 79)
+[33m26ff3677[m v3.1.0 — community-fixes wave: accuracy, reliability & accessibility
+[33ma2c21598[m AltStore source: add v3.0.3
+[33m4f392ffe[m v3.0.3 — large Apple Health imports no longer crash
+[33m55de2b56[m iOS Apple Health import: aggregate incrementally so big exports don't OOM (#355)
+[33m93b38bae[m AltStore source: add v3.0.2
+[33m92549de2[m v3.0.2 — Bluetooth stream + Apple Health sync fixes
+[33m55a782cf[m iOS Apple Health: stop the two-way sync reading its own write-backs
+[33m88c7a1b7[m BLE: cap reassembled frame length so a corrupt SOF can't wedge the stream
+[33mca2e03f4[m AltStore source: add v3.0.1
+[33m85884215[m Update README.md
+[33m4e5e16b0[m v3.0.1 — cleaner score rings + fixes
+[33m47ed1de4[m README: refresh for v3 — hero image, titanium logo, screenshots, gold accents
+[33m733b3251[m Steps tile: prefer the strap's own on-device count over Apple Health (#276)
+[33m8f8f0ae2[m Score rings: drop the centre core dot behind the number
+[33m898f5946[m Add WHOOP 4.0 v25 PPG→HR feasibility guard tests + analysis harness
+[33m3668d2dc[m Android: HR-zone coaching now persists + buzzes (parity with Mac/iOS)
+[33m0e968dd4[m Sleep: keep the real wake time when a night runs past the daytime band
+[33md4757ffb[m Fix red CI on main: StressView type-check timeout + Liftosaur importer bugs
+[33me06f5b88[m AltStore source: add v3.0.0
+[33m333428e4[m v3.0.0: sync macOS Info.plist CFBundleVersion to 120
+[33mf159a7aa[m v3.0.0 — Titanium & Gold
+[33ma5df9e3d[m Tab bar: stop the centre FAB overlapping the Live tab
+[33m3a09d029[m Clean material Sleep night-selector chip + refresh community stats
+[33m6493fb3e[m Add DEBUG demo-seed + screenshot harness; clean material DayNavBar date chip
+[33m156b5354[m v3 Titanium & Gold — wave 4: alternate-icon toggle + consistency confirm
+[33m3aabdc80[m v3 Titanium & Gold — wave 3 polish: in-app BrandMark + motion + darker navy alt-icon
+[33m949fb957[m v3 Titanium & Gold — language sweep + machined-titanium icon rework
+[33m8ff3e381[m v3 Titanium & Gold — clean the More-menu selection (drop the gold pill)
+[33m54603f1d[m v3 Titanium & Gold — wave 2: stress gauge, gold FAB, hero fidelity + Titanium app icon
+[33mdac597f8[m v3 Titanium & Gold — foundation polish
+[33mc2005612[m v3 Titanium & Gold — wave 1: re-skin design system foundation + kit
+[33mca80a6a4[m ios: drive the App Group id from a single APP_GROUP_ID build setting
+[33m79edeac1[m altstore: 2.18.5
+[33mcbccee82[m v2.18.5 — Today sparkline tiles no longer truncate their value on phones (#332)
+[33me1c53676[m altstore: 2.18.4
+[33m7ba8951f[m v2.18.4 — Dynamic Island toggle now ends an already-showing Live Activity (#341)
+[33m055817ff[m altstore: 2.18.3
+[33m4c1515f0[m v2.18.3 — Workouts header: stack Add button + range pill on phone so the button isn't crushed (#339); docs(ios): own-Apple-ID signing steps (#340)
+[33m3144d9a7[m altstore: 2.18.2
+[33mfc18f6c7[m v2.18.2 — HR tooltip + workout times respect the device 12-/24-hour setting (#337)
+[33m18cece41[m altstore: 2.18.1
+[33m3410d046[m v2.18.1 — in-app toggle for the live-HR Dynamic Island / Live Activity (#336)
+[33mf1e78d53[m altstore: 2.18.0
+[33ma8e1e3c0[m v2.18.0 — experimental: Export raw sensor data (CSV) from Settings, cross-platform (#322/#276/#308 diagnostic tool)
+[33m93d969c9[m altstore: 2.17.1
+[33m1472718c[m v2.17.1 — Charge shows 'Calibrating — 0 of N' instead of bare 'No data' for new straps (#335)
+[33m6ddf618d[m altstore: 2.17.0
+[33m1c07ac69[m v2.17.0 — iPhone polish: tab-bar clearance (#333), press states + haptics (#329), sheet detents + decimal keyboard (#330), chart VoiceOver + Reduce-Motion draw-in (#334)
+[33m0c6f1a70[m altstore: 2.16.1
+[33mb4b7a643[m v2.16.1 — Today tiles shrink value to fit instead of truncating to '…' on Android (#332)
+[33mab4b0ef4[m altstore: 2.16.0
+[33me5dacb59[m v2.16.0 — UX polish: hypnogram legibility (#323), Live offline CTA (#325), Trends cleanup (#326), Effort tint full-ramp + digest toggle (#328)
+[33m2dca2a58[m altstore: 2.15.3
+[33m74f24278[m v2.15.3 — Android GPS route distance fix: relax accuracy gate so weak-signal runs aren't under-collected (#324)
+[33m57a03586[m docs(ios): document adding NOOP as an AltStore/SideStore source for auto-updates (#321)
+[33mcb31107b[m altstore: 2.15.2
+[33md00c14d8[m v2.15.2 — fix Today header date one day behind the nav pill west of UTC (#320)
+[33m3d965ed2[m altstore: 2.15.1
+[33m7fb3fb93[m v2.15.1 — fix Last Workouts tile truncating duration to '1…' on Android (#319)
+[33m70ff08a1[m altstore: 2.15.0
+[33mf0bb8e58[m v2.15.0 — sleep day (#304) + sleep detection (#308) + Effort scale (#313) + Android BLE crash/lifecycle (#314); new look on every screen
+[33m9a426d1f[m Bevel redesign: propagate the new look to every screen (Mac/iPhone/Android)
+[33m300deeb2[m altstore: 2.14.1
+[33meec25162[m v2.14.1 — workout-merge bridging (#306) + delete-sleep on Android (#305)
+[33m55730426[m AltStore source: v2.14.0
+[33m7d3689bc[m v2.14.0 — a beautiful new look (Bevel-grade redesign, all platforms)
+[33m0cd47393[m AltStore source: v2.13.0
+[33md07a2964[m v2.13.0 — big iOS update (19 community PRs reimplemented) + cross-platform parity
+[33m87c3f4b4[m AltStore source: v2.12.0
+[33m8876df14[m v2.12.0 — Continuous HRV capture (opt-in): keep the dense R-R stream armed in the background
+[33mcfa12bea[m README: scatter live stat badges + a star-history chart across the page; drop stale iOS version
+[33mbe9fd159[m README: add a live Repobeats activity widget + community thanks
+[33me38f6781[m AltStore source: v2.11.1
+[33m55298537[m v2.11.1 — bucket days by local time, not UTC (#277) + fix two latent v2.11.0 compile errors
+[33md4361cf8[m AltStore source: v2.11.0
+[33mc4c320e8[m v2.11.0 — smart wake alarm, live workout, editable Today, Effort 0-21, smoother hypnogram, lifting import
+[33m04ab7391[m Donations: suggest $50+ (a fraction of a year's WHOOP subscription)
+[33mf6b83461[m README: add press credibility to the support section
+[33m4ba12c92[m AltStore source: v2.10.0
+[33mcc623f92[m v2.10.0 — sleep-debt, daytime stress, recovery forecast, day navigation, Live perf
+[33mdc0193e9[m iOS/macOS Live-tab performance: stop the frame flood re-rendering everything
+[33m51e3330f[m Today: day navigation (all platforms), battery+streak strip, iOS alignment polish
+[33md1a68e8c[m Sleep-debt ledger, daytime stress timeline, and a recovery forecast
+[33med3f620f[m AltStore source: v2.9.0
+[33mb7750f7d[m v2.9.0 — background GPS, sleep editing, log-ahead, Rest score, vital provenance, MCP
+[33m694d3697[m Add opt-in read-only local MCP server package (NoopLocalAccess)
+[33ma6345f82[m Rest tile shows the score, Explore-empty fix, vital provenance, log-for-tomorrow
+[33m98ec5055[m Android: GPS tracking into the foreground service, Sleep-screen editing, Stress/Explore polish
+[33m3534c308[m AltStore source: v2.8.9
+[33mdb066888[m v2.8.9 — Insights crash fix, accurate HRV, connection-status + R22 + sport-picker
+[33m15f8a77e[m Fix Insights-tab crash: (?U) regex flag is unsupported on Android ICU (#267)
+[33mf6a594d9[m Gate the R22 deep-data unlock on the genuine encrypted bond (#269)
+[33m8545b6be[m Capture uncaught crashes into the shareable strap log (Android)
+[33m2431e844[m Unify connection-status label across sidebar and Settings (#266)
+[33m8b39f208[m Add Tennis, Squash, Table tennis to the sport list
+[33m1a75b4d5[m Show a scrollbar on the workout sport picker
+[33mdd308324[m Reject ectopic beats in session HRV (inflated rMSSD on WHOOP 5/MG)
+[33mcccebe18[m Intelligence By-Day range filter + interactive Today HR chart
+[33m47a9473d[m AltStore source: v2.8.8
+[33mc05294fd[m v2.8.8 — strap-log diagnostics: layout version + connect RSSI (PR #241)
+[33m58cef2c7[m AltStore source: v2.8.7
+[33m48122f37[m v2.8.7 — readiness evidence (#233) + Health Connect distance (#215) + iOS Explore nav (#199)
+[33m06c41146[m AltStore source: v2.8.6
+[33mecd318c2[m v2.8.6 — v26 notch (#194) + iOS diagnostics/expectations + #225 device-noun + #224 journal dedup
+[33m0d824927[m AltStore source: v2.8.5
+[33md7c0a044[m v2.8.5 — fix iPhone import (#179) + foreign-DB store self-heal (#222, real fix)
+[33m97edb765[m AltStore source: v2.8.4
+[33m532247c2[m v2.8.4 — in-app "How your scores work" guide (Charge / Effort / Rest)
+[33m953acda8[m AltStore source: v2.8.3
+[33ma6fb15de[m Fix #222: iOS imported data + strap sync stuck on "store not ready" — v2.8.3
+[33m0050dfe5[m AltStore source: v2.8.2
+[33m2070a30b[m Cross-platform parity audit fixes + v2.8.2
+[33m2a3fedb1[m v2.8.1 — battery + responsiveness (reimplemented contributor fixes)
+[33m9c89fbe8[m v2.8.0 — Update B: new features + contributor feature-PRs (reimplemented as NoopApp)
+[33m35915b81[m v2.7.0 — Update A: big fix wave (reported issues + contributor fixes)
+[33m396662da[m v2.6.10 — WHOOP 5/MG R22 telemetry: live confirmation it's working (#174)
+[33m4bae1488[m v2.6.9 — iPhone polish: What's New fits the screen, Today cards align
+[33me5cdc3fd[m v2.6.8 — iPhone import: copy iCloud/Files picks to local storage first (#179)
+[33m5e65c86c[m v2.6.7 — More-tab icons stop flickering green→blue (#184)
+[33m35470579[m v2.6.6 — iPhone Workouts table fits the screen (#183)
+[33md8f12b7e[m v2.6.5 — Broadcast HR: advertise the strap as a standard BLE HR sensor (#181)
+[33m6178dc58[m v2.6.4 — tidier workout names, correct Rest duration
+[33m203d35ca[m v2.6.3 — universal Mac build, iPhone import fix, AltStore source
+[33mad871932[m v2.6.2 — iPhone button-label polish (#175)
+[33mfb0eec0b[m v2.6.1 — wire the imported-strain → Effort rescale + lossless CSV round-trip
+[33m83c2ca73[m v2.6.0 — Charge / Effort / Rest: NOOP's own daily scores, all out of 100
+[33mb6e86b5c[m v2.5.0 — experimental WHOOP 5.0/MG deep-data unlock (R22 enable sequence)
+[33m83e7b429[m v2.4.0 — a small, honest ask (12-hourly donation nudge, all platforms)
+[33m2c96942f[m v2.3.2 — split sleep: every block counted, one night per day (PR #173)
+[33mc3598a23[m v2.3.1 — skin-temp scale fix (Mac/iOS), stale v25/v26 warning, CSV export hardening
+[33m665d8c2e[m v2.3.0 — PPG-derived HR (WHOOP 5/MG), ~4am day rollover, split-sleep, Android notif catch-all, terms v1.1
+[33m718df5c4[m v2.2.1 — fix Shortcuts-export duplication; Android Explore/Compare parity for nutrition + mood
+[33m02fb70fb[m v2.2.0 — Mind mood check-in + nutrition CSV import; v26 PPG capture tooling
+[33m148b09b7[m v2.1.0 — past-night sleep browsing, Coach data fix, workout times, battery, step calibration, Breathe HRV outcomes, iOS Shortcuts export
+[33mf10cd131[m docs: document the versioning scheme (SemVer)
+[33m83cb9273[m Issue templates: require complete bug reports (form + no blank issues)
+[33mf1201215[m v2.0 — success-side backfill observability + no-flash-cursor diagnostics
+[33m28ad77ed[m v1.99 — show imported steps on Today (Android); correct '4.0 has no steps' docs
+[33m4c4c7ec1[m v1.98 — reject-archive retro-decode now on Android too (#151 parity)
+[33m6bf22f19[m Port the reject-archive retro-decode to Android (#151 parity)
+[33m567c7ce1[m v1.97 — retro-decode archived history (#151) + Coach Markdown (#149)
+[33m57640cac[m Render AI Coach replies as Markdown on all three clients (reimplements PR #149)
+[33mfb199081[m Retro-decode the reject archive after a decoder update (reimplements PR #151)
+[33m5d56e990[m v1.96 — iOS is now a direct download (unsigned .ipa + sideload) + #126/#150
+[33m6e837de6[m fix(#150): Health Connect import accepts partial permissions
+[33mc5614b9c[m docs: comprehensive freshness pass — 3 platforms (iOS), v1.95, Homebrew+trust, v25
+[33mbd880868[m fix(#126): require sustained emptiness before the 'clock has lost sync' banner
+[33m1a61c947[m docs: document brew trust step for Homebrew 6.0.0 tap-trust gate
+[33m0fddbb52[m v1.95 — decode WHOOP 4.0 v25 historical layout, unlocking sleep & recovery (#30)
+[33m7991eae7[m Add Tools/update-homebrew-cask.sh + doc for the release-step cask update (#141)
+[33m24e52074[m Homebrew cask: update via release-step script, drop the Actions workflow (#141)
+[33m3242b28e[m Docs: cross-platform sharing model + iOS fold-in lessons; Homebrew cask scaffold (#141)
+[33mc34b2dea[m Unwrap optional subtitle interpolation (CI / older-Xcode portability)
+[33mfb4e3219[m v1.94: workout re-score (#137) + iOS target folded into main (#42)
+[33m326c7554[m Reconcile iOS target to a green compile (#42 fold-in)
+[33m2665c9f2[m Re-score under-sampled manual workouts from offloaded HR (#137)
+[33m42779a91[m WIP: scaffold iOS target on current main (#42 fold-in, step 1)
+[33m6f80db99[m Journal curation: remove custom + hide built-in questions (v1.93, #140)
+[33m04d853a7[m Dump full undecodable record bytes in the strap log (v1.92, #30/#136)
+[33mddc74605[m Add local/custom OpenAI-compatible AI Coach provider (v1.91, #131)
+[33m264063ac[m v1.90 — tell the user when sync completed but the strap banked nothing (#77/#91/#120)
+[33m8cc5077d[m Refactor AI Coach providers into per-provider files (reimplemented from #133, thanks aw1875)
+[33mc379ee60[m README: link the Roadmap & help-wanted board (#132)
+[33m7dc1a5fc[m v1.89 — live HR lands on today even when the strap's RTC is invalid (#126, Android)
+[33m8fcc27d0[m v1.88 — Explore chart hover fix (#104) + clearer WHOOP 5/MG connect flow (#130)
+[33m00918f18[m Point people to r/NOOPApp for help/discussion; bugs stay on GitHub
+[33m3e70be3b[m Fix strap-log instructions in the bug template (per-platform)
+[33me630e540[m v1.87 — deep sleep no longer zeroed when the deep block lands late in the night (#127)
+[33mfda1f4ab[m v1.86 — deep sleep stops reading 0m on sparse-HRV nights (#127/#129) + richer AI Coach (#124)
+[33mee64ff91[m entitlements: declare network.client for the AI Coach (sandboxed/signed builds) (#128)
+[33m3e1837d2[m v1.85 — 3-day browsing, interactive charts, Vital Signs screen, background-reconnect (Android)
+[33m4a048e50[m v1.84 — fix Android ANR: sleep analysis was O(n^2) on the main thread (#125)
+[33mcb595fd0[m Backfiller (macOS): log undecodable records on partially-decoded chunks too
+[33mf4e498f5[m 5/MG historical decode: regression fixtures from a 2nd device (validates v18 generalises)
+[33mba84eb3f[m Backfiller: calmer log when a history chunk is only strap console output
+[33mcb6b1354[m v1.83 — workout calories for manual sessions + Health Connect imports (#117)
+[33m5d680c57[m v1.82 — stop destroying undecodable strap history (#77/#91) + a board of fixes
+[33m618efc24[m v1.81 — Start a workout from the Workouts screen + honest Smart-alarm note
+[33mcd8e30ca[m v1.80: native journal logging on Insights + Imperial/Metric units toggle (display-only, factors pinned by tests) — reimplemented from PR#97 / #103
+[33mbcc1c8fb[m v1.79: manual workouts + edit/relabel/dismiss auto-detected workouts (#107, Room migration v4->v5) + CSV export — reimplemented from PR#97
+[33m05a98b4d[m v1.78: daytime false-sleep guard (#90) + Android Sync-now button & progress (#93) + community files/templates/security/CI (reimplemented from #106)
+[33madbc53c3[m v1.77: first-run terms acknowledgment gate (both platforms) + TERMS.md + Explore chart hover-flicker fix (#104)
+[33m74debfa4[m docs: Android Play Protect / sideload troubleshooting (#108)
+[33m917153f2[m v1.76: tolerant Apple Health import (#100) + low-bandwidth standard-HR fallback for marginal radios (#80) + live HR graph time-series (#105)
+[33m8012bf11[m v1.75: personal vital baselines (VitalBands) + macOS analytics parity (steps/respiration/calories/skin-temp, v11 store migration)
+[33m71e8dcaf[m v1.74: Android 5/MG reconnect-guide parity + #84 startup-crash fix + green WhoopStore schema tests
+[33m9b5dfb25[m v1.73: in-app reconnect guide for 5/MG after a firmware bond reset
+[33m4b29b798[m v1.72: GPS workout crash fix (Android)
+[33m27d7c79c[m v1.71: GPS-tracked workouts (Android)
+[33m4875f2aa[m v1.70: clearer sync status (Android) + responsive Compare (macOS)
+[33m3126e69c[m v1.69: cleaner Live status (#92) + rejected-frame hex diagnostic (#91)
+[33m1218ff06[m v1.68: sleep figures, HR zones, charging, calibration, sync status, illness notifications (#88)
+[33m006d9a15[m v1.67: manual workout tracking (Mac + Android)
+[33m788382e8[m linux-capture: throttled sync progress line (backlog % + ETA)
+[33me0ff518c[m v1.66: Android WHOOP 4 unmapped-firmware fallback — the #77 fix
+[33mbab27ca7[m v1.65: surface silently-dropped history chunks (#77)
+[33m8f65f977[m v1.64: PR #85 adoption — MTU 247, skin-temp, sync status, recovery UI, alarm groundwork
+[33m16f891ac[m v1.63: Mac — strap-computed nights now show in the Sleep tab (#77)
+[33m9067535b[m v1.62: WHOOP 5/MG history — the missing clock (thanks tajchert, #78)
+[33m0e196363[m v1.61: widget starvation fix — updates now run to completion (#82)
+[33m0815d838[m v1.60: notification recovery fix, widget armour, dependency currency
+[33m433df9bf[m v1.59: Android Health Connect writeback (opt-in)
+[33m29dfdf26[m v1.58: Android bottom tab bar
+[33m9740f84e[m v1.57: Android home-screen widget
+[33m404e4572[m v1.56: macOS Shortcuts actions; Android notification recovery %
+[33m2d85521e[m macOS recovery-seeding + step parity with Android (v1.55, #78)
+[33mab856996[m Import French WHOOP exports (v1.54, #79)
+[33mdae2da4d[m BLE-only recovery cold-start + on-device estimates groundwork (v1.53, #78)
+[33m764b55b4[m WHOOP 5.0/MG history offload on Android (v1.52, #78)
+[33maec81adb[m True battery %, sync indicator, HR on imported workouts (v1.51, #77)
+[33me0c5e517[m Ease GATT write congestion on slow Android stacks (v1.50, #77)
+[33mc8c925ad[m Import Spanish WHOOP exports (v1.49, #76)
+[33m2fbfa0f9[m Fix dropped GATT command writes on stricter Android stacks (v1.48, #77)
+[33m517ff841[m 1.47 — opt-in Health Connect auto-sync (Android), foreground-only (PR #75)
+[33m78b889f8[m 1.46 — stale-strap history dates (#72), live gestures during sync (#69), encrypted-bond indicator (#69)
+[33m75011469[m README: 5/MG pairing — how to enter pairing mode + one-device-at-a-time (#69)
+[33mb9d54303[m Decode WHOOP 5 v18 skin temperature (raw register) + Linux frame-decode tooling (PR #71)
+[33m012eefc2[m 1.45 — clearer 5/MG pairing guidance; revert v1.44's over-eager hint clear (#69)
+[33m1c1486a8[m 1.44 — clear the stale "pairing refused" banner once bonded (#69)
+[33mda1abf9d[m 1.43 — 24-hour heart-rate trend on the dashboard
+[33ma2c2f956[m v1.42 — Android: auto-reconnect to the saved strap on launch (#67)
+[33m4b1e62a4[m v1.41 — update check previews what's new
+[33md8b39ce1[m v1.40 — manual "Check for updates" button (both platforms)
+[33mc7143f09[m v1.39 — Android wrist alerts for incoming calls (#66)
+[33mf02b6381[m v1.38 — avoid main-actor stalls during dashboard analysis (#65)
+[33m4a112c8a[m Keep macOS responsive during long historical offloads (#64)
+[33m98d46814[m HealthScreen: live HR zones use the profile's max HR, not a fixed default (#36 rider)
+[33mb309fa28[m v1.37 — unified first-run onboarding, Mac + Android (#36 / #63)
+[33mfd06a77c[m Add Linux durable historical-offload sync tool (#62)
+[33m258f56ad[m v1.36 — Android: direct reconnect after a dropout, no scan needed (#61)
+[33m9a37b7cc[m v1.35 — WHOOP 5/MG buzz: exact command from the working app, matched byte-for-byte (#48)
+[33m999d3250[m v1.34 — WHOOP 5/MG haptics: send opcode 0x13 not 79 (experimental, #48)
+[33meeb43130[m Add Google Health → Apple Health export bridge tool (#58)
+[33m69c952f9[m v1.33 — re-arm smart alarm on bond so the set time reaches the strap (#59)
+[33m8d8e0982[m v1.32 — keep Today sparklines within their window (#49)
+[33m43d1c27e[m v1.31 — blank stale HR smoothing window on resume (#46)
+[33me1e890fb[m v1.30 — Workouts list: correct source pill for Health Connect (#53 follow-up)
+[33m542f3ccb[m v1.29 — Re-scan requests BLE permission so it actually scans (#1, #54, #55)
+[33mb2ee804f[m v1.28 — Health Connect: correct Today label + workout types (#53)
+[33m9bed4cfc[m v1.27 — make Android wrist alerts real: notification listener (#52)
+[33m4c2367ef[m v1.26 — make the Android Smart alarm real (#51)
+[33mee89210a[m docs: add ADA + XRP donation addresses to the README support table (all four now inline)
+[33maae99285[m docs: put funding front-and-centre — sustainability + easy crypto how-to
+[33m51a929ca[m v1.25 — WHOOP 5/MG history offload (experimental, Mac)
+[33m17249152[m docs+UI: clarify WHOOP 5/MG pairing (pairing mode, not just scan)
+[33m7cac48d7[m v1.24 — let users switch between a WHOOP 4 and a 5/MG (Mac + Android)
+[33m0a4e27c7[m v1.23 — WHOOP 5/MG historical decode parity (Android)
+[33md15ce8ec[m v1.22 — battery refresh on WHOOP 5/MG (Mac + Android)
+[33mfa636b3f[m v1.21 — WHOOP 5 v18 biometric fields + v26 PPG channel fix (Mac)
+[33m75c74164[m docs: Android is shipped, iOS is the experimental community port (#42)
+[33m7a1f3416[m docs: point iOS to the experimental community port (#42), not a roadmap item
+[33m6c25745b[m v1.20 — Android strap-log logcat is opt-in (#45)
+[33mea6a838d[m v1.19 — import serialization (#40/#44) + WHOOP 5 optical PPG decode (#43)
+[33mdffe0730[m v1.18 — import fixes: Apple Health overwriting WHOOP message (#40) + HC resilience (#34)
+[33md65c0477[m v1.17 — WHOOP 4 sleep on unmapped firmware (#30)
+[33m9998f943[m i18n: localization foundation for the macOS app (#37)
+[33mb26259b5[m WHOOP 5 EVENT decode (#38) + WHOOP 4 offload tooling & v24 confirm (#39)
+[33m185c95ae[m v1.16 — Health Connect data shown as Health Connect, not Apple Health (#34)
+[33ma81d789e[m tools/linux-capture: WHOOP 4 command probe + scan-first connect
+[33m45c15ac7[m WHOOP 5 COMMAND_RESPONSE decode (battery, history range, name, fw)
+[33m07c6b9a2[m v1.15 — WHOOP 5/MG: wire the wrist buzz through puffin framing
+[33m66873695[m v1.14 — Android Today: clearer empty states for stale imports
+[33m22a9710d[m v1.13 — WHOOP 5/MG live heart rate on Android (bonded but no HR)
+[33m3a9758bf[m WHOOP 5/MG historical-offload decoder + capture tooling (type-47 v18)
+[33m317450b9[m v1.12 — macOS WHOOP 5/MG live HR + Readiness anchoring (Mac + Android)
+[33m841f52b4[m v1.11 — Today reflects today, not stale imports (Mac + Android)
+[33m3efdb302[m Android: WHOOP 5/MG confirmed-write bond (#17) + keep realtime HR on across HR screens (#18)
+[33m0ae6b08a[m Android: fix "bonded but no live data" — pin GATT callbacks to one thread (PR #22)
+[33mf006f675[m macOS strap-log export + fix Health Monitor flat-line HR chart (#17, #18)
+[33m7c812596[m Decode WHOOP 5 REALTIME_DATA (live HR + R-R) (PR #21)
+[33m1d07d0f5[m Add WHOOP 5/MG frame capture + Linux protocol workbench (PRs #19, #20)
+[33m574d15cb[m Android: in-app strap log + "Share strap log" export; fix worn-status default
+[33mbfe23b12[m Alarm: log the wake time in local zone, not UTC (avoid the "+0000" confusion)
+[33m61042892[m WHOOP 5/MG: bond before subscribing to fix the "Finishing handshake" hang (#17)
+[33m5ad846ce[m StreamStore: split storageStats_rowCountsForTest tuple into let-bindings
+[33mf028559c[m Fix live HR freezing mid-session: port the macOS keep-alive to Android
+[33m7407f138[m Keep the strap connected in the background (Android foreground service)
+[33mc2d9ec1e[m README: clear "first launch on macOS" Gatekeeper instructions (issue #15)
+[33m838d919a[m Adopt the PolyForm Noncommercial License 1.0.0 (issue #11)
+[33ma49a442e[m README: Readiness, strap-support tiers, AI Coach, onboarding/What's New
+[33m8bdf6a4f[m Fix WHOOP live feed and import picker (#14)
+[33mcf402f23[m Privacy doc: tell the truth about the AI Coach (issue #13)
+[33m47cf893e[m Bump app version to 1.2 on both platforms (issue #10)
+[33m1e8f27e4[m Fix Android: bonded but no heart rate (CCCD writes raced the bond) — issue #12
+[33m0ef0a96f[m Onboarding, What's New, and expectation-setting on both apps
+[33m814d4682[m Add opt-in WHOOP 5/MG protocol probes (experimental, dev-gated)
+[33mace43934[m Add Readiness: on-device training-readiness intelligence
+[33m0158a8d2[m Import localized (German) WHOOP export column headers (issue #3 follow-up)
+[33mccccdbfb[m Resolve the WHOOP 5/MG "connected but not connected" state (issue #8)
+[33m9bd45a93[m Experimental WHOOP 5/MG live connect (CLIENT_HELLO + standard HR)
+[33m20fc4cb9[m Be honest about WHOOP 5/MG instead of "charge it and put it on" (issue #7)
+[33m04cb9028[m Fix the WHOOP export picker doing nothing (issue #5)
+[33m7153238d[m Pick your WHOOP model before pairing (4.0 vs 5.0/MG)
+[33m734a4e01[m Import non-English WHOOP exports (route CSVs by content + localized names)
+[33m90ceed74[m Reframe away from "subscription bypass" toward interoperability
+[33m1a4a065c[m Harden the macOS build + fix two crash paths flagged in review
+[33m2d07dec5[m In-app connection walkthrough (foolproof pairing helper)
+[33mf466f816[m Tell the user when there's no Bluetooth LE (e.g. an emulator)
+[33m722a5a7d[m Connect button now requests the Bluetooth permission itself
+[33m0350f135[m Make Android connect diagnosable when it fails
+[33mea466580[m Build a universal macOS binary (Intel + Apple Silicon)
+[33m7be90e0a[m Android scores live from the strap (engine + offload ported)
+[33m7f2e1f3c[m On-device scoring + clear day-one data expectations
+[33mecaabdc0[m NOOP — offline WHOOP companion

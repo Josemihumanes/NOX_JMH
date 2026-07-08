@@ -1,9 +1,9 @@
 name: iOS Release Build (unsigned)
 
-# Compila el target NOOPiOS para dispositivo real, SIN firmar (igual que hace
-# NOOP oficialmente para mantenerse anónimo), lo empaqueta como .ipa y lo publica
-# como asset de un Release de GitHub. AltStore/SideStore firman ese .ipa en tu
-# propio iPhone con tu Apple ID gratuita al instalarlo.
+# Compila el target NOOPiOS (app NOX) para dispositivo real, SIN firmar (igual que
+# hacia NOOP originalmente, para mantenerse anónimo), lo empaqueta como .ipa y lo
+# publica como asset de un Release de GitHub. AltStore/SideStore firman ese .ipa en
+# tu propio iPhone con tu Apple ID gratuita al instalarlo.
 #
 # Cómo dispararlo:
 #   1) Manualmente: pestaña "Actions" del repo -> "iOS Release Build (unsigned)"
@@ -61,7 +61,7 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build NOOPiOS for device (unsigned)
+      - name: Build NOX (NOOPiOS target) for device (unsigned)
         run: >-
           xcodebuild -scheme NOOPiOS -configuration Release
           -destination 'generic/platform=iOS'
@@ -83,7 +83,7 @@ jobs:
           cp -R "$APP_PATH" Payload/
           VERSION="${{ steps.ver.outputs.version }}"
           VERSION_NUM="${VERSION#v}"
-          IPA_NAME="NOOP-${VERSION}-ios.ipa"
+          IPA_NAME="NOX-${VERSION}-ios.ipa"
           zip -r "$IPA_NAME" Payload
           SIZE=$(stat -f%z "$IPA_NAME")
           echo "ipa_name=$IPA_NAME" >> "$GITHUB_OUTPUT"
@@ -95,9 +95,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.ver.outputs.version }}
-          name: "NOOP ${{ steps.ver.outputs.version }} (build personal)"
+          name: "NOX ${{ steps.ver.outputs.version }} (build personal)"
           body: |
-            Build personal no firmado de NOOP, para instalar vía AltStore/SideStore.
+            Build personal no firmado de NOX (fork de NOOP), para instalar vía AltStore/SideStore.
 
             **Tamaño del .ipa:** ${{ steps.package.outputs.size }} bytes.
             Recuerda actualizar el campo "size" en altstore-source.json con este valor.
