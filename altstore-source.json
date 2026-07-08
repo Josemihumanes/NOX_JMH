@@ -2,8 +2,8 @@
   "name": "NOX",
   "subtitle": "A standalone WHOOP app — your strap, your device, fully offline.",
   "description": "An AltStore / SideStore source for NOX (a personal fork of NOOP, the independent open-source WHOOP companion). Add this source to get one-tap updates for the sideloaded iOS build.\n\nNOX is not affiliated with WHOOP. It reads a strap you own, directly over Bluetooth, on your own device — no WHOOP app, no subscription, no cloud.",
-  "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
-  "website": "https://github.com/Josemihumanes/JMH_WH00P_N00P",
+  "iconURL": "https://github.com/Josemihumanes/NOX_JMH/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
+  "website": "https://github.com/Josemihumanes/NOX_JMH",
   "tintColor": "6C4FE0",
   "apps": [
     {
@@ -11,8 +11,8 @@
       "bundleIdentifier": "com.jmh.nox",
       "developerName": "Josemihumanes (personal fork of NOOP by NoopApp)",
       "subtitle": "Read your own WHOOP strap, fully offline.",
-      "localizedDescription": "NOX talks to a WHOOP 4.0 / 5.0 / MG strap you own directly over Bluetooth — no WHOOP app, no subscription, no cloud. Live heart rate, history sync, and Charge / Effort / Rest scores, all computed on-device and stored only on your iPhone.\n\nIndependent and experimental; not affiliated with WHOOP. Personal fork based on NOOP by NoopApp: https://github.com/Josemihumanes/JMH_WH00P_N00P",
-      "iconURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
+      "localizedDescription": "NOX talks to a WHOOP 4.0 / 5.0 / MG strap you own directly over Bluetooth — no WHOOP app, no subscription, no cloud. Live heart rate, history sync, and Charge / Effort / Rest scores, all computed on-device and stored only on your iPhone.\n\nIndependent and experimental; not affiliated with WHOOP. Personal fork based on NOOP by NoopApp: https://github.com/Josemihumanes/NOX_JMH",
+      "iconURL": "https://github.com/Josemihumanes/NOX_JMH/raw/main/StrandiOS/Resources/Assets.xcassets/AppIcon.appiconset/icon_1024.png",
       "tintColor": "6C4FE0",
       "category": "healthcare-fitness",
       "screenshotURLs": [],
@@ -22,7 +22,7 @@
           "buildVersion": "2",
           "date": "2026-07-08",
           "localizedDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
-          "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
           "size": 0,
           "minOSVersion": "17.0"
         }
@@ -41,7 +41,7 @@
       "buildVersion": "2",
       "versionDate": "2026-07-08",
       "versionDescription": "Rebranding a NOX: nuevo nombre, icono y bundle ID.",
-      "downloadURL": "https://github.com/Josemihumanes/JMH_WH00P_N00P/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.1.0/NOX-v1.1.0-ios.ipa",
       "size": 0,
       "minOSVersion": "17.0"
     }
