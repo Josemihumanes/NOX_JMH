@@ -849,7 +849,7 @@ private struct LivePhysiology: View {
                 // Offline: show a muted "Offline" word (dimmed to textTertiary) instead of three bare
                 // accent-coloured em-dashes that read as broken live readouts. Once there's an active
                 // stream the real values (and their cyan/green/amber accents) return.
-                proofMetric("R-R", activeConnection ? rrSummary : String(localized: "Offline"),
+                proofMetric(String(localized: "R-R"), activeConnection ? rrSummary : String(localized: "Offline"),
                             StrandPalette.metricCyan, offline: !activeConnection)
                 proofMetric(String(localized: "Frame"), activeConnection ? (live.lastFrameType ?? "—") : String(localized: "Offline"),
                             StrandPalette.accent, offline: !activeConnection)
@@ -1029,7 +1029,7 @@ private struct ActiveWorkoutLive: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: NoopMetrics.gap) {
-                stat("HR", model.bpm.map { "\($0)" } ?? "—",
+                stat(String(localized: "HR"), model.bpm.map { "\($0)" } ?? "—",
                      tint: model.bpm == nil ? StrandPalette.textPrimary : StrandPalette.metricRose)
                 stat(String(localized: "Avg"), workout.avgHr > 0 ? "\(workout.avgHr)" : "—")
                 stat(String(localized: "Peak"), workout.peakHr > 0 ? "\(workout.peakHr)" : "—")
@@ -1169,7 +1169,7 @@ private struct SignalTrustTile: View {
                 LiquidVessel(value: tile.frac, tint: tile.tint, animated: false)
                     .frame(width: 22, height: 22)
                     .accessibilityHidden(true)
-                Text(tile.title.uppercased())
+                Text(String(localized: String.LocalizationValue(tile.title)).uppercased())
                     .font(StrandFont.overline)
                     .tracking(StrandFont.overlineTracking)
                     .foregroundStyle(StrandPalette.textSecondary)
