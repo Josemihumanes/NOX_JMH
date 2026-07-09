@@ -1,5 +1,8 @@
 import Foundation
 import GRDB
+#if canImport(SQLite3)
+import SQLite3
+#endif
 
 /// SQLite-level integrity verification for the backup/restore pipeline (#1014 defence-in-depth).
 ///
@@ -47,6 +50,27 @@ public enum DatabaseIntegrity {
             diag.append("attributesOfItem=FAILED")
         }
         diag.append("isReadableFile=\(fm.isReadableFile(atPath: path))")
+        // Directorio contenedor
+        let parentPath = (path as NSString).deletingLastPathComponent
+        if let pattrs = try? fm.attributesOfItem(atPath: parentPath) {
+            if let pperms = pattrs[.posixPermissions] as? Int { diag.append("dirPosix=\(String(pperms, radix: 8))") }
+        }
+        diag.append("dirReadable=\(fm.isReadableFile(atPath: parentPath))")
+        // Prueba de lectura cruda con FileHandle (sin pasar por SQLite)
+        if let fh = FileHandle(forReadingAtPath: path) {
+            let bytes = fh.readData(ofLength: 16)
+            diag.append("FileHandleRead=OK(\(bytes.count)bytes)")
+            try? fh.close()
+        } else {
+            diag.append("FileHandleRead=FAILED")
+        }
+        // Prueba de apertura cruda con la API C de sqlite3 directamente (sin GRDB)
+        #if canImport(SQLite3)
+        var rawDb: OpaquePointer? = nil
+        let rawRc = sqlite3_open_v2(path, &rawDb, SQLITE_OPEN_READONLY, nil)
+        diag.append("rawSqlite3OpenRC=\(rawRc)")
+        if rawDb != nil { sqlite3_close(rawDb) }
+        #endif
         // --- fin diagnóstico ---
         var config = Configuration()
         config.readonly = true
