@@ -1,8 +1,5 @@
 import Foundation
 import GRDB
-#if canImport(SQLite3)
-import SQLite3
-#endif
 
 /// SQLite-level integrity verification for the backup/restore pipeline (#1014 defence-in-depth).
 ///
@@ -35,58 +32,21 @@ public enum DatabaseIntegrity {
         guard FileManager.default.fileExists(atPath: path) else {
             return "no database file at that path"
         }
-        // --- Diagnóstico temporal extendido ---
-        var diag: [String] = []
-        let fm = FileManager.default
-        if let attrs = try? fm.attributesOfItem(atPath: path) {
-            if let size = attrs[.size] as? Int64 { diag.append("size=\(size)") }
-            if let perms = attrs[.posixPermissions] as? Int { diag.append("posix=\(String(perms, radix: 8))") }
-            if let owner = attrs[.ownerAccountName] as? String { diag.append("owner=\(owner)") }
-            if let ptype = attrs[.type] as? FileAttributeType { diag.append("type=\(ptype.rawValue)") }
-            #if os(iOS)
-            if let protection = attrs[.protectionKey] as? FileProtectionType { diag.append("protection=\(protection.rawValue)") }
-            #endif
-        } else {
-            diag.append("attributesOfItem=FAILED")
-        }
-        diag.append("isReadableFile=\(fm.isReadableFile(atPath: path))")
-        // Directorio contenedor
-        let parentPath = (path as NSString).deletingLastPathComponent
-        if let pattrs = try? fm.attributesOfItem(atPath: parentPath) {
-            if let pperms = pattrs[.posixPermissions] as? Int { diag.append("dirPosix=\(String(pperms, radix: 8))") }
-        }
-        diag.append("dirReadable=\(fm.isReadableFile(atPath: parentPath))")
-        // Prueba de lectura cruda con FileHandle (sin pasar por SQLite)
-        if let fh = FileHandle(forReadingAtPath: path) {
-            let bytes = fh.readData(ofLength: 16)
-            diag.append("FileHandleRead=OK(\(bytes.count)bytes)")
-            try? fh.close()
-        } else {
-            diag.append("FileHandleRead=FAILED")
-        }
-        // Prueba de apertura cruda con la API C de sqlite3 directamente (sin GRDB)
-        #if canImport(SQLite3)
-        var rawDb: OpaquePointer? = nil
-        let rawRc = sqlite3_open_v2(path, &rawDb, SQLITE_OPEN_READONLY, nil)
-        diag.append("rawSqlite3OpenRC=\(rawRc)")
-        if rawDb != nil { sqlite3_close(rawDb) }
-        // Mismo intento pero agregando NOMUTEX (posible flag que usa GRDB internamente)
-        var rawDb2: OpaquePointer? = nil
-        let rawRc2 = sqlite3_open_v2(path, &rawDb2, SQLITE_OPEN_READONLY | SQLITE_OPEN_NOMUTEX, nil)
-        diag.append("rawSqlite3OpenRC_NOMUTEX=\(rawRc2)")
-        if rawDb2 != nil { sqlite3_close(rawDb2) }
-        #endif
-        // Prueba GRDB pero en modo LECTURA-ESCRITURA (no readonly) para comparar
-        do {
-            var rwConfig = Configuration()
-            rwConfig.readonly = false
-            let rwQueue = try DatabaseQueue(path: path, configuration: rwConfig)
-            _ = try rwQueue.read { db in try Int.fetchOne(db, sql: "SELECT 1") }
-            diag.append("grdbReadWriteOpen=OK")
-        } catch {
-            diag.append("grdbReadWriteOpen=FAILED(\(error.localizedDescription))")
-        }
-        // --- fin diagnóstico ---
+
+        // iOS/GRDB quirk (found while debugging a sideloaded-build restore failure): the very first
+        // SQLite open of a freshly-staged file on iOS can fail with SQLITE_CANTOPEN (14) when opened
+        // directly in read-only mode, even though the file is completely healthy (verified: raw
+        // sqlite3_open_v2 and FileHandle both succeed on the same path). Opening it read-write ONCE
+        // first — without writing anything, just a throwaway SELECT — reliably clears whatever iOS-side
+        // state is blocking the read-only open, and the subsequent read-only connection then succeeds.
+        // Harmless: this connection only reads, and is closed immediately.
+        _ = try? {
+            var warmupConfig = Configuration()
+            warmupConfig.readonly = false
+            let warmupQueue = try DatabaseQueue(path: path, configuration: warmupConfig)
+            _ = try warmupQueue.read { db in try Int.fetchOne(db, sql: "SELECT 1") }
+        }()
+
         var config = Configuration()
         config.readonly = true
         do {
@@ -100,9 +60,9 @@ public enum DatabaseIntegrity {
             // That IS the verdict: the file is not a usable database.
             var extra = ""
             if let dbError = error as? DatabaseError {
-                extra = " [DIAG resultCode=\(dbError.resultCode.rawValue) extendedCode=\(dbError.extendedResultCode.rawValue) message=\(dbError.message ?? "nil") sql=\(dbError.sql ?? "nil")]"
+                extra = " (SQLite code \(dbError.resultCode.rawValue))"
             }
-            return error.localizedDescription + extra + " [FILEDIAG " + diag.joined(separator: ", ") + "]"
+            return error.localizedDescription + extra
         }
     }
 

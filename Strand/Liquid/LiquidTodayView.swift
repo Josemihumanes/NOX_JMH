@@ -346,16 +346,6 @@ struct LiquidTodayView: View {
                 }
                 Spacer(minLength: 8)
                 HStack(spacing: 8) {
-                    // Support / donate — a tap opens the (optional) support sheet. NOOP is free forever.
-                    Button { showSupport = true } label: {
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 19, weight: .semibold))
-                            .foregroundStyle(StrandPalette.chargeColor)
-                            .frame(width: 34, height: 34)
-                            .shadow(color: .black.opacity(0.3), radius: 6, y: 1)
-                    }
-                    .buttonStyle(LiquidPressStyle())
-                    .accessibilityLabel("Support NOOP. It's free; donations are optional and help development.")
                     // Profile pic (the one set in Settings) → opens Settings, matching the classic Today.
                     Button { showSettings = true } label: {
                         ProfileAvatarView(imageData: profile.avatarImageData, size: 34)

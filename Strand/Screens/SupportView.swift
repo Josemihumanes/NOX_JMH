@@ -11,11 +11,6 @@ struct SupportView: View {
                        subtitle: "\(ProjectInfo.appName) is free and always will be. If it's useful to you, you can chip in to help with development and testing costs. Totally optional.") {
             VStack(alignment: .leading, spacing: NoopMetrics.sectionSpacing) {
                 VStack(alignment: .leading, spacing: NoopMetrics.cardInnerSpacing) {
-                    SectionHeader("Support the build", overline: "Optional")
-                    donateCard
-                }
-                .staggeredAppear(index: 0)
-                VStack(alignment: .leading, spacing: NoopMetrics.cardInnerSpacing) {
                     SectionHeader("Help & Contact", overline: "Get in touch")
                     contactCard
                     builtOnCard
