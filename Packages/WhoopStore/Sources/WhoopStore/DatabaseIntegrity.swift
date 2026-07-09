@@ -32,6 +32,22 @@ public enum DatabaseIntegrity {
         guard FileManager.default.fileExists(atPath: path) else {
             return "no database file at that path"
         }
+        // --- Diagnóstico temporal extendido ---
+        var diag: [String] = []
+        let fm = FileManager.default
+        if let attrs = try? fm.attributesOfItem(atPath: path) {
+            if let size = attrs[.size] as? Int64 { diag.append("size=\(size)") }
+            if let perms = attrs[.posixPermissions] as? Int { diag.append("posix=\(String(perms, radix: 8))") }
+            if let owner = attrs[.ownerAccountName] as? String { diag.append("owner=\(owner)") }
+            if let ptype = attrs[.type] as? FileAttributeType { diag.append("type=\(ptype.rawValue)") }
+            #if os(iOS)
+            if let protection = attrs[.protectionKey] as? FileProtectionType { diag.append("protection=\(protection.rawValue)") }
+            #endif
+        } else {
+            diag.append("attributesOfItem=FAILED")
+        }
+        diag.append("isReadableFile=\(fm.isReadableFile(atPath: path))")
+        // --- fin diagnóstico ---
         var config = Configuration()
         config.readonly = true
         do {
@@ -43,7 +59,11 @@ public enum DatabaseIntegrity {
         } catch {
             // Open or query failed outright (SQLITE_NOTADB on a garbage file, malformed header, …).
             // That IS the verdict: the file is not a usable database.
-            return error.localizedDescription
+            var extra = ""
+            if let dbError = error as? DatabaseError {
+                extra = " [DIAG resultCode=\(dbError.resultCode.rawValue) extendedCode=\(dbError.extendedResultCode.rawValue) message=\(dbError.message ?? "nil") sql=\(dbError.sql ?? "nil")]"
+            }
+            return error.localizedDescription + extra + " [FILEDIAG " + diag.joined(separator: ", ") + "]"
         }
     }
 
