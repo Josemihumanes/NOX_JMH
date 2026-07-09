@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Arreglo del bug de restore + quitado el boton de apoyo/donaciones (corazon).",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.9/NOX-v1.2.9-ios.ipa",
-          "size": 17009509,
+          "localizedDescription": "Quitada la entrada completa de Soporte del menu Mas.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.0/NOX-v1.3.0-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Arreglo del bug de restore + quitado el boton de apoyo/donaciones (corazon).",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.9/NOX-v1.2.9-ios.ipa",
-      "size": 17009509,
+      "versionDescription": "Quitada la entrada completa de Soporte del menu Mas.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.0/NOX-v1.3.0-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
