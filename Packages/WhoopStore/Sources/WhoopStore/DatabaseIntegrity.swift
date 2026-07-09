@@ -70,7 +70,22 @@ public enum DatabaseIntegrity {
         let rawRc = sqlite3_open_v2(path, &rawDb, SQLITE_OPEN_READONLY, nil)
         diag.append("rawSqlite3OpenRC=\(rawRc)")
         if rawDb != nil { sqlite3_close(rawDb) }
+        // Mismo intento pero agregando NOMUTEX (posible flag que usa GRDB internamente)
+        var rawDb2: OpaquePointer? = nil
+        let rawRc2 = sqlite3_open_v2(path, &rawDb2, SQLITE_OPEN_READONLY | SQLITE_OPEN_NOMUTEX, nil)
+        diag.append("rawSqlite3OpenRC_NOMUTEX=\(rawRc2)")
+        if rawDb2 != nil { sqlite3_close(rawDb2) }
         #endif
+        // Prueba GRDB pero en modo LECTURA-ESCRITURA (no readonly) para comparar
+        do {
+            var rwConfig = Configuration()
+            rwConfig.readonly = false
+            let rwQueue = try DatabaseQueue(path: path, configuration: rwConfig)
+            _ = try rwQueue.read { db in try Int.fetchOne(db, sql: "SELECT 1") }
+            diag.append("grdbReadWriteOpen=OK")
+        } catch {
+            diag.append("grdbReadWriteOpen=FAILED(\(error.localizedDescription))")
+        }
         // --- fin diagnóstico ---
         var config = Configuration()
         config.readonly = true
