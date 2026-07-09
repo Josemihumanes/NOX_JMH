@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Diagnóstico extendido v2: FileHandle + sqlite3 crudo + directorio.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.6/NOX-v1.2.6-ios.ipa",
-          "size": 0,
+          "size": 17040469,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Diagnóstico extendido v2: FileHandle + sqlite3 crudo + directorio.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.6/NOX-v1.2.6-ios.ipa",
-      "size": 0,
+      "size": 17040469,
       "minOSVersion": "17.0"
     }
   ],
