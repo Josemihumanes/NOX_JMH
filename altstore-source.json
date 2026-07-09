@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Reemplazo casi total de NOOP por NOX en todo el catalogo de traducciones (es/en).",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.3/NOX-v1.3.3-ios.ipa",
-          "size": 0,
+          "size": 17008655,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Reemplazo casi total de NOOP por NOX en todo el catalogo de traducciones (es/en).",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.3/NOX-v1.3.3-ios.ipa",
-      "size": 0,
+      "size": 17008655,
       "minOSVersion": "17.0"
     }
   ],
