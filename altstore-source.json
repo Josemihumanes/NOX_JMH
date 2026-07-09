@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Diagnóstico v3: comparar GRDB readonly vs read-write, y flags NOMUTEX.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.7/NOX-v1.2.7-ios.ipa",
-          "size": 0,
+          "size": 17041750,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Diagnóstico v3: comparar GRDB readonly vs read-write, y flags NOMUTEX.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.2.7/NOX-v1.2.7-ios.ipa",
-      "size": 0,
+      "size": 17041750,
       "minOSVersion": "17.0"
     }
   ],
