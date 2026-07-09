@@ -1,6 +1,96 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "up": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al alza"
+          }
+        }
+      }
+    },
+    "down": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a la baja"
+          }
+        }
+      }
+    },
+    ", a good sign": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ", buena señal"
+          }
+        }
+      }
+    },
+    ", worth a look": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ", vale la pena revisarlo"
+          }
+        }
+      }
+    },
+    "Your Effort outpaced your Charge this week: you leaned into the red. Watch for a recovery dip.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu Esfuerzo superó a tu Carga esta semana: te metiste en zona roja. Vigila una posible caída de recuperación."
+          }
+        }
+      }
+    },
+    "Effort and Charge tracked together this week: a sustainable load.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esfuerzo y Carga fueron de la mano esta semana: una carga sostenible."
+          }
+        }
+      }
+    },
+    "You carried more Charge than you spent this week: there's room to push if you want it.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llevaste más Carga de la que gastaste esta semana: hay margen para apretar si quieres."
+          }
+        }
+      }
+    },
+    "Not enough Effort and Charge days this week to read your balance.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay suficientes días de Esfuerzo y Carga esta semana para leer tu equilibrio."
+          }
+        }
+      }
+    },
+    "%@ is %@ %@ week over week (avg %@ vs %@)%@.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ está %@ %@ semana a semana (media %@ vs %@)%@."
+          }
+        }
+      }
+    },
     "I am not a WHOOP employee, contractor, or affiliate, and I am not using NOOP on WHOOP's behalf.": {
       "localizations": {
         "es": {

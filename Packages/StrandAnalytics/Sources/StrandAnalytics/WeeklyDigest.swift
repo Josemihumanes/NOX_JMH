@@ -41,11 +41,11 @@ public enum WeeklyMetric: String, CaseIterable, Sendable {
     /// Human label for the metric (matches the rest of the app's naming).
     public var label: String {
         switch self {
-        case .charge: return "Charge"
-        case .effort: return "Effort"
-        case .rest:   return "Rest"
-        case .rhr:    return "Resting HR"
-        case .hrv:    return "HRV"
+        case .charge: return String(localized: "Charge")
+        case .effort: return String(localized: "Effort")
+        case .rest:   return String(localized: "Rest")
+        case .rhr:    return String(localized: "Resting HR")
+        case .hrv:    return String(localized: "HRV")
         }
     }
 
@@ -195,13 +195,13 @@ public enum BalanceRead: String, Equatable, Sendable {
     public var sentence: String {
         switch self {
         case .overreaching:
-            return "Your Effort outpaced your Charge this week: you leaned into the red. Watch for a recovery dip."
+            return String(localized: "Your Effort outpaced your Charge this week: you leaned into the red. Watch for a recovery dip.")
         case .balanced:
-            return "Effort and Charge tracked together this week: a sustainable load."
+            return String(localized: "Effort and Charge tracked together this week: a sustainable load.")
         case .underloaded:
-            return "You carried more Charge than you spent this week: there's room to push if you want it."
+            return String(localized: "You carried more Charge than you spent this week: there's room to push if you want it.")
         case .insufficient:
-            return "Not enough Effort and Charge days this week to read your balance."
+            return String(localized: "Not enough Effort and Charge days this week to read your balance.")
         }
     }
 }
@@ -379,7 +379,7 @@ public enum WeeklyDigestEngine {
     static func moverSentence(_ s: WeeklyMetricSummary,
                               effortDisplayFactor: Double = 1.0) -> String {
         let f = s.metric == .effort ? effortDisplayFactor : 1.0
-        let directionWord = s.wowDelta > 0 ? "up" : (s.wowDelta < 0 ? "down" : "flat")
+        let directionWord = s.wowDelta > 0 ? String(localized: "up") : (s.wowDelta < 0 ? String(localized: "down") : String(localized: "flat"))
         let magnitude: String
         if let pct = s.weekOverWeek.pctChange, abs(pct) >= 1 {
             magnitude = "\(roundedInt(abs(pct)))%"
@@ -388,14 +388,13 @@ public enum WeeklyDigestEngine {
         }
         let frame: String
         switch s.wowGoodness {
-        case 1:  frame = ", a good sign"
-        case -1: frame = ", worth a look"
+        case 1:  frame = String(localized: ", a good sign")
+        case -1: frame = String(localized: ", worth a look")
         default: frame = ""
         }
         let thisAvg = roundedInt(s.thisWeek.mean * f)
         let lastAvg = roundedInt(s.weekOverWeek.previous.mean * f)
-        return "\(s.metric.label) is \(directionWord) \(magnitude) week over week"
-            + " (avg \(thisAvg) vs \(lastAvg))\(frame)."
+        return String(localized: "\(s.metric.label) is \(directionWord) \(magnitude) week over week (avg \(thisAvg) vs \(lastAvg))\(frame).")
     }
 
     // MARK: - Range extraction

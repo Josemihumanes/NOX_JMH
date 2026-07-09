@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Reemplazo casi total de NOOP por NOX en todo el catalogo de traducciones (es/en).",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.3/NOX-v1.3.3-ios.ipa",
-          "size": 17008655,
+          "localizedDescription": "Traducir frases de insights semanales (Tendencias) en StrandAnalytics.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.4/NOX-v1.3.4-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Reemplazo casi total de NOOP por NOX en todo el catalogo de traducciones (es/en).",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.3/NOX-v1.3.3-ios.ipa",
-      "size": 17008655,
+      "versionDescription": "Traducir frases de insights semanales (Tendencias) en StrandAnalytics.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.4/NOX-v1.3.4-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
