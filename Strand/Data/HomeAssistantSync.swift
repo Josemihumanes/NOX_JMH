@@ -221,12 +221,11 @@ struct HomeAssistantSync {
     }
 
     @discardableResult
+    @MainActor
     func push(_ metrics: [HomeAssistantMetric]) async -> (succeeded: Int, failed: Int) {
         guard settings.isConfigured, let baseURL = settings.normalizedBaseURL else {
-            await MainActor.run {
-                settings.lastResult = HomeAssistantError.notConfigured.errorDescription
-                settings.lastResultWasError = true
-            }
+            settings.lastResult = HomeAssistantError.notConfigured.errorDescription
+            settings.lastResultWasError = true
             return (0, metrics.count)
         }
 
@@ -255,14 +254,12 @@ struct HomeAssistantSync {
             }
         }
 
-        await MainActor.run {
-            if failed == 0 {
-                settings.lastResult = String(localized: "Sent \(succeeded) sensor(s) to Home Assistant.")
-                settings.lastResultWasError = false
-            } else {
-                settings.lastResult = lastError ?? String(localized: "Some sensors failed to send.")
-                settings.lastResultWasError = true
-            }
+        if failed == 0 {
+            settings.lastResult = String(localized: "Sent \(succeeded) sensor(s) to Home Assistant.")
+            settings.lastResultWasError = false
+        } else {
+            settings.lastResult = lastError ?? String(localized: "Some sensors failed to send.")
+            settings.lastResultWasError = true
         }
         return (succeeded, failed)
     }
