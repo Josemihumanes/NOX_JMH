@@ -69,7 +69,7 @@ struct NOOPWidgetView: View {
         var parts: [String] = []
         if let r = snap.recovery { parts.append("Charge \(r)%") }
         if let b = snap.bpm { parts.append("\(b) bpm") }
-        return parts.isEmpty ? "NOOP" : parts.joined(separator: " · ")
+        return parts.isEmpty ? "NOX" : parts.joined(separator: " · ")
     }
 
     private var recoveryGauge: some View {
@@ -98,7 +98,7 @@ struct NOOPWidgetView: View {
     private var home: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("NOOP").font(.system(size: 13, weight: .bold))
+                Text("NOX").font(.system(size: 13, weight: .bold))
                     .foregroundStyle(StrandPalette.textSecondary)
                 Spacer()
                 Circle().fill(snap.bonded ? StrandPalette.statusPositive : StrandPalette.statusCritical)
@@ -133,7 +133,7 @@ struct NOOPWidgetView: View {
     private var large: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("NOOP").font(.system(size: 13, weight: .bold))
+                Text("NOX").font(.system(size: 13, weight: .bold))
                     .foregroundStyle(StrandPalette.textSecondary)
                 Spacer()
                 Circle().fill(snap.bonded ? StrandPalette.statusPositive : StrandPalette.statusCritical)
@@ -166,7 +166,7 @@ struct NOOPWidgetView: View {
     }
 
     /// One labelled stat in the large grid — value over a caption, equal-width so the three columns align.
-    private func statCell(_ label: String, value: String?, unit: String? = nil,
+    private func statCell(_ label: LocalizedStringKey, value: String?, unit: String? = nil,
                           tint: Color = StrandPalette.textPrimary) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
@@ -197,7 +197,7 @@ struct NOOPWidget: Widget {
                     .background(StrandPalette.surfaceBase)
             }
         }
-        .configurationDisplayName("NOOP Charge")
+        .configurationDisplayName("NOX Charge")
         .description("Charge, Effort, Rest, HRV, resting and live heart rate, and strap battery at a glance.")
         .supportedFamilies([
             .systemSmall, .systemMedium, .systemLarge,
