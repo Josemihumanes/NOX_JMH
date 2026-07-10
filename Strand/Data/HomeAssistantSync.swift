@@ -144,9 +144,16 @@ struct HomeAssistantClient {
     }
 
     /// Quick reachability + auth check: GET /api/, which HA answers with
-    /// `{"message": "API running."}` when the token is valid.
+    /// `{"message": "API running."}` when the token is valid. The trailing slash matters: HA's
+    /// router treats "/api" and "/api/" as distinct routes and only registers the latter, so
+    /// dropping it produces a 404 even with a perfectly valid token.
     func testConnection(baseURL: URL, token: String) async throws -> Bool {
-        var req = URLRequest(url: baseURL.appendingPathComponent("api"))
+        // Built via string concatenation, not appendingPathComponent, because that API can silently
+        // drop the trailing slash — and the slash is what makes this route exist at all on HA.
+        guard let url = URL(string: baseURL.absoluteString + "/api/") else {
+            throw HomeAssistantError.badURL
+        }
+        var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.setValue("application/json", forHTTPHeaderField: "content-type")
