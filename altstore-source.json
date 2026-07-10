@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Arreglo: barra final en /api/ que causaba 404 en Probar conexion.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.7/NOX-v1.3.7-ios.ipa",
-          "size": 0,
+          "size": 17047732,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Arreglo: barra final en /api/ que causaba 404 en Probar conexion.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.7/NOX-v1.3.7-ios.ipa",
-      "size": 0,
+      "size": 17047732,
       "minOSVersion": "17.0"
     }
   ],
