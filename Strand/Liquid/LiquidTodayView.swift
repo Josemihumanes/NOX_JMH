@@ -34,6 +34,11 @@ struct LiquidTodayView: View {
     @State private var hrValues: [Double] = []     // hrBuckets since midnight → 5-min means
     @State private var workouts: [WorkoutRow] = [] // newest-first
 
+    // Home Assistant push (opt-in, off by default): fire-and-forget after load() refreshes today's
+    // scores, deduplicated so an unrelated repo.refreshSeq bump with unchanged numbers doesn't re-send.
+    @StateObject private var homeAssistantSettings = HomeAssistantSettings()
+    @State private var lastHomeAssistantPushSignature: String?
+
     // sheets / expanders
     @State private var guideSection: ScoreSection?
     @State private var showCustomise = false
@@ -862,6 +867,42 @@ struct LiquidTodayView: View {
 
         // First load done — bring the hero gauges + sky to life now the launch churn has settled.
         if !dataLoaded { withAnimation(.easeIn(duration: 0.4)) { dataLoaded = true } }
+
+        // Home Assistant: only push today's own numbers (a past day browsed via swipe isn't "now"),
+        // and only when something actually changed since the last push, so a repo.refreshSeq bump
+        // with identical figures (e.g. a battery-only BLE tick) doesn't spam Home Assistant.
+        if selectedDayOffset == 0 {
+            pushTodayToHomeAssistantIfNeeded()
+        }
+    }
+
+    private func pushTodayToHomeAssistantIfNeeded() {
+        guard homeAssistantSettings.enabled, homeAssistantSettings.pushAfterSync else { return }
+        let charge = displayDay?.recovery
+        let effort = displayDay?.strain
+        let rest = restScore
+        let hrv = displayDay?.avgHrv
+        let rhr = displayDay?.restingHr
+
+        // Nothing worth sending yet (e.g. right after a fresh pair, before the first sync lands).
+        guard charge != nil || effort != nil || rest != nil else { return }
+
+        let signature = "\(charge ?? -1)|\(effort ?? -1)|\(rest ?? -1)|\(hrv ?? -1)|\(rhr ?? -1)"
+        guard signature != lastHomeAssistantPushSignature else { return }
+        lastHomeAssistantPushSignature = signature
+
+        var metrics: [HomeAssistantMetric] = []
+        if let charge { metrics.append(HomeAssistantMetric(key: "charge", state: String(Int(charge.rounded())), friendlyName: "NOX Charge", unit: "pts", icon: "mdi:battery-charging-80")) }
+        if let effort { metrics.append(HomeAssistantMetric(key: "effort", state: String(Int(effort.rounded())), friendlyName: "NOX Effort", unit: "pts", icon: "mdi:lightning-bolt")) }
+        if let rest { metrics.append(HomeAssistantMetric(key: "rest", state: String(Int(rest.rounded())), friendlyName: "NOX Rest", unit: "pts", icon: "mdi:sleep")) }
+        if let hrv { metrics.append(HomeAssistantMetric(key: "hrv", state: String(Int(hrv.rounded())), friendlyName: "NOX HRV", unit: "ms", icon: "mdi:heart-pulse")) }
+        if let rhr { metrics.append(HomeAssistantMetric(key: "resting_hr", state: String(rhr), friendlyName: "NOX Resting HR", unit: "bpm", icon: "mdi:heart")) }
+        guard !metrics.isEmpty else { return }
+
+        let settingsSnapshot = homeAssistantSettings
+        Task.detached(priority: .background) {
+            await HomeAssistantSync(settings: settingsSnapshot).push(metrics)
+        }
     }
 
     // MARK: - Derived (sync, off repo.today / repo.days)
