@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Nueva integracion (paso 1/2): configuracion y cliente de Home Assistant.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.6/NOX-v1.3.6-ios.ipa",
-          "size": 0,
+          "size": 17046999,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Nueva integracion (paso 1/2): configuracion y cliente de Home Assistant.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.6/NOX-v1.3.6-ios.ipa",
-      "size": 0,
+      "size": 17046999,
       "minOSVersion": "17.0"
     }
   ],
