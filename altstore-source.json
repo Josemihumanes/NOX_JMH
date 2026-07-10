@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Home Assistant paso 2/2: envio automatico de valores reales (Charge/Effort/Rest/HRV/RHR) tras sincronizar.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.8/NOX-v1.3.8-ios.ipa",
-          "size": 0,
+          "size": 17050529,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Home Assistant paso 2/2: envio automatico de valores reales (Charge/Effort/Rest/HRV/RHR) tras sincronizar.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.8/NOX-v1.3.8-ios.ipa",
-      "size": 0,
+      "size": 17050529,
       "minOSVersion": "17.0"
     }
   ],
