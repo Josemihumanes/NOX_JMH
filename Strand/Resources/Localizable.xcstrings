@@ -1,6 +1,216 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Home Assistant": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home Assistant"
+          }
+        }
+      }
+    },
+    "Send your NOX scores to a Home Assistant instance as sensors, so they can drive automations and dashboards there. One-way: NOX never reads anything back from Home Assistant. If your Home Assistant runs on your own network, this never leaves it.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envía tus puntuaciones de NOX a una instancia de Home Assistant como sensores, para que puedan disparar automatizaciones y paneles ahí. De un solo sentido: NOX nunca lee nada de vuelta desde Home Assistant. Si tu Home Assistant corre en tu propia red, esto nunca sale de ella."
+          }
+        }
+      }
+    },
+    "Connection": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conexión"
+          }
+        }
+      }
+    },
+    "Setup": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configuración"
+          }
+        }
+      }
+    },
+    "Test": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prueba"
+          }
+        }
+      }
+    },
+    "Verify": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar"
+          }
+        }
+      }
+    },
+    "Enabled": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado"
+          }
+        }
+      }
+    },
+    "Base URL": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL base"
+          }
+        }
+      }
+    },
+    "Long-Lived Access Token": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token de acceso de larga duración"
+          }
+        }
+      }
+    },
+    "Paste your token": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pega tu token"
+          }
+        }
+      }
+    },
+    "Create one from your Home Assistant profile page → Security → Long-Lived Access Tokens.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea uno desde tu perfil de Home Assistant → Seguridad → Tokens de acceso de larga duración."
+          }
+        }
+      }
+    },
+    "Entity prefix": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prefijo de entidad"
+          }
+        }
+      }
+    },
+    "Sensors will be created as sensor.%@_charge, _effort, _rest, and so on.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los sensores se crearán como sensor.%@_charge, _effort, _rest, etc."
+          }
+        }
+      }
+    },
+    "Push automatically after each sync": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar automáticamente tras cada sincronización"
+          }
+        }
+      }
+    },
+    "Test connection": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probar conexión"
+          }
+        }
+      }
+    },
+    "Send sample sensors now": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar sensores de prueba ahora"
+          }
+        }
+      }
+    },
+    "Connected. Home Assistant accepted the token.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado. Home Assistant aceptó el token."
+          }
+        }
+      }
+    },
+    "Home Assistant isn't configured yet. Add a URL and a long-lived access token in Settings.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home Assistant aún no está configurado. Agrega una URL y un token de acceso de larga duración en Ajustes."
+          }
+        }
+      }
+    },
+    "That Home Assistant URL doesn't look valid.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esa URL de Home Assistant no parece válida."
+          }
+        }
+      }
+    },
+    "Sent %lld sensor(s) to Home Assistant.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se enviaron %lld sensor(es) a Home Assistant."
+          }
+        }
+      }
+    },
+    "Some sensors failed to send.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algunos sensores no se pudieron enviar."
+          }
+        }
+      }
+    },
     "up": {
       "localizations": {
         "es": {
