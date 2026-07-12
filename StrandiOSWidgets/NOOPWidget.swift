@@ -9,16 +9,34 @@ struct NOOPEntry: TimelineEntry {
 }
 
 struct NOOPProvider: TimelineProvider {
+    /// Diagnostic aid: if the App Group itself is unreachable from THIS process (the widget
+    /// extension, a separate process from the host app — sideloaded multi-target signing sometimes
+    /// fails to provision the extension's half of a shared App Group even when the host app's half
+    /// works fine), surface a value that can't be mistaken for real data instead of silently falling
+    /// back to the same nice-looking placeholder used for "no data published yet". Real Charge/Rest
+    /// scores are 0–100; −1 is not, so it's an unambiguous tell.
+    private static var appGroupUnreachableSnapshot: WidgetSnapshot {
+        WidgetSnapshot(recovery: -1, bpm: -1, batteryPct: -1, bonded: false, updated: Date(),
+                       effort: -1, rest: -1, hrv: -1, restingHr: -1)
+    }
+
+    private func currentSnapshot() -> WidgetSnapshot {
+        guard UserDefaults(suiteName: "group.com.jmh.nox") != nil else {
+            return Self.appGroupUnreachableSnapshot
+        }
+        return WidgetSnapshot.load() ?? .placeholder
+    }
+
     func placeholder(in context: Context) -> NOOPEntry {
         NOOPEntry(date: Date(), snapshot: .placeholder)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (NOOPEntry) -> Void) {
-        completion(NOOPEntry(date: Date(), snapshot: WidgetSnapshot.load() ?? .placeholder))
+        completion(NOOPEntry(date: Date(), snapshot: currentSnapshot()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<NOOPEntry>) -> Void) {
-        let snap = WidgetSnapshot.load() ?? .placeholder
+        let snap = currentSnapshot()
         // Refresh roughly every 15 minutes; the app also forces a reload when it publishes fresh data.
         let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date()) ?? Date().addingTimeInterval(900)
         completion(Timeline(entries: [NOOPEntry(date: Date(), snapshot: snap)], policy: .after(next)))
