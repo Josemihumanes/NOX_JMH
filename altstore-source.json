@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Diagnostico: chequeo directo de si el App Group (datos del widget) es alcanzable.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.1/NOX-v1.4.1-ios.ipa",
-          "size": 0,
+          "size": 17053689,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Diagnostico: chequeo directo de si el App Group (datos del widget) es alcanzable.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.1/NOX-v1.4.1-ios.ipa",
-      "size": 0,
+      "size": 17053689,
       "minOSVersion": "17.0"
     }
   ],
