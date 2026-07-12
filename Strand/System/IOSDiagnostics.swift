@@ -46,7 +46,8 @@ struct IOSDiagnostics {
             isSideloaded: Self.isSideloadedBuild(),
             sideloadExpiry: Self.provisioningExpiryDate(),
             appGroupReachable: Self.isAppGroupReachable(),
-            appGroupID: Self.resolvedAppGroupID()
+            appGroupID: Self.resolvedAppGroupID(),
+            lastWidgetPublish: UserDefaults(suiteName: "group.com.jmh.nox")?.string(forKey: "nox.debug.lastPublish")
         )
         #elseif os(macOS)
         return IOSDiagnostics(
@@ -89,6 +90,11 @@ struct IOSDiagnostics {
     /// widget extension, they'd each be reading/writing a different shared container and neither would
     /// ever see the other's data despite both individually reporting "reachable". nil on macOS.
     var appGroupID: String? = nil
+    /// Debug canary (temporary): the last thing `WidgetSnapshot.publish(from:)` actually wrote,
+    /// read back from the SAME shared suite. If this is nil despite having opened the app repeatedly,
+    /// publish() itself is never completing (or never being called) — a different bug than App Group
+    /// misconfiguration. nil on macOS.
+    var lastWidgetPublish: String? = nil
 
     /// macOS: true when the Mac is on AC power, false on battery, nil off macOS. Net-new env (spec 3.4).
     var macOnAC: Bool? = nil
@@ -134,6 +140,7 @@ struct IOSDiagnostics {
             lines.append("App Group (widget/watch data): \(ag ? "reachable" : "NOT REACHABLE — widget/watch will show placeholder data only")")
         }
         if let gid = appGroupID { lines.append("App Group id (this process): \(gid)") }
+        if let lp = lastWidgetPublish { lines.append("Last widget publish: \(lp)") } else { lines.append("Last widget publish: never recorded") }
         return lines
         #elseif os(macOS)
         var lines: [String] = []

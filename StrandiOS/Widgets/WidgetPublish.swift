@@ -60,6 +60,13 @@ extension WidgetSnapshot {
             restingHr: day?.restingHr
         )
         snap.save()
+        // Debug canary (temporary): a timestamp in the SAME shared suite proves whether this function
+        // is even reached and completing, independent of whatever WidgetSnapshot.save()/load() do —
+        // Diagnostics reads it back directly.
+        UserDefaults(suiteName: WidgetSnapshot.suiteName)?.set(
+            "published \(Date()) recovery=\(snap.recovery.map(String.init) ?? "nil") rest=\(snap.rest.map(String.init) ?? "nil") bpm=\(snap.bpm.map(String.init) ?? "nil")",
+            forKey: "nox.debug.lastPublish"
+        )
         WidgetCenter.shared.reloadAllTimelines()
     }
 }
