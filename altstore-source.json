@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Diagnostico: marca de tiempo de la ultima publicacion real al widget.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.4/NOX-v1.4.4-ios.ipa",
-          "size": 17054042,
+          "localizedDescription": "Diagnostico: mostrar el canario de depuracion dentro del propio widget.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.5/NOX-v1.4.5-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Diagnostico: marca de tiempo de la ultima publicacion real al widget.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.4/NOX-v1.4.4-ios.ipa",
-      "size": 17054042,
+      "versionDescription": "Diagnostico: mostrar el canario de depuracion dentro del propio widget.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.5/NOX-v1.4.5-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],

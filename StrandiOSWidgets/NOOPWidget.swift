@@ -144,6 +144,11 @@ struct NOOPWidgetView: View {
                 Label("\(snap.batteryPct.map { "\($0)%" } ?? "–")", systemImage: "battery.50")
             }
             .font(.caption2).foregroundStyle(StrandPalette.textSecondary)
+            // TEMP DEBUG: raw canary read directly by the extension, proving what THIS process sees.
+            if family == .systemSmall {
+                Text(UserDefaults(suiteName: "group.com.jmh.nox")?.string(forKey: "nox.debug.lastPublish") ?? "NIL-CANARY")
+                    .font(.system(size: 7)).foregroundStyle(.red).lineLimit(2).minimumScaleFactor(0.5)
+            }
         }
         .padding(12)
     }
