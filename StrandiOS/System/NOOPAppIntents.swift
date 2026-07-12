@@ -9,7 +9,7 @@ enum PendingIntents {
     enum Action: String { case markMoment, buzz }
 
     private static let key = "noop.pendingIntents"
-    private static var defaults: UserDefaults? { UserDefaults(suiteName: WidgetSnapshot.suiteName) }
+    private static var defaults: UserDefaults? { UserDefaults.standard }
 
     /// Optional `at` is the invocation time, captured now and consumed on drain. Encoded into the
     /// stored string as "rawValue:epochSeconds" so the array stays a plain [String] (no schema
