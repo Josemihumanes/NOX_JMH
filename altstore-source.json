@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Diagnostico: mostrar el canario de depuracion dentro del propio widget.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.5/NOX-v1.4.5-ios.ipa",
-          "size": 17055127,
+          "localizedDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Diagnostico: mostrar el canario de depuracion dentro del propio widget.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.5/NOX-v1.4.5-ios.ipa",
-      "size": 17055127,
+      "versionDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
