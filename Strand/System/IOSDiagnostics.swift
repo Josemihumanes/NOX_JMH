@@ -44,7 +44,8 @@ struct IOSDiagnostics {
             backgroundRefresh: backgroundRefresh,
             isLowPowerMode: ProcessInfo.processInfo.isLowPowerModeEnabled,
             isSideloaded: Self.isSideloadedBuild(),
-            sideloadExpiry: Self.provisioningExpiryDate()
+            sideloadExpiry: Self.provisioningExpiryDate(),
+            appGroupReachable: Self.isAppGroupReachable()
         )
         #elseif os(macOS)
         return IOSDiagnostics(
@@ -76,6 +77,12 @@ struct IOSDiagnostics {
     var isSideloaded: Bool? = nil
     /// The provisioning profile's expiry date, if a profile is embedded and parseable. nil otherwise.
     var sideloadExpiry: Date? = nil
+    /// Whether the shared App Group container (widget/watch data bridge) is actually reachable from
+    /// this process. false here means `UserDefaults(suiteName:)` returned nil — the widget and watch
+    /// will only ever show placeholder numbers, never real ones, regardless of anything else being
+    /// correct. Common causes: the entitlement's group id doesn't match `APP_GROUP_ID` in project.yml,
+    /// or (on some free/personal-team sideload signings) App Groups aren't granted at all. nil on macOS.
+    var appGroupReachable: Bool? = nil
 
     /// macOS: true when the Mac is on AC power, false on battery, nil off macOS. Net-new env (spec 3.4).
     var macOnAC: Bool? = nil
@@ -116,6 +123,9 @@ struct IOSDiagnostics {
             } else {
                 lines.append("Sideload expiry: \(days) day\(days == 1 ? "" : "s") remaining")
             }
+        }
+        if let ag = appGroupReachable {
+            lines.append("App Group (widget/watch data): \(ag ? "reachable" : "NOT REACHABLE — widget/watch will show placeholder data only")")
         }
         return lines
         #elseif os(macOS)
@@ -191,6 +201,14 @@ struct IOSDiagnostics {
         else { return nil }
 
         return plist["ExpirationDate"] as? Date
+    }
+
+    /// Whether the App Group container this app declares (must match `APP_GROUP_ID` in project.yml
+    /// and both targets' entitlements) is actually reachable. Kept as a literal here rather than
+    /// importing StrandiOSShared's `WidgetSnapshot.suiteName`, since this file also compiles into the
+    /// macOS "Strand" target, which never links that iOS-only module.
+    private static func isAppGroupReachable() -> Bool {
+        UserDefaults(suiteName: "group.com.jmh.nox") != nil
     }
 
     #endif
