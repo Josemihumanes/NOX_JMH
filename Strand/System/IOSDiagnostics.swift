@@ -44,10 +44,7 @@ struct IOSDiagnostics {
             backgroundRefresh: backgroundRefresh,
             isLowPowerMode: ProcessInfo.processInfo.isLowPowerModeEnabled,
             isSideloaded: Self.isSideloadedBuild(),
-            sideloadExpiry: Self.provisioningExpiryDate(),
-            appGroupReachable: Self.isAppGroupReachable(),
-            appGroupID: Self.resolvedAppGroupID(),
-            lastWidgetPublish: UserDefaults(suiteName: "group.com.jmh.nox")?.string(forKey: "nox.debug.lastPublish")
+            sideloadExpiry: Self.provisioningExpiryDate()
         )
         #elseif os(macOS)
         return IOSDiagnostics(
@@ -79,22 +76,6 @@ struct IOSDiagnostics {
     var isSideloaded: Bool? = nil
     /// The provisioning profile's expiry date, if a profile is embedded and parseable. nil otherwise.
     var sideloadExpiry: Date? = nil
-    /// Whether the shared App Group container (widget/watch data bridge) is actually reachable from
-    /// this process. false here means `UserDefaults(suiteName:)` returned nil — the widget and watch
-    /// will only ever show placeholder numbers, never real ones, regardless of anything else being
-    /// correct. Common causes: the entitlement's group id doesn't match `APP_GROUP_ID` in project.yml,
-    /// or (on some free/personal-team sideload signings) App Groups aren't granted at all. nil on macOS.
-    var appGroupReachable: Bool? = nil
-    /// The literal App Group id THIS process's Info.plist resolves to (its `AppGroupIdentifier` key,
-    /// same mechanism `WidgetSnapshot.suiteName` uses) — if this differs between the host app and the
-    /// widget extension, they'd each be reading/writing a different shared container and neither would
-    /// ever see the other's data despite both individually reporting "reachable". nil on macOS.
-    var appGroupID: String? = nil
-    /// Debug canary (temporary): the last thing `WidgetSnapshot.publish(from:)` actually wrote,
-    /// read back from the SAME shared suite. If this is nil despite having opened the app repeatedly,
-    /// publish() itself is never completing (or never being called) — a different bug than App Group
-    /// misconfiguration. nil on macOS.
-    var lastWidgetPublish: String? = nil
 
     /// macOS: true when the Mac is on AC power, false on battery, nil off macOS. Net-new env (spec 3.4).
     var macOnAC: Bool? = nil
@@ -136,11 +117,6 @@ struct IOSDiagnostics {
                 lines.append("Sideload expiry: \(days) day\(days == 1 ? "" : "s") remaining")
             }
         }
-        if let ag = appGroupReachable {
-            lines.append("App Group (widget/watch data): \(ag ? "reachable" : "NOT REACHABLE — widget/watch will show placeholder data only")")
-        }
-        if let gid = appGroupID { lines.append("App Group id (this process): \(gid)") }
-        if let lp = lastWidgetPublish { lines.append("Last widget publish: \(lp)") } else { lines.append("Last widget publish: never recorded") }
         return lines
         #elseif os(macOS)
         var lines: [String] = []
@@ -215,22 +191,6 @@ struct IOSDiagnostics {
         else { return nil }
 
         return plist["ExpirationDate"] as? Date
-    }
-
-    /// Whether the App Group container this app declares (must match `APP_GROUP_ID` in project.yml
-    /// and both targets' entitlements) is actually reachable. Kept as a literal here rather than
-    /// importing StrandiOSShared's `WidgetSnapshot.suiteName`, since this file also compiles into the
-    /// macOS "Strand" target, which never links that iOS-only module.
-    private static func isAppGroupReachable() -> Bool {
-        UserDefaults(suiteName: "group.com.jmh.nox") != nil
-    }
-
-    /// Mirrors `WidgetSnapshot.suiteName`'s own resolution exactly (same Info.plist key, same
-    /// fallback), read independently here since this file can't import StrandiOSShared (it also
-    /// compiles into the macOS target, which never links that iOS-only module).
-    private static func resolvedAppGroupID() -> String {
-        Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String
-            ?? "group.com.noopapp.noop (FALLBACK — AppGroupIdentifier missing from this process's Info.plist)"
     }
 
     #endif

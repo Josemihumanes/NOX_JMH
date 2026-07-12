@@ -15,13 +15,9 @@ import StrandDesign
 struct StrandiOSApp: App {
     @StateObject private var model: AppModel
     @StateObject private var health: HealthKitBridge
-    /// The phone→watch link. Built + activated here so the watch app actually receives snapshots on a
-    /// real device; without an owner that pushes it, the watch only ever shows placeholder data.
-    @StateObject private var watch = WatchSessionBridge()
     /// Shared cross-screen navigation hook (e.g. Live → Devices). The iOS shell (`RootTabView`)
     /// observes it and presents the Devices manager.
     @StateObject private var router = NavRouter()
-    @State private var liveActivity = LiveActivityController()
     @Environment(\.scenePhase) private var scenePhase
     /// Appearance preference (System/Light/Dark). Default follows the OS; the Settings picker writes it.
     @AppStorage(AppearanceMode.storageKey) private var appearanceRaw = AppearanceMode.system.rawValue
@@ -36,10 +32,6 @@ struct StrandiOSApp: App {
         // target, so the hook there never runs on iOS.
         DemoDayHarness.applyLaunchArgsIfNeeded()
         #endif
-        // Debug-only canary: trips if the App Group entitlement is missing on this target before any
-        // silent no-op (PendingIntents, WidgetSnapshot.publish, Live Activity) can mask the issue as
-        // "the widget doesn't show anything yet." No-op in Release.
-        WidgetSnapshot.assertGroupProvisioned()
         // #510: register the scheduled debug auto-export's BGTask handler BEFORE launch finishes — iOS
         // only delivers a background task whose identifier was registered at launch AND listed in the
         // target's BGTaskSchedulerPermittedIdentifiers (project.yml). Without this the overnight drop
@@ -76,52 +68,6 @@ struct StrandiOSApp: App {
                 // fixed-geometry tiles/gauges stay legible at the largest accessibility sizes rather than
                 // clipping; the common Larger-Text range still scales fully.
                 .dynamicTypeSize(...DynamicTypeSize.accessibility1)
-                .onReceive(model.live.$heartRate) { _ in
-                    // #911: anchor the Live Activity on the SAME shared `Repository.widgetAnchor` the
-                    // Home/Lock widget and the watch snapshot use, so this fourth surface can't drift to a
-                    // different day at the rollover (it previously read `days.last(where: recovery != nil)`,
-                    // which kept pointing at yesterday's scored row after Today had moved on).
-                    let day = Repository.widgetAnchor(days: model.repo.days)
-                    liveActivity.update(
-                        bpm: model.live.connected ? (model.bpm ?? model.live.heartRate) : nil,
-                        recovery: day?.recovery.map { Int($0.rounded()) },
-                        connected: model.live.connected,
-                        effort: day?.strain.map { Int($0.rounded()) }
-                    )
-                }
-                // End the Live Activity the moment the link drops, even if no further HR tick arrives.
-                .onReceive(model.live.$connected) { isConnected in
-                    // #911: same shared anchor as the heartRate site above, so the Live Activity, the
-                    // widget, the watch and Today never disagree about which day they describe.
-                    let day = Repository.widgetAnchor(days: model.repo.days)
-                    liveActivity.update(
-                        bpm: isConnected ? (model.bpm ?? model.live.heartRate) : nil,
-                        recovery: day?.recovery.map { Int($0.rounded()) },
-                        connected: isConnected,
-                        effort: day?.strain.map { Int($0.rounded()) }
-                    )
-                }
-                // #911/#759: republish the Home/Lock-Screen widget whenever the dashboard caches actually
-                // change mid-session. The only other publish site is the scenePhase .active handler, so
-                // during a long foreground session the widget froze at the last-foreground snapshot while
-                // Today and the Live Activity kept updating. `refreshSeq` is diff-guarded (Repository.refresh
-                // skips the bump when the merged caches are byte-identical) and refresh() assigns every cache
-                // BEFORE bumping the seq, so this publish always reads fresh data. `dropFirst()` skips the
-                // publisher's attach-time replay of the current value; the .active publish already covers
-                // launch. BUDGET: this app runs with bluetooth-central, so the process is NOT suspended in
-                // the background, and the 15-minute analyze tick + backfill-completion refreshes bump the
-                // seq back there too, where WidgetKit reloads DO count against the daily budget. Hence the
-                // foreground gate: publish only while .active (foreground-initiated reloads are budget
-                // exempt); a background bump is covered by the widget's own 15-minute timeline policy and
-                // by the .active republish on return.
-                .onReceive(model.repo.$refreshSeq.dropFirst()) { _ in
-                    guard scenePhase == .active else { return }
-                    Task { await WidgetSnapshot.publish(from: model) }
-                    // The watch rides the same active-only hook because the bridge now SELF-THROTTLES
-                    // (30-minute spacing + headline-change dedup, both must pass, see WatchSessionBridge),
-                    // so a refresh storm can't burn the ~50/day complication transfer budget.
-                    Task { await watch.pushLatest(from: model) }
-                }
                 // #581: the `noop://import-health` deep link the iOS Shortcut opens after building the
                 // HealthKit-free payload. Filter on the host so other future schemes don't trip the
                 // importer; macOS never registers the scheme so this stays iOS-only.
@@ -129,14 +75,6 @@ struct StrandiOSApp: App {
                     if url.host == "import-health" {
                         model.handleHealthImportURL(url)
                     }
-                }
-                // Bring the watch link up once at launch (WCSession ignores a redundant activate), then
-                // push the first snapshot so a watch that's already on-wrist gets current scores without
-                // waiting for the next foreground. activate() is idempotent + a no-op where WC isn't
-                // supported, so this is safe on every device/simulator combination.
-                .task {
-                    watch.activate()
-                    await watch.pushLatest(from: model)
                 }
         }
         // HealthKit authorization is intentionally NOT requested on launch. The system permission
@@ -156,11 +94,6 @@ struct StrandiOSApp: App {
                 Task {
                     health.refreshAuthIfPreviouslyGranted()
                     await health.sync()
-                    await WidgetSnapshot.publish(from: model)
-                    // Push the wrist on the SAME refresh as the Home-screen widget so the watch, the
-                    // widget and Today never disagree about which day they describe. Without this the
-                    // watch only ever holds placeholder data on a real device.
-                    await watch.pushLatest(from: model)
                 }
             } else if phase == .background {
                 // #155: refresh the Documents/noop_sync.txt drop file the user's Siri Shortcut logs
