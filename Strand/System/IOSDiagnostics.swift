@@ -45,7 +45,8 @@ struct IOSDiagnostics {
             isLowPowerMode: ProcessInfo.processInfo.isLowPowerModeEnabled,
             isSideloaded: Self.isSideloadedBuild(),
             sideloadExpiry: Self.provisioningExpiryDate(),
-            appGroupReachable: Self.isAppGroupReachable()
+            appGroupReachable: Self.isAppGroupReachable(),
+            appGroupID: Self.resolvedAppGroupID()
         )
         #elseif os(macOS)
         return IOSDiagnostics(
@@ -83,6 +84,11 @@ struct IOSDiagnostics {
     /// correct. Common causes: the entitlement's group id doesn't match `APP_GROUP_ID` in project.yml,
     /// or (on some free/personal-team sideload signings) App Groups aren't granted at all. nil on macOS.
     var appGroupReachable: Bool? = nil
+    /// The literal App Group id THIS process's Info.plist resolves to (its `AppGroupIdentifier` key,
+    /// same mechanism `WidgetSnapshot.suiteName` uses) — if this differs between the host app and the
+    /// widget extension, they'd each be reading/writing a different shared container and neither would
+    /// ever see the other's data despite both individually reporting "reachable". nil on macOS.
+    var appGroupID: String? = nil
 
     /// macOS: true when the Mac is on AC power, false on battery, nil off macOS. Net-new env (spec 3.4).
     var macOnAC: Bool? = nil
@@ -127,6 +133,7 @@ struct IOSDiagnostics {
         if let ag = appGroupReachable {
             lines.append("App Group (widget/watch data): \(ag ? "reachable" : "NOT REACHABLE — widget/watch will show placeholder data only")")
         }
+        if let gid = appGroupID { lines.append("App Group id (this process): \(gid)") }
         return lines
         #elseif os(macOS)
         var lines: [String] = []
@@ -209,6 +216,14 @@ struct IOSDiagnostics {
     /// macOS "Strand" target, which never links that iOS-only module.
     private static func isAppGroupReachable() -> Bool {
         UserDefaults(suiteName: "group.com.jmh.nox") != nil
+    }
+
+    /// Mirrors `WidgetSnapshot.suiteName`'s own resolution exactly (same Info.plist key, same
+    /// fallback), read independently here since this file can't import StrandiOSShared (it also
+    /// compiles into the macOS target, which never links that iOS-only module).
+    private static func resolvedAppGroupID() -> String {
+        Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String
+            ?? "group.com.noopapp.noop (FALLBACK — AppGroupIdentifier missing from this process's Info.plist)"
     }
 
     #endif

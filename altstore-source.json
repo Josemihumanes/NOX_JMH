@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Diagnostico widget: si muestra -1 en todo, el App Group no es alcanzable desde la extension.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.2/NOX-v1.4.2-ios.ipa",
-          "size": 17053281,
+          "localizedDescription": "Diagnostico: mostrar el App Group ID exacto que la app resuelve.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.3/NOX-v1.4.3-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Diagnostico widget: si muestra -1 en todo, el App Group no es alcanzable desde la extension.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.2/NOX-v1.4.2-ios.ipa",
-      "size": 17053281,
+      "versionDescription": "Diagnostico: mostrar el App Group ID exacto que la app resuelve.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.3/NOX-v1.4.3-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
