@@ -105,17 +105,19 @@ struct NOOPWidgetView: View {
                     .frame(width: 8, height: 8)
             }
             Spacer(minLength: 0)
+            // Small shows Rest as the headline (battery + Rest + pulse is the trio requested); Medium
+            // keeps Charge as the headline since it has room for a full second row (Effort) below.
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(snap.recovery.map(String.init) ?? "–")
+                Text((family == .systemSmall ? snap.rest : snap.recovery).map(String.init) ?? "–")
                     .font(.system(size: 40, weight: .bold, design: .rounded))
-                    .foregroundStyle(recoveryColor)
+                    .foregroundStyle(family == .systemSmall ? restColor : recoveryColor)
                 Text("%").font(.headline).foregroundStyle(StrandPalette.textTertiary)
             }
-            Text("Charge").font(.caption).foregroundStyle(StrandPalette.textTertiary)
+            Text(family == .systemSmall ? "Rest" : "Charge").font(.caption).foregroundStyle(StrandPalette.textTertiary)
             Spacer(minLength: 0)
             HStack {
                 Label("\(snap.bpm.map(String.init) ?? "–")", systemImage: "waveform.path.ecg")
-                // Medium has room for one more stat (#446); small stays a clean Charge + HR + battery.
+                // Medium has room for one more stat (#446): Effort. Small stays Rest headline + HR + battery.
                 if family == .systemMedium {
                     Spacer()
                     Label("\(snap.effort.map(String.init) ?? "–")", systemImage: "bolt.fill")

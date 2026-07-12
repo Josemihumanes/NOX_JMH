@@ -21,9 +21,9 @@
           "version": "8.2.2",
           "buildVersion": "172",
           "date": "2026-07-08",
-          "localizedDescription": "Widget: rebranding a NOX y traduccion al espanol.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.9/NOX-v1.3.9-ios.ipa",
-          "size": 17051423,
+          "localizedDescription": "Widget pequeno: muestra Descanso + pulso + bateria de la pulsera.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.0/NOX-v1.4.0-ios.ipa",
+          "size": 0,
           "minOSVersion": "17.0"
         }
       ],
@@ -40,9 +40,9 @@
       "version": "8.2.2",
       "buildVersion": "172",
       "versionDate": "2026-07-08",
-      "versionDescription": "Widget: rebranding a NOX y traduccion al espanol.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.3.9/NOX-v1.3.9-ios.ipa",
-      "size": 17051423,
+      "versionDescription": "Widget pequeno: muestra Descanso + pulso + bateria de la pulsera.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.0/NOX-v1.4.0-ios.ipa",
+      "size": 0,
       "minOSVersion": "17.0"
     }
   ],
