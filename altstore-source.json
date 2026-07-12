@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
-          "size": 0,
+          "size": 16314150,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
-      "size": 0,
+      "size": 16314150,
       "minOSVersion": "17.0"
     }
   ],
