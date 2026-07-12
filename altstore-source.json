@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Diagnostico: mostrar el App Group ID exacto que la app resuelve.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.3/NOX-v1.4.3-ios.ipa",
-          "size": 0,
+          "size": 17053020,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Diagnostico: mostrar el App Group ID exacto que la app resuelve.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.3/NOX-v1.4.3-ios.ipa",
-      "size": 0,
+      "size": 17053020,
       "minOSVersion": "17.0"
     }
   ],
