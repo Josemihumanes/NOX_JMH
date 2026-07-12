@@ -23,7 +23,7 @@
           "date": "2026-07-08",
           "localizedDescription": "Diagnostico widget: si muestra -1 en todo, el App Group no es alcanzable desde la extension.",
           "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.2/NOX-v1.4.2-ios.ipa",
-          "size": 0,
+          "size": 17053281,
           "minOSVersion": "17.0"
         }
       ],
@@ -42,7 +42,7 @@
       "versionDate": "2026-07-08",
       "versionDescription": "Diagnostico widget: si muestra -1 en todo, el App Group no es alcanzable desde la extension.",
       "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.2/NOX-v1.4.2-ios.ipa",
-      "size": 0,
+      "size": 17053281,
       "minOSVersion": "17.0"
     }
   ],
