@@ -1,40 +1,40 @@
 # NOX
 
-A personal, offline-first WHOOP strap companion for iPhone — an independent fork of the open-source **NOOP** project, rebranded and maintained for personal use.
+Un compañero personal, sin conexión, para tu pulsera WHOOP en iPhone — un fork independiente del proyecto de código abierto **NOOP**, rebautizado y mantenido para uso personal.
 
-> **Unofficial & independent.** Not affiliated with, endorsed by, or sponsored by WHOOP, Inc. "WHOOP" is used only to identify the third-party hardware this app interoperates with. See [`DISCLAIMER.md`](DISCLAIMER.md) for the full legal notice.
+> **No oficial e independiente.** No está afiliado con, respaldado por, ni patrocinado por WHOOP, Inc. "WHOOP" se usa únicamente para identificar el hardware de terceros con el que esta app interopera. Consulta [`DISCLAIMER.md`](DISCLAIMER.md) para el aviso legal completo.
 
-## What is this?
+## ¿Qué es esto?
 
-NOX connects directly to a WHOOP 4.0 or 5.0/MG strap over Bluetooth — no WHOOP app, no account, no cloud. It reads the strap's raw sensor data and computes its own recovery, strain, and sleep scores **entirely on-device**, using published, peer-reviewed sports-science methods. Nothing is uploaded anywhere unless you explicitly choose to (e.g. the optional Home Assistant integration, which only ever talks to a Home Assistant instance you configure yourself).
+NOX se conecta directamente a una pulsera WHOOP 4.0 o 5.0/MG por Bluetooth — sin app oficial, sin cuenta, sin nube. Lee los datos sin procesar de los sensores de la pulsera y calcula sus propias puntuaciones de recuperación, esfuerzo y sueño **completamente en el dispositivo**, usando métodos de ciencia del deporte publicados y revisados por pares. Nada se sube a ningún lado a menos que tú lo elijas explícitamente (por ejemplo, la integración opcional con Home Assistant, que solo se comunica con la instancia de Home Assistant que tú mismo configures).
 
-This is a **personal build**: it targets iOS only, is distributed unsigned for sideloading via [SideStore](https://sidestore.io)/AltStore, and is not published on the App Store.
+Este es un **proyecto personal**: solo apunta a iOS, se distribuye sin firmar para instalarse vía sideload con [SideStore](https://sidestore.io)/AltStore, y no está publicado en la App Store.
 
-## Features
+## Funciones
 
-- **Direct BLE connection** to WHOOP 4.0 and 5.0/MG straps — no official app required
-- **On-device Charge, Effort, and Rest scoring** (WHOOP's Recovery/Strain/Sleep, computed independently, same 0–100 scale)
-- **Apple Watch as sensor** — run without a strap at all, using the Watch's own HealthKit data
-- **Oura ring support**, standard/Garmin/Huami heart-rate bands, and generic Bluetooth fitness machines (FTMS)
-- **Full offline backup & restore** to a folder of your choice (iCloud Drive, Dropbox, Google Drive, etc.)
-- **Home Assistant integration** — optionally push your scores as sensors to your own Home Assistant instance for automations and dashboards
-- **AI Coach** — optional, bring-your-own-key chat coach (Anthropic, OpenAI, Gemini, or any OpenAI-compatible local server)
-- **Siri Shortcuts & App Intents**, Live Sessions, sleep staging, a personal lab notebook, mood/behaviour correlation tracking, and more
-- **English and Spanish** localization
+- **Conexión BLE directa** a pulseras WHOOP 4.0 y 5.0/MG — sin necesitar la app oficial
+- **Puntuación de Carga, Esfuerzo y Descanso calculada en el dispositivo** (el Recovery/Strain/Sleep de WHOOP, calculado de forma independiente, en la misma escala de 0 a 100)
+- **Apple Watch como sensor** — funciona sin pulsera, usando los propios datos de HealthKit del reloj
+- **Soporte para anillo Oura**, bandas de frecuencia cardíaca estándar/Garmin/Huami, y máquinas de fitness Bluetooth genéricas (FTMS)
+- **Copia de seguridad y restauración completas sin conexión**, a la carpeta que elijas (iCloud Drive, Dropbox, Google Drive, etc.)
+- **Integración con Home Assistant** — envía opcionalmente tus puntuaciones como sensores a tu propia instancia de Home Assistant para automatizaciones y paneles
+- **AI Coach** — un asistente de chat opcional, con tu propia clave de API (Anthropic, OpenAI, Gemini, o cualquier servidor local compatible con OpenAI)
+- **Atajos de Siri y App Intents**, Sesiones en vivo, clasificación de fases del sueño, un cuaderno de laboratorio personal, seguimiento de correlaciones entre ánimo y comportamiento, y más
+- Disponible en **español e inglés**
 
-## Installation
+## Instalación
 
-NOX is not on the App Store. Install it via [SideStore](https://sidestore.io) or AltStore using this source URL:
+NOX no está en la App Store. Instálalo vía [SideStore](https://sidestore.io) o AltStore usando esta URL de fuente:
 
 ```
 https://raw.githubusercontent.com/Josemihumanes/NOX_JMH/main/altstore-source.json
 ```
 
-Builds are unsigned `.ipa`s produced by GitHub Actions on every tagged release; SideStore/AltStore sign them locally with your own (free) Apple ID when you install.
+Los builds son `.ipa`s sin firmar, generados por GitHub Actions en cada release etiquetado; SideStore/AltStore los firman localmente con tu propio Apple ID (gratuito) al instalarlos.
 
-## Building from source
+## Compilar desde el código fuente
 
-The project uses [XcodeGen](https://github.com/yonaskolb/XcodeGen) — the `.xcodeproj` is generated from [`project.yml`](project.yml), not committed:
+El proyecto usa [XcodeGen](https://github.com/yonaskolb/XcodeGen) — el `.xcodeproj` se genera a partir de [`project.yml`](project.yml), no está comiteado:
 
 ```bash
 brew install xcodegen
@@ -45,12 +45,12 @@ xcodebuild -scheme NOOPiOS -configuration Release \
   clean build
 ```
 
-See [`.github/workflows/ios-release.yml`](.github/workflows/ios-release.yml) for the exact release process.
+Consulta [`.github/workflows/ios-release.yml`](.github/workflows/ios-release.yml) para ver el proceso exacto de release.
 
-## Not a medical device
+## No es un dispositivo médico
 
-Charge, Effort, Rest, and every other metric NOX computes are approximations for personal insight and curiosity — not clinically validated, not medical advice, and not a substitute for professional care. See [`DISCLAIMER.md`](DISCLAIMER.md) §5 for the full notice.
+Carga, Esfuerzo, Descanso, y cualquier otra métrica que calcula NOX son aproximaciones para uso informativo y curiosidad personal — no están clínicamente validadas, no son consejo médico, y no sustituyen la atención de un profesional. Consulta [`DISCLAIMER.md`](DISCLAIMER.md) §5 para el aviso completo.
 
-## License & attribution
+## Licencia y atribución
 
-Original work is licensed under the **PolyForm Noncommercial License 1.0.0** — see [`LICENSE`](LICENSE). Third-party dependencies keep their own licenses; see [`NOTICE`](NOTICE) and [`ATTRIBUTION.md`](ATTRIBUTION.md).
+El trabajo original está licenciado bajo la **PolyForm Noncommercial License 1.0.0** — consulta [`LICENSE`](LICENSE). Las dependencias de terceros mantienen sus propias licencias; consulta [`NOTICE`](NOTICE) y [`ATTRIBUTION.md`](ATTRIBUTION.md).
