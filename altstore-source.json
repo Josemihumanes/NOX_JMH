@@ -20,10 +20,10 @@
         {
           "version": "8.2.2",
           "buildVersion": "172",
-          "date": "2026-07-08",
-          "localizedDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
-          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
-          "size": 16314150,
+          "date": "2026-07-15",
+          "localizedDescription": "Refina la marca NOX en la app y elimina las superficies de soporte/donaciones heredadas.",
+          "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.8/NOX-v1.4.8-ios.ipa",
+          "size": 16275256,
           "minOSVersion": "17.0"
         }
       ],
@@ -39,10 +39,10 @@
       },
       "version": "8.2.2",
       "buildVersion": "172",
-      "versionDate": "2026-07-08",
-      "versionDescription": "Limpieza mayor: quitar macOS, Apple Watch, widget/Live Activity y Android. Solo iOS ahora.",
-      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.7/NOX-v1.4.7-ios.ipa",
-      "size": 16314150,
+      "versionDate": "2026-07-15",
+      "versionDescription": "Refina la marca NOX en la app y elimina las superficies de soporte/donaciones heredadas.",
+      "downloadURL": "https://github.com/Josemihumanes/NOX_JMH/releases/download/v1.4.8/NOX-v1.4.8-ios.ipa",
+      "size": 16275256,
       "minOSVersion": "17.0"
     }
   ],
