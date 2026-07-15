@@ -43,7 +43,6 @@ struct LiquidTodayView: View {
     @State private var guideSection: ScoreSection?
     @State private var showCustomise = false
     @State private var showSettings = false
-    @State private var showSupport = false
     @State private var synthesisExpanded = false
     @State private var showLiveSession = false
 
@@ -254,14 +253,6 @@ struct LiquidTodayView: View {
                 SettingsView()
                     .background(StrandPalette.surfaceBase.ignoresSafeArea())
                     .liquidSheetDoneChrome { showSettings = false }
-            }
-        }
-        // The heart → the (optional) Support sheet: NOOP is free forever, donations just help it keep moving.
-        .sheet(isPresented: $showSupport) {
-            NavigationStack {
-                SupportView()
-                    .background(StrandPalette.surfaceBase.ignoresSafeArea())
-                    .liquidSheetDoneChrome { showSupport = false }
             }
         }
         // Live Session (silent guardian, beta): the in-session screen owns the whole display — full

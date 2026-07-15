@@ -375,13 +375,6 @@ static func runShortcut(_ name: String) {
 > NOOP** for inbound automation and (b) **x-callback-url / `shortcuts://` deep links**
 > for outbound calls, and remove `lockScreen` from the iOS action set.
 
-### 4. Pasteboard
-
-`Strand/Screens/SupportView.swift` copies a string with `NSPasteboard.general`. The
-iOS equivalent is `UIPasteboard.general.string = …`. This is a one-call swap; wrap it
-in a tiny `#if os(iOS)` / `#if os(macOS)` helper (the same pattern `Palette.swift`
-already uses) so the screen compiles on both.
-
 ### Summary of app-layer deltas
 
 | macOS-only file/API | iOS replacement |
@@ -389,7 +382,6 @@ already uses) so the screen compiles on both.
 | `MenuBar/MenuBarContent.swift` (`MenuBarExtra`) | WidgetKit widget + Live Activity; reuse `StrandDesign` views |
 | `MacActions.lockScreen()` (`login.framework`) | Not possible on iOS — hide/remap the action |
 | `MacActions.runShortcut(_:)` via `NSWorkspace` | App Intents (inbound) + `UIApplication.open` / x-callback-url (outbound) |
-| `NSPasteboard` (`SupportView.swift`) | `UIPasteboard` behind an `#if os` helper |
 | `NSWorkspace`/`NSImage` app icons in `NotificationSettingsStore.swift` | iOS has no per-app launch icons; replace with iOS notification settings UI |
 | `CBCentralManager(delegate:queue:)` | `CBCentralManager(delegate:queue:options:[…RestoreIdentifierKey…])` + `bluetooth-central` background mode |
 

@@ -636,11 +636,8 @@ paywall. The Android Support screen should reuse the same addresses as the macOS
 | ETH | Ethereum | `0xd64D508b531c4b1297Ca4023C774e0E97aA67B7F` |
 | XRP | XRP | `rpvijHi2nVY9WWAJhojsAX5tJmHdmLtFhq` — **Destination Tag `3338312747` (required)** |
 
-The XRP row **must surface the destination tag `3338312747`** as its own copyable line with a clear
-"required — XRP sent without it may be lost" note (it's a `tag` field on the address model, rendered
-only when present). Present them as copyable rows with a copy-to-clipboard action and accessible
-labels, mirroring `Strand/Screens/SupportView.swift`. Keep the screen attribution-first (credit the
-upstream reverse-engineering) with donations clearly marked optional.
+The Android donation screen described here is historical upstream context. NOX has removed the
+in-app donation/support surface; attribution and safety copy should remain in About/legal areas.
 
 ---
 
